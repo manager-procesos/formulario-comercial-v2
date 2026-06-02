@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levantamiento Comercial v2 — Manager ERP</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1F3864;
+    --sky: #00B0F0;
+    --sky-light: #e6f7fe;
+    --sky-mid: #b3e6fb;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --red: #ef4444;
+    --green: #22c55e;
+    --orange: #f97316;
+    --radius: 8px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.12);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,.16);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-800);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    padding: 28px 20px 24px;
+  }
+  .header-logo {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .header p {
+    font-size: 13px;
+    color: rgba(255,255,255,.6);
+    margin-top: 4px;
+  }
+
+  /* ── Config Bar ── */
+  .config-bar {
+    background: #162a4e;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 0 20px;
+  }
+  .config-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    cursor: pointer;
+    color: rgba(255,255,255,.5);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    user-select: none;
+    max-width: 680px;
+    margin: 0 auto;
+    transition: color .2s;
+  }
+  .config-toggle:hover { color: var(--sky); }
+  .config-toggle svg { transition: transform .2s; }
+  .config-toggle.open svg { transform: rotate(180deg); }
+
+  .config-panel {
+    display: none;
+    padding: 16px 0 20px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .config-panel.open { display: block; }
+
+  .token-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .token-row .field-wrap { flex: 1; }
+  .token-row input {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    color: rgba(255,255,255,.9);
+  }
+  .token-row input::placeholder { color: rgba(255,255,255,.3); }
+  .token-row input:focus {
+    background: rgba(255,255,255,.12);
+    border-color: var(--sky);
+    outline: none;
+  }
+  .token-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 11px;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gray-400);
+    flex-shrink: 0;
+  }
+  .dot.ok { background: var(--green); }
+  .dot.err { background: var(--red); }
+  .dot.checking { background: var(--orange); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  /* ── Main ── */
+  .main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  /* ── CRM Search Block ── */
+  .crm-block {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 2px solid var(--sky);
+    box-shadow: var(--shadow-md);
+    padding: 20px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .crm-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .crm-block-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .crm-badge {
+    background: var(--sky);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+  }
+  .mode-toggle {
+    font-size: 11px;
+    color: var(--sky);
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    background: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--sky);
+    transition: all .2s;
+  }
+  .mode-toggle:hover { background: var(--sky); color: white; }
+
+  .search-wrap {
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 12px 44px 12px 16px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    transition: all .2s;
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--sky);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,176,240,.12);
+  }
+  .search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-400);
+    pointer-events: none;
+  }
+  .search-spinner {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    border: 2px solid var(--gray-200);
+    border-top-color: var(--sky);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+  /* Autocomplete dropdown */
+  .ac-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    max-height: 240px;
+    overflow-y: auto;
+    display: none;
+  }
+  .ac-dropdown.open { display: block; }
+  .ac-item {
+    padding: 11px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background .15s;
+  }
+  .ac-item:last-child { border-bottom: none; }
+  .ac-item:hover, .ac-item.active { background: var(--sky-light); }
+  .ac-item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  .ac-item-rut {
+    font-size: 12px;
+    color: var(--gray-400);
+    margin-top: 1px;
+  }
+  .ac-empty {
+    padding: 16px;
+    text-align: center;
+    color: var(--gray-400);
+    font-size: 13px;
+  }
+
+  .crm-selected-tag {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: var(--sky-light);
+    border: 1px solid var(--sky-mid);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .crm-selected-tag.show { display: flex; }
+  .crm-clear {
+    margin-left: auto;
+    cursor: pointer;
+    color: var(--gray-400);
+    font-size: 16px;
+    line-height: 1;
+    border: none;
+    background: none;
+    padding: 0;
+  }
+  .crm-clear:hover { color: var(--red); }
+
+  .manual-note {
+    display: none;
+    font-size: 11px;
+    color: var(--orange);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .manual-note.show { display: block; }
+
+  /* ── Section ── */
+  .section {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-num {
+    background: var(--sky);
+    color: white;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-body {
+    padding: 20px;
+  }
+
+  /* ── Fields ── */
+  .field-wrap {
+    margin-bottom: 14px;
+  }
+  .field-wrap:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 5px;
+  }
+  label .req { color: var(--sky); }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    transition: all .2s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--sky);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,176,240,.1);
+  }
+  input.autofilled {
+    background: var(--sky-light);
+    border-color: var(--sky-mid);
+    color: var(--navy);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* ── Radio/Check groups ── */
+  .radio-group, .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .radio-group label, .check-group label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--gray-700);
+    transition: all .15s;
+  }
+  .radio-group label:hover, .check-group label:hover {
+    border-color: var(--sky);
+    color: var(--navy);
+  }
+  .radio-group input[type="radio"],
+  .check-group input[type="checkbox"] {
+    width: auto;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    accent-color: var(--sky);
+  }
+  .radio-group input:checked + span,
+  .check-group input:checked + span { color: var(--navy); font-weight: 600; }
+
+  /* ── Submit ── */
+  .submit-wrap {
+    text-align: center;
+    margin-top: 28px;
+  }
+  .btn-submit {
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 48px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: all .2s;
+    box-shadow: var(--shadow-md);
+  }
+  .btn-submit:hover {
+    background: #162a4e;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
+  }
+  .btn-submit:active { transform: translateY(0); }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-top: 16px;
+  }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all .3s;
+    z-index: 999;
+    max-width: 320px;
+    border-left: 4px solid var(--sky);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.error { border-left-color: var(--red); }
+  .toast.success { border-left-color: var(--green); }
+
+  @media (max-width: 520px) {
+    .row-2, .row-3 { grid-template-columns: 1fr; }
+    .token-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="header-logo">Manager ERP</div>
+  <h1>Levantamiento Comercial v2</h1>
+  <p>Formulario de diagnóstico con integración Zoho CRM</p>
+</div>
+
+<!-- ── CONFIG BAR ── -->
+<div class="config-bar">
+  <div class="config-toggle" id="configToggle">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+    Configuración Zoho CRM
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:4px">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+  <div class="config-panel" id="configPanel">
+    <div class="token-row">
+      <div class="field-wrap">
+        <label style="color:rgba(255,255,255,.5)">Access Token OAuth2</label>
+        <input type="text" id="zohoToken" placeholder="1000.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+      </div>
+      <button class="btn-submit" style="padding:10px 18px;font-size:13px;margin-bottom:0;white-space:nowrap" onclick="testToken()">Verificar</button>
+    </div>
+    <div class="token-status">
+      <span class="dot" id="tokenDot"></span>
+      <span id="tokenMsg" style="color:rgba(255,255,255,.4);font-size:11px">Token no ingresado</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="main">
+
+  <!-- CRM Search -->
+  <div class="crm-block">
+    <div class="crm-block-header">
+      <div class="crm-block-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        Buscar cliente en Zoho CRM
+        <span class="crm-badge">ZOHO</span>
+      </div>
+      <button class="mode-toggle" id="modeToggle" onclick="toggleManual()">Modo manual</button>
+    </div>
+
+    <div id="crmSearchArea">
+      <div class="search-wrap">
+        <input type="text" class="search-input" id="crmSearch" placeholder="Escriba nombre de empresa..." autocomplete="off">
+        <svg class="search-icon" id="searchIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <div class="search-spinner" id="searchSpinner"></div>
+        <div class="ac-dropdown" id="acDropdown"></div>
+      </div>
+      <div class="crm-selected-tag" id="selectedTag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="selectedTagText"></span>
+        <button class="crm-clear" onclick="clearCrmSelection()" title="Limpiar">×</button>
+      </div>
+    </div>
+
+    <p class="manual-note" id="manualNote">⚠ Modo manual activo — los datos de cliente deben ingresarse manualmente.</p>
+  </div>
+
+  <form id="mainForm" onsubmit="handleSubmit(event)">
+
+    <!-- SECCIÓN 1: CLIENTE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">1</span>
+        Datos del Cliente
+      </div>
+      <div class="section-body">
+        <div class="field-wrap">
+          <label>Razón Social <span class="req">*</span></label>
+          <input type="text" id="razon_social" name="razon_social" placeholder="Nombre empresa o persona jurídica" required>
+        </div>
+        <div class="row-2">
+          <div class="field-wrap">
+            <label>RUT <span class="req">*</span></label>
+            <input type="text" id="rut" name="rut" placeholder="12.345.678-9" required>
+          </div>
+          <div class="field-wrap">
+            <label>Rubro / Industria</label>
+            <input type="text" id="rubro" name="rubro" placeholder="ej. Distribución, Retail…">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field-wrap">
+            <label>Contacto Principal <span class="req">*</span></label>
+            <input type="text" id="contacto" name="contacto" placeholder="Nombre completo" required>
+          </div>
+          <div class="field-wrap">
+            <label>Cargo</label>
+            <input type="text" id="cargo" name="cargo" placeholder="ej. Gerente de TI">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field-wrap">
+            <label>Correo Electrónico <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="contacto@empresa.cl" required>
+          </div>
+          <div class="field-wrap">
+            <label>Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field-wrap">
+            <label>Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" placeholder="Santiago">
+          </div>
+          <div class="field-wrap">
+            <label>Fecha visita</label>
+            <input type="text" id="fecha_visita" name="fecha_visita" placeholder="DD/MM/AAAA">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: BASE DE DATOS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">2</span>
+        Información de Base de Datos
+      </div>
+      <div class="section-body">
+        <div class="row-2">
+          <div class="field-wrap">
+            <label>Motor de BD actual</label>
+            <select id="motor_bd" name="motor_bd">
+              <option value="">Seleccionar…</option>
+              <option>SQL Server</option>
+              <option>MySQL / MariaDB</option>
+              <option>PostgreSQL</option>
+              <option>Oracle</option>
+              <option>Firebird</option>
+              <option>Access</option>
+              <option>Otro</option>
+              <option>Sin BD estructurada</option>
+            </select>
+          </div>
+          <div class="field-wrap">
+            <label>Versión del motor</label>
+            <input type="text" id="version_bd" name="version_bd" placeholder="ej. SQL Server 2019">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field-wrap">
+            <label>N° de empresas en BD</label>
+            <input type="text" id="num_empresas" name="num_empresas" placeholder="ej. 3">
+          </div>
+          <div class="field-wrap">
+            <label>N° de usuarios activos</label>
+            <input type="text" id="num_usuarios" name="num_usuarios" placeholder="ej. 15">
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label>Módulos / Áreas que usa</label>
+          <div class="check-group">
+            <label><input type="checkbox" name="modulos" value="Contabilidad"><span>Contabilidad</span></label>
+            <label><input type="checkbox" name="modulos" value="Remuneraciones"><span>Remuneraciones</span></label>
+            <label><input type="checkbox" name="modulos" value="Facturación"><span>Facturación</span></label>
+            <label><input type="checkbox" name="modulos" value="Inventario"><span>Inventario</span></label>
+            <label><input type="checkbox" name="modulos" value="CRM"><span>CRM</span></label>
+            <label><input type="checkbox" name="modulos" value="Bodega"><span>Bodega</span></label>
+            <label><input type="checkbox" name="modulos" value="RRHH"><span>RRHH</span></label>
+            <label><input type="checkbox" name="modulos" value="Proyectos"><span>Proyectos</span></label>
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label>Sistema ERP actual</label>
+          <input type="text" id="erp_actual" name="erp_actual" placeholder="ej. Bsale, Defontana, SoftlandManager, otro…">
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: DIAGNÓSTICO -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">3</span>
+        Preguntas de Diagnóstico
+      </div>
+      <div class="section-body">
+
+        <div class="field-wrap">
+          <label>¿El cliente tiene integración SII activa?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="sii" value="Sí"><span>Sí</span></label>
+            <label><input type="radio" name="sii" value="No"><span>No</span></label>
+            <label><input type="radio" name="sii" value="Parcial"><span>Parcial</span></label>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>¿Emite DTE (facturas electrónicas)?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="dte" value="Sí"><span>Sí</span></label>
+            <label><input type="radio" name="dte" value="No"><span>No</span></label>
+            <label><input type="radio" name="dte" value="En proceso"><span>En proceso</span></label>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>¿Maneja multi-empresa?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="multiempresa" value="Sí"><span>Sí</span></label>
+            <label><input type="radio" name="multiempresa" value="No"><span>No</span></label>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>¿Tiene sucursales o bodegas adicionales?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="sucursales" value="Sí"><span>Sí</span></label>
+            <label><input type="radio" name="sucursales" value="No"><span>No</span></label>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>Urgencia de implementación</label>
+          <div class="radio-group">
+            <label><input type="radio" name="urgencia" value="Inmediata"><span>Inmediata</span></label>
+            <label><input type="radio" name="urgencia" value="1-3 meses"><span>1–3 meses</span></label>
+            <label><input type="radio" name="urgencia" value="3-6 meses"><span>3–6 meses</span></label>
+            <label><input type="radio" name="urgencia" value="Sin definir"><span>Sin definir</span></label>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>Presupuesto estimado (UF)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="presupuesto" value="< 50 UF"><span>&lt; 50 UF</span></label>
+            <label><input type="radio" name="presupuesto" value="50-150 UF"><span>50–150 UF</span></label>
+            <label><input type="radio" name="presupuesto" value="150-300 UF"><span>150–300 UF</span></label>
+            <label><input type="radio" name="presupuesto" value="> 300 UF"><span>&gt; 300 UF</span></label>
+            <label><input type="radio" name="presupuesto" value="No definido"><span>No definido</span></label>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>Observaciones / Comentarios adicionales</label>
+          <textarea id="observaciones" name="observaciones" placeholder="Anotaciones del levantamiento, requerimientos especiales, contexto…" rows="4"></textarea>
+        </div>
+
+        <div class="field-wrap">
+          <label>Ejecutivo comercial <span class="req">*</span></label>
+          <input type="text" id="ejecutivo" name="ejecutivo" placeholder="Nombre del ejecutivo" required>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit">Enviar Levantamiento</button>
+      <p class="footer-note">Manager ERP · Formulario Comercial v2 · Zoho CRM Integration</p>
+    </div>
+
+  </form>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State
+let zohoToken = '';
+let manualMode = false;
+let searchTimer = null;
+let selectedAccount = null;
+
+// ── Config panel
+document.getElementById('configToggle').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('configPanel').classList.toggle('open');
+});
+
+// ── Token test
+async function testToken() {
+  const t = document.getElementById('zohoToken').value.trim();
+  if (!t) { setTokenStatus('err', 'Ingresa un token'); return; }
+  setTokenStatus('checking', 'Verificando…');
+  try {
+    const r = await fetch('https://www.zohoapis.com/crm/v2/Accounts?per_page=1', {
+      headers: { 'Authorization': 'Zoho-oauthtoken ' + t }
+    });
+    if (r.ok) {
+      zohoToken = t;
+      setTokenStatus('ok', 'Token válido ✓');
+      showToast('Conexión con Zoho CRM establecida', 'success');
+    } else {
+      setTokenStatus('err', 'Token inválido (' + r.status + ')');
+    }
+  } catch(e) {
+    setTokenStatus('err', 'Error de red — verifica el token o la red');
+  }
+}
+
+function setTokenStatus(state, msg) {
+  const dot = document.getElementById('tokenDot');
+  const msgEl = document.getElementById('tokenMsg');
+  dot.className = 'dot ' + state;
+  msgEl.textContent = msg;
+  msgEl.style.color = state === 'ok' ? '#22c55e' : state === 'err' ? '#ef4444' : 'rgba(255,255,255,.5)';
+}
+
+// ── Manual mode
+function toggleManual() {
+  manualMode = !manualMode;
+  const btn = document.getElementById('modeToggle');
+  const note = document.getElementById('manualNote');
+  const searchArea = document.getElementById('crmSearchArea');
+  if (manualMode) {
+    btn.textContent = 'Usar Zoho CRM';
+    note.classList.add('show');
+    searchArea.style.opacity = '.4';
+    searchArea.style.pointerEvents = 'none';
+  } else {
+    btn.textContent = 'Modo manual';
+    note.classList.remove('show');
+    searchArea.style.opacity = '1';
+    searchArea.style.pointerEvents = 'auto';
+  }
+}
+
+// ── CRM Search
+const crmInput = document.getElementById('crmSearch');
+const acDropdown = document.getElementById('acDropdown');
+const searchSpinner = document.getElementById('searchSpinner');
+const searchIcon = document.getElementById('searchIcon');
+
+crmInput.addEventListener('input', function() {
+  clearTimeout(searchTimer);
+  const q = this.value.trim();
+  if (q.length < 2) { closeDropdown(); return; }
+  searchTimer = setTimeout(() => searchZoho(q), 400);
+});
+
+crmInput.addEventListener('keydown', function(e) {
+  const items = acDropdown.querySelectorAll('.ac-item');
+  const active = acDropdown.querySelector('.ac-item.active');
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (!active) items[0]?.classList.add('active');
+    else { active.classList.remove('active'); (active.nextElementSibling || items[0]).classList.add('active'); }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (!active) items[items.length-1]?.classList.add('active');
+    else { active.classList.remove('active'); (active.previousElementSibling || items[items.length-1]).classList.add('active'); }
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (active) active.click();
+  } else if (e.key === 'Escape') closeDropdown();
+});
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-wrap')) closeDropdown();
+});
+
+async function searchZoho(q) {
+  if (!zohoToken) {
+    // Demo mode without token
+    showDemoResults(q);
+    return;
+  }
+  showSpinner(true);
+  try {
+    const criteria = `(Account_Name:contains:${encodeURIComponent(q)})`;
+    const url = `https://www.zohoapis.com/crm/v2/Accounts/search?criteria=${criteria}&per_page=8`;
+    const r = await fetch(url, {
+      headers: { 'Authorization': 'Zoho-oauthtoken ' + zohoToken }
+    });
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    renderResults(data.data || []);
+  } catch(e) {
+    renderError();
+  } finally {
+    showSpinner(false);
+  }
+}
+
+function showDemoResults(q) {
+  // Simulated results when no token (demo UX)
+  const demo = [
+    { id: 'demo1', Account_Name: q + ' S.A.', RUT_field: '76.123.456-7', Phone: '+56 2 2345 6789', Email: 'contacto@' + q.toLowerCase().replace(/ /g,'-') + '.cl' },
+    { id: 'demo2', Account_Name: q + ' Ltda.', RUT_field: '77.654.321-K', Phone: '+56 9 8765 4321', Email: 'info@' + q.toLowerCase().replace(/ /g,'-') + '.cl' },
+  ];
+  renderResults(demo, true);
+}
+
+function renderResults(accounts, isDemo) {
+  if (!accounts.length) {
+    acDropdown.innerHTML = '<div class="ac-empty">No se encontraron empresas</div>';
+    acDropdown.classList.add('open');
+    return;
+  }
+  acDropdown.innerHTML = accounts.map(a => `
+    <div class="ac-item" data-id="${a.id}" onclick="selectAccount(${JSON.stringify(a).replace(/"/g,'&quot;')})">
+      <div class="ac-item-name">${a.Account_Name || a.name || ''}</div>
+      <div class="ac-item-rut">${a.RUT_field || a.RUT || ''}${isDemo ? ' · Demo' : ''}</div>
+    </div>
+  `).join('');
+  acDropdown.classList.add('open');
+}
+
+function renderError() {
+  acDropdown.innerHTML = '<div class="ac-empty" style="color:var(--orange)">⚠ Error al consultar Zoho CRM</div>';
+  acDropdown.classList.add('open');
+}
+
+function closeDropdown() {
+  acDropdown.classList.remove('open');
+  acDropdown.innerHTML = '';
+}
+
+function showSpinner(show) {
+  searchSpinner.style.display = show ? 'block' : 'none';
+  searchIcon.style.display = show ? 'none' : 'block';
+}
+
+async function selectAccount(account) {
+  closeDropdown();
+  selectedAccount = account;
+  crmInput.value = account.Account_Name || account.name || '';
+
+  // Show selected tag
+  document.getElementById('selectedTagText').textContent =
+    (account.Account_Name || account.name || '') + (account.RUT_field ? ' · ' + account.RUT_field : '');
+  document.getElementById('selectedTag').classList.add('show');
+
+  // Autofill fields
+  setAutofill('razon_social', account.Account_Name || account.name || '');
+  setAutofill('rut', account.RUT_field || account.RUT || '');
+  setAutofill('telefono', account.Phone || '');
+  setAutofill('email', account.Email || '');
+
+  // Fetch contact if token available
+  if (zohoToken && account.id && !account.id.startsWith('demo')) {
+    await fetchContact(account.id);
+  }
+
+  showToast('Cliente cargado desde Zoho CRM ✓', 'success');
+}
+
+async function fetchContact(accountId) {
+  try {
+    const url = `https://www.zohoapis.com/crm/v2/Contacts/search?criteria=(Account_Name.id:equals:${accountId})&per_page=1`;
+    const r = await fetch(url, {
+      headers: { 'Authorization': 'Zoho-oauthtoken ' + zohoToken }
+    });
+    if (!r.ok) return;
+    const data = await r.json();
+    if (data.data && data.data[0]) {
+      const c = data.data[0];
+      const name = [c.First_Name, c.Last_Name].filter(Boolean).join(' ');
+      if (name) setAutofill('contacto', name);
+      if (c.Email && !document.getElementById('email').value) setAutofill('email', c.Email);
+      if (c.Phone && !document.getElementById('telefono').value) setAutofill('telefono', c.Phone);
+    }
+  } catch(e) { /* silently fail */ }
+}
+
+function setAutofill(id, value) {
+  const el = document.getElementById(id);
+  if (!el || !value) return;
+  el.value = value;
+  el.classList.add('autofilled');
+  el.addEventListener('input', () => el.classList.remove('autofilled'), { once: true });
+}
+
+function clearCrmSelection() {
+  selectedAccount = null;
+  crmInput.value = '';
+  document.getElementById('selectedTag').classList.remove('show');
+  ['razon_social','rut','contacto','email','telefono'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.classList.remove('autofilled'); }
+  });
+}
+
+// ── Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = {};
+  fd.forEach((v, k) => {
+    if (data[k]) {
+      data[k] = Array.isArray(data[k]) ? [...data[k], v] : [data[k], v];
+    } else {
+      data[k] = v;
+    }
+  });
+  data.crm_account_id = selectedAccount?.id || null;
+  data.timestamp = new Date().toISOString();
+  console.log('Formulario:', data);
+  showToast('Levantamiento enviado correctamente ✓', 'success');
+}
+
+// ── Toast
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
