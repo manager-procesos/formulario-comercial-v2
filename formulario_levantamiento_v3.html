@@ -55,6 +55,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .crm-clear{background:none;border:none;cursor:pointer;color:var(--text-3);font-size:20px;line-height:1;padding:0 2px;}
 .crm-clear:hover{color:var(--red);}
 
+/* ZOHO PILLS — vendedor y GEX */
+.crm-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.crm-pill{display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:20px;font-size:12px;font-weight:600;}
+.crm-pill-vendedor{background:#E6F4EC;border:1px solid #A8DCBC;color:#0A6A32;}
+.crm-pill-gex{background:#EEF3FC;border:1px solid var(--border-hi);color:var(--navy);}
+.crm-pill svg{flex-shrink:0;}
+
 .contact-sel{margin-top:10px;display:none;}
 .contact-sel.show{display:block;}
 .contact-label{font-size:11.5px;font-weight:600;color:var(--text-2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;}
@@ -70,14 +77,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .st-dot.loading{background:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* WRAP */
 .wrap{max-width:680px;margin:0 auto;padding:20px 20px 100px;}
 .hero{background:linear-gradient(135deg,var(--navy) 0%,#1a4a8a 100%);border-radius:var(--r-lg);padding:22px 24px;margin-bottom:16px;position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:rgba(0,176,240,.12);}
 .hero-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;}
 .hero-desc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
 
-/* SECTIONS */
 .sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:8px;overflow:hidden;transition:box-shadow .2s;}
 .sec:hover{box-shadow:0 2px 8px rgba(0,0,0,.06);}
 .sec-head{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;transition:background .1s;-webkit-tap-highlight-color:transparent;}
@@ -91,19 +96,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .sec-body{display:none;padding:0 14px 16px;border-top:1px solid var(--border);}
 .sec.open .sec-body{display:block;}
 
-/* FIELDS */
 .field{margin-top:12px;}
 .field label{display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em;}
 .hint{font-size:11px;color:var(--text-3);margin-bottom:4px;}
 .req{color:var(--red);}
-.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#fff;outline:none;transition:all .15s;}
+.field input,.field textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#fff;outline:none;transition:all .15s;}
 .field input:focus,.field textarea:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(0,176,240,.1);}
 .field textarea{min-height:72px;resize:vertical;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;}
 .char-count{font-size:11px;color:var(--text-3);text-align:right;margin-top:3px;}
 input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !important;color:var(--navy);}
+input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !important;color:#0A6A32 !important;}
 
-/* TOGGLES */
+.zoho-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--sky);background:#EEF9FF;border:1px solid #A8DDF8;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;}
+
 .togs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
 .tog{display:flex;align-items:center;gap:6px;padding:8px 13px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;font-size:13px;color:var(--text-2);user-select:none;transition:all .15s;}
 .tog:hover{border-color:var(--border-hi);}
@@ -111,12 +117,10 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 .tog-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .tog.on .tog-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;}
 
-/* ALERTS */
 .alert{border-radius:var(--r);padding:9px 12px;font-size:12.5px;line-height:1.5;margin-top:10px;display:flex;gap:7px;}
 .alert-blue{background:#EEF3FC;border-left:3px solid var(--blue);color:#1A3060;}
 .alert-orange{background:#FFF8F0;border-left:3px solid var(--orange);color:#7A4A00;}
 
-/* BD BLOCKS */
 .bd-block{border:1px solid var(--border-hi);border-radius:var(--r-lg);margin-bottom:8px;overflow:hidden;background:var(--card);}
 .bd-block-head{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;transition:background .1s;}
 .bd-block-head:hover{background:#F0F4FC;}
@@ -141,7 +145,6 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 .num-btn:hover{background:var(--border);}
 .num-val{width:36px;text-align:center;font-family:var(--mono);font-size:13px;font-weight:700;border-left:1px solid var(--border);border-right:1px solid var(--border);padding:5px 0;background:#fff;color:var(--navy);}
 
-/* TABLA */
 .tabla-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:6px;}
 .t-head{display:grid;grid-template-columns:28px 1fr 46px 46px;background:#F0F4FA;padding:6px 0;border-bottom:1px solid var(--border);}
 .th{text-align:center;font-size:10.5px;font-weight:600;color:var(--text-3);}
@@ -167,7 +170,6 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 .cb-no.on{background:var(--red);border-color:var(--red);}
 .cb-no.on::after{content:'✗';color:#fff;font-size:11px;font-weight:700;}
 
-/* SUMMARY */
 .summ{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;margin-top:10px;display:none;}
 .summ.show{display:block;}
 .summ-title{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--navy);}
@@ -186,7 +188,6 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 .ab-blue{background:#EEF3FC;color:var(--navy);border-color:var(--border-hi);}
 .ab-green{background:#E6F4EC;color:#0A6A32;border-color:#A8DCBC;}
 
-/* STICKY FOOTER */
 .sticky-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:11px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;}
 .sf-left{display:flex;align-items:center;gap:10px;}
 .sf-pct{font-size:15px;font-weight:700;color:var(--navy);font-family:var(--mono);}
@@ -220,7 +221,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 <div class="wrap">
   <div class="hero">
     <div class="hero-title">Completar con el Cliente</div>
-    <div class="hero-desc">Busca el cliente en Zoho CRM para autocompletar los datos. Al terminar genera el correo para IT y descarga el PDF.</div>
+    <div class="hero-desc">Busca el cliente en Zoho CRM para autocompletar datos, vendedor y GEX. Al terminar genera el correo para IT y descarga el PDF.</div>
   </div>
 
   <!-- CRM SEARCH -->
@@ -231,7 +232,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
       <span class="crm-badge">ZOHO CRM</span>
     </div>
     <div class="crm-demo-note">
-      ⚡ <strong>Modo Demo</strong> — Datos simulados de Zoho CRM. Con token de autorización se conecta a datos reales.
+      ⚡ <strong>Modo Demo</strong> — Datos simulados. Con token de autorización se conecta a Zoho CRM real (incluye Vendedor y GEX reales).
     </div>
     <div class="crm-body">
       <div class="search-wrap">
@@ -241,6 +242,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         </div>
         <div class="ac-drop" id="ac-drop"></div>
       </div>
+
       <div class="crm-sel" id="crm-sel">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         <div class="crm-sel-info">
@@ -249,6 +251,19 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         </div>
         <button class="crm-clear" onclick="clearCRM()">×</button>
       </div>
+
+      <!-- PILLS VENDEDOR + GEX -->
+      <div class="crm-pills" id="crm-pills" style="display:none;">
+        <div class="crm-pill crm-pill-vendedor" id="pill-vendedor">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="pill-vendedor-text"></span>
+        </div>
+        <div class="crm-pill crm-pill-gex" id="pill-gex">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span id="pill-gex-text"></span>
+        </div>
+      </div>
+
       <div class="contact-sel" id="contact-sel">
         <div class="contact-label">Seleccionar contacto</div>
         <div class="contact-list" id="contact-list"></div>
@@ -277,6 +292,16 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         <div class="field"><label>Correo <span class="req">*</span></label><input id="f-email" type="email" placeholder="correo@empresa.cl" oninput="upd()"></div>
       </div>
       <div class="field"><label>Teléfono</label><input id="f-tel" placeholder="+56 9 XXXX XXXX" oninput="upd()"></div>
+      <div class="row2">
+        <div class="field">
+          <label>Vendedor a cargo <span class="zoho-tag">ZOHO</span></label>
+          <input id="f-vendedor" placeholder="Se autocompleta desde Zoho CRM" readonly style="background:#F7FAFD;cursor:default;">
+        </div>
+        <div class="field">
+          <label>Gestor de Expansión (GEX) <span class="zoho-tag">ZOHO</span></label>
+          <input id="f-gex" placeholder="Se autocompleta desde Zoho CRM" readonly style="background:#F7FAFD;cursor:default;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -380,7 +405,6 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
     </div>
   </div>
 
-  <!-- SUMMARY -->
   <div class="summ" id="summ">
     <div class="summ-title">📋 Resumen del Levantamiento</div>
     <div id="summ-data"></div>
@@ -408,42 +432,41 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 </div>
 
 <script>
-// ── DEMO DATA — simula Zoho CRM real ────────────────────
-const DEMO_ACCOUNTS = [
-  { id:'d1', name:'BLUNDING S A', rut:'79.744.580-0', phone:'968308188', email:'', city:'Santiago',
-    contacts:[
-      {id:'c1',name:'Camila Soto',email:'creditoycobranzas@blunding.com',phone:'968308188'},
-      {id:'c2',name:'Luis Antonio Contreras Neira',email:'lcontreras@blunding.com',phone:'+56977695431'},
-      {id:'c3',name:'Rodrigo San Martin',email:'costos@blunding.cl',phone:'+56223505930'},
-      {id:'c4',name:'Soledad Illanis',email:'sillanis@blunding.com',phone:''},
-      {id:'c5',name:'Teresa Rojas',email:'ventas@blunding.com',phone:''},
-    ]
-  },
-  { id:'d2', name:'CONSTRUCTORA PÉREZ S.A.', rut:'76.234.567-8', phone:'+56 2 2345 6789', email:'contacto@perez.cl', city:'Valparaíso',
-    contacts:[
-      {id:'c6',name:'Carlos Pérez Muñoz',email:'cperez@constructoraperez.cl',phone:'+56 9 8765 4321'},
-      {id:'c7',name:'Ana González',email:'agonzalez@constructoraperez.cl',phone:''},
-    ]
-  },
-  { id:'d3', name:'DISTRIBUIDORA EL SUR LTDA.', rut:'77.345.678-9', phone:'+56 9 8765 4321', email:'info@elsur.cl', city:'Concepción',
-    contacts:[
-      {id:'c8',name:'Pedro Rojas Silva',email:'projas@elsur.cl',phone:'+56 9 1234 5678'},
-    ]
-  },
-  { id:'d4', name:'RETAIL NORTE SPA', rut:'78.456.789-0', phone:'+56 2 3456 7890', email:'ventas@retailnorte.cl', city:'Antofagasta',
-    contacts:[
-      {id:'c9',name:'María Fernández',email:'mfernandez@retailnorte.cl',phone:'+56 9 9876 5432'},
-      {id:'c10',name:'Jorge Castillo',email:'jcastillo@retailnorte.cl',phone:''},
-    ]
-  },
-  { id:'d5', name:'SERVICIOS TEC. MANAGER LTDA.', rut:'76.987.654-3', phone:'+56 2 2222 3333', email:'info@managerltda.cl', city:'Santiago',
-    contacts:[
-      {id:'c11',name:'Roberto Vega',email:'rvega@managerltda.cl',phone:'+56 9 5555 6666'},
-    ]
-  },
+// ── DEMO DATA ────────────────────────────────────────────
+const DEMO_ACCOUNTS=[
+  {id:'d1',name:'BLUNDING S A',rut:'79.744.580-0',phone:'968308188',email:'',city:'Santiago',
+   vendedor:'Roberto Ramírez',vendedor_email:'rramirez@manager.cl',gex:'Marcos Cayupán',
+   contacts:[
+     {id:'c1',name:'Camila Soto',email:'creditoycobranzas@blunding.com',phone:'968308188'},
+     {id:'c2',name:'Luis Antonio Contreras Neira',email:'lcontreras@blunding.com',phone:'+56977695431'},
+     {id:'c3',name:'Rodrigo San Martin',email:'costos@blunding.cl',phone:'+56223505930'},
+     {id:'c4',name:'Soledad Illanis',email:'sillanis@blunding.com',phone:''},
+     {id:'c5',name:'Teresa Rojas',email:'ventas@blunding.com',phone:''},
+   ]},
+  {id:'d2',name:'CONSTRUCTORA PÉREZ S.A.',rut:'76.234.567-8',phone:'+56 2 2345 6789',email:'contacto@perez.cl',city:'Valparaíso',
+   vendedor:'María López',vendedor_email:'mlopez@manager.cl',gex:'Gabriel Clavijo',
+   contacts:[
+     {id:'c6',name:'Carlos Pérez Muñoz',email:'cperez@constructoraperez.cl',phone:'+56 9 8765 4321'},
+     {id:'c7',name:'Ana González',email:'agonzalez@constructoraperez.cl',phone:''},
+   ]},
+  {id:'d3',name:'DISTRIBUIDORA EL SUR LTDA.',rut:'77.345.678-9',phone:'+56 9 8765 4321',email:'info@elsur.cl',city:'Concepción',
+   vendedor:'Jorge Muñoz',vendedor_email:'jmunoz@manager.cl',gex:'Marcos Cayupán',
+   contacts:[
+     {id:'c8',name:'Pedro Rojas Silva',email:'projas@elsur.cl',phone:'+56 9 1234 5678'},
+   ]},
+  {id:'d4',name:'RETAIL NORTE SPA',rut:'78.456.789-0',phone:'+56 2 3456 7890',email:'ventas@retailnorte.cl',city:'Antofagasta',
+   vendedor:'Roberto Ramírez',vendedor_email:'rramirez@manager.cl',gex:'Gabriel Clavijo',
+   contacts:[
+     {id:'c9',name:'María Fernández',email:'mfernandez@retailnorte.cl',phone:'+56 9 9876 5432'},
+     {id:'c10',name:'Jorge Castillo',email:'jcastillo@retailnorte.cl',phone:''},
+   ]},
+  {id:'d5',name:'SERVICIOS TEC. MANAGER LTDA.',rut:'76.987.654-3',phone:'+56 2 2222 3333',email:'info@managerltda.cl',city:'Santiago',
+   vendedor:'María López',vendedor_email:'mlopez@manager.cl',gex:'Marcos Cayupán',
+   contacts:[
+     {id:'c11',name:'Roberto Vega',email:'rvega@managerltda.cl',phone:'+56 9 5555 6666'},
+   ]},
 ];
 
-// ── TABLAS ──────────────────────────────────────────────
 const TABLAS=[
   {n:1,c:"ACCESS",d:"Control de acceso y permisos",ob:true},
   {n:2,c:"AUTOR_DB",d:"Autorizaciones del sistema",ob:true},
@@ -469,10 +492,7 @@ const TABLAS=[
   {n:22,c:"DESCT_DB",d:"Descuentos y LP (si aplica)",ob:false},
 ];
 
-const ts={};
-let numExtra=1;
-let searchTimer=null;
-let currentContacts=[];
+const ts={};let numExtra=1;let searchTimer=null;let currentContacts=[];
 
 // ── CRM SEARCH ──────────────────────────────────────────
 const crmInput=document.getElementById('crm-input');
@@ -483,7 +503,6 @@ function setStatus(state,msg){
   document.getElementById('st-dot').className='st-dot'+(state?' '+state:'');
   document.getElementById('st-msg').textContent=msg;
 }
-
 function showSpinner(on){
   searchIco.innerHTML=on
     ?'<div class="spin"></div>'
@@ -494,15 +513,10 @@ crmInput.addEventListener('input',function(){
   clearTimeout(searchTimer);
   const q=this.value.trim();
   if(q.length<2){acDrop.classList.remove('open');setStatus('','Escribe al menos 2 caracteres para buscar');return;}
-  showSpinner(true);
-  setStatus('loading','Buscando en Zoho CRM…');
+  showSpinner(true);setStatus('loading','Buscando en Zoho CRM…');
   searchTimer=setTimeout(()=>searchDemo(q),400);
 });
-
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.crm-block'))acDrop.classList.remove('open');
-});
-
+document.addEventListener('click',function(e){if(!e.target.closest('.crm-block'))acDrop.classList.remove('open');});
 crmInput.addEventListener('keydown',function(e){
   const items=acDrop.querySelectorAll('.ac-item');
   const hi=acDrop.querySelector('.ac-item.hi');
@@ -514,10 +528,7 @@ crmInput.addEventListener('keydown',function(e){
 
 function searchDemo(q){
   showSpinner(false);
-  const results=DEMO_ACCOUNTS.filter(a=>
-    a.name.toLowerCase().includes(q.toLowerCase())||
-    a.rut.includes(q)
-  );
+  const results=DEMO_ACCOUNTS.filter(a=>a.name.toLowerCase().includes(q.toLowerCase())||a.rut.includes(q));
   if(!results.length){
     acDrop.innerHTML='<div class="ac-empty">No se encontraron empresas</div>';
     setStatus('','Sin resultados para "'+q+'"');
@@ -543,16 +554,23 @@ function selectAccount(account){
   document.getElementById('crm-sel-rut').textContent=account.rut+(account.city?' · '+account.city:'');
   document.getElementById('crm-sel').classList.add('show');
 
+  // Pills vendedor + GEX
+  document.getElementById('pill-vendedor-text').textContent='Vendedor: '+account.vendedor;
+  document.getElementById('pill-gex-text').textContent='GEX: '+account.gex;
+  document.getElementById('crm-pills').style.display='flex';
+
+  // Autocompletar campos
   setField('f-razon',account.name);
   setField('f-rut',account.rut);
   if(account.phone)setField('f-tel',account.phone);
+  setZohoField('f-vendedor',account.vendedor);
+  setZohoField('f-gex',account.gex);
 
+  // Contactos
   currentContacts=account.contacts||[];
   if(currentContacts.length){
     document.getElementById('contact-list').innerHTML=currentContacts.map(c=>`
-      <div class="contact-pill" onclick="selectContact(this,'${c.id}')">
-        ${c.name}
-      </div>`).join('');
+      <div class="contact-pill" onclick="selectContact(this,'${c.id}')">${c.name}</div>`).join('');
     document.getElementById('contact-sel').classList.add('show');
   }
 
@@ -568,16 +586,20 @@ function selectContact(el,cid){
   setField('f-contacto',c.name);
   if(c.email)setField('f-email',c.email);
   if(c.phone)setField('f-tel',c.phone);
-  setStatus('ok','Contacto seleccionado: '+c.name+' ✓');
+  setStatus('ok','Contacto: '+c.name+' ✓');
   upd();
 }
 
 function setField(id,val){
   const el=document.getElementById(id);
   if(!el||!val)return;
-  el.value=val;
-  el.classList.add('autofilled');
+  el.value=val;el.classList.add('autofilled');
   el.addEventListener('input',()=>el.classList.remove('autofilled'),{once:true});
+}
+function setZohoField(id,val){
+  const el=document.getElementById(id);
+  if(!el||!val)return;
+  el.value=val;el.classList.add('autofilled-zoho');
 }
 
 function clearCRM(){
@@ -585,10 +607,15 @@ function clearCRM(){
   document.getElementById('crm-sel').classList.remove('show');
   document.getElementById('contact-sel').classList.remove('show');
   document.getElementById('contact-list').innerHTML='';
+  document.getElementById('crm-pills').style.display='none';
   currentContacts=[];
   ['f-razon','f-rut','f-tel','f-contacto','f-email'].forEach(id=>{
     const el=document.getElementById(id);
     if(el){el.value='';el.classList.remove('autofilled');}
+  });
+  ['f-vendedor','f-gex'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.value='';el.classList.remove('autofilled-zoho');}
   });
   setStatus('','Escribe al menos 2 caracteres para buscar');
   upd();
@@ -596,8 +623,7 @@ function clearCRM(){
 
 // ── FORM LOGIC ──────────────────────────────────────────
 function renderTbl(containerId,prefix){
-  const el=document.getElementById(containerId);
-  if(!el)return;
+  const el=document.getElementById(containerId);if(!el)return;
   el.innerHTML=TABLAS.map((t,i)=>`
     <div class="tr ${t.ob?'ob':''}">
       <div class="td-n">${t.ob?'★':t.n}</div>
@@ -606,74 +632,36 @@ function renderTbl(containerId,prefix){
       <div class="td-cb"><div class="cb cb-no" id="${prefix}no${i}" onclick="tCb('${prefix}',${i},'no')"></div></div>
     </div>`).join('');
 }
-
 function tCb(prefix,i,type){
   if(TABLAS[i].ob)return;
-  const si=document.getElementById(prefix+'si'+i);
-  const no=document.getElementById(prefix+'no'+i);
+  const si=document.getElementById(prefix+'si'+i),no=document.getElementById(prefix+'no'+i);
   if(type==='si'){si.classList.toggle('on');if(si.classList.contains('on'))no.classList.remove('on');}
   else{no.classList.toggle('on');if(no.classList.contains('on'))si.classList.remove('on');}
 }
-
-function getSel(prefix){
-  return TABLAS.filter((t,i)=>t.ob||document.getElementById(prefix+'si'+i)?.classList.contains('on'));
-}
-
+function getSel(prefix){return TABLAS.filter((t,i)=>t.ob||document.getElementById(prefix+'si'+i)?.classList.contains('on'));}
 function togSec(id){document.getElementById(id).classList.toggle('open');}
-function selTog(el,group,val){
-  document.querySelectorAll(`[onclick*="'${group}'"]`).forEach(o=>o.classList.remove('on'));
-  el.classList.add('on');ts[group]=val;upd();
-}
+function selTog(el,group,val){document.querySelectorAll(`[onclick*="'${group}'"]`).forEach(o=>o.classList.remove('on'));el.classList.add('on');ts[group]=val;upd();}
 function togMod(el){el.classList.toggle('on');upd();}
 function getMods(){return[...document.querySelectorAll('.mods .tog.on')].map(o=>o.textContent.trim()).join(', ')||'—';}
 function v(id){return(document.getElementById(id)?.value||'').trim();}
-
 function mostrarExtra(){document.getElementById('extra-wrap').classList.add('show');renderExtras();}
 function ocultarExtra(){document.getElementById('extra-wrap').classList.remove('show');}
-
-function chgNum(d){
-  numExtra=Math.max(1,Math.min(6,numExtra+d));
-  document.getElementById('num-val').textContent=numExtra;
-  renderExtras();
-}
+function chgNum(d){numExtra=Math.max(1,Math.min(6,numExtra+d));document.getElementById('num-val').textContent=numExtra;renderExtras();}
 
 function renderExtras(){
   const cont=document.getElementById('extra-blocks');
   const saved={};
-  cont.querySelectorAll('.bd-block').forEach(b=>{
-    const i=b.dataset.i;
-    saved[i]={nm:b.querySelector('.bd-nm')?.value||'',rut:b.querySelector('.bd-rut')?.value||'',dc:b.querySelector('.bd-dc')?.value||''};
-  });
+  cont.querySelectorAll('.bd-block').forEach(b=>{const i=b.dataset.i;saved[i]={nm:b.querySelector('.bd-nm')?.value||'',rut:b.querySelector('.bd-rut')?.value||'',dc:b.querySelector('.bd-dc')?.value||''};});
   cont.innerHTML='';
   for(let i=0;i<numExtra;i++){
-    const p=saved[i]||{};
-    const b=document.createElement('div');
-    b.className='bd-block open';b.dataset.i=i;
-    b.innerHTML=`
-      <div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')">
-        <div class="bd-num">${i+2}</div>
-        <div class="bd-block-title" id="bdt${i}">${p.nm||'BD Adicional '+(i+1)}</div>
-        <span class="bd-block-arrow">▼</span>
-      </div>
-      <div class="bd-block-body">
-        <div class="bd-fields">
-          <div class="bd-field"><label>Nombre BD nueva</label><input class="bd-nm" placeholder="NOMBRE_BD" value="${p.nm||''}" oninput="updBDTitle(${i},this.value)"></div>
-          <div class="bd-field"><label>RUT cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||''}"></div>
-        </div>
-        <div class="bd-fields">
-          <div class="bd-field" style="grid-column:1/-1;"><label>Descripción (máx. 30)</label><input class="bd-dc" placeholder="Descripción" maxlength="30" value="${p.dc||''}"></div>
-        </div>
-        <div class="bd-tabla-title">Tablas a copiar para esta BD</div>
-        <div class="tabla-wrap">
-          <div class="t-head"><div class="th">N°</div><div class="th tl">Tabla</div><div class="th si">SÍ</div><div class="th no">NO</div></div>
-          <div id="tbl_ext_${i}"></div>
-        </div>
-      </div>`;
-    cont.appendChild(b);
-    renderTbl('tbl_ext_'+i,'ext'+i+'_');
+    const p=saved[i]||{};const b=document.createElement('div');b.className='bd-block open';b.dataset.i=i;
+    b.innerHTML=`<div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')"><div class="bd-num">${i+2}</div><div class="bd-block-title" id="bdt${i}">${p.nm||'BD Adicional '+(i+1)}</div><span class="bd-block-arrow">▼</span></div>
+      <div class="bd-block-body"><div class="bd-fields"><div class="bd-field"><label>Nombre BD nueva</label><input class="bd-nm" placeholder="NOMBRE_BD" value="${p.nm||''}" oninput="updBDTitle(${i},this.value)"></div><div class="bd-field"><label>RUT cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||''}"></div></div>
+      <div class="bd-fields"><div class="bd-field" style="grid-column:1/-1;"><label>Descripción (máx. 30)</label><input class="bd-dc" placeholder="Descripción" maxlength="30" value="${p.dc||''}"></div></div>
+      <div class="bd-tabla-title">Tablas a copiar para esta BD</div><div class="tabla-wrap"><div class="t-head"><div class="th">N°</div><div class="th tl">Tabla</div><div class="th si">SÍ</div><div class="th no">NO</div></div><div id="tbl_ext_${i}"></div></div></div>`;
+    cont.appendChild(b);renderTbl('tbl_ext_'+i,'ext'+i+'_');
   }
 }
-
 function updBDTitle(i,v){const el=document.getElementById('bdt'+i);if(el)el.textContent=v.trim()||'BD Adicional '+(i+1);}
 
 function upd(){
@@ -685,12 +673,7 @@ function upd(){
   setBadge('b1',v('f-razon')&&v('f-contacto'));
   setBadge('b2',v('f-bdnueva')&&v('f-bdorigen'));
 }
-
-function setBadge(id,done){
-  const el=document.getElementById(id);
-  el.textContent=done?'✓ Listo':'Pendiente';
-  el.className='sec-badge'+(done?' done':'');
-}
+function setBadge(id,done){const el=document.getElementById(id);el.textContent=done?'✓ Listo':'Pendiente';el.className='sec-badge'+(done?' done':'');}
 
 function fmtTablas(sel){
   const mx=Math.max(...TABLAS.map(t=>t.c.length));
@@ -707,15 +690,16 @@ function buildEmail(){
     const dc=bl.querySelector('.bd-dc')?.value||`[descripción BD ${i+2}]`;
     crea+=`\n${i+2}. Crear base denominada "${nm}" y en el campo "Descripción" indicar: ${dc}`;
   });
-  let tbls=`Copiar desde base "${v('f-bdorigen')||'[BD_ORIGEN]'}" a "${v('f-bdnueva')||'[NOMBRE_BD]'}" las siguientes tablas (debe ser desde esa base, no otra):\n${fmtTablas(mainSel)}`;
+  let tbls=`Copiar desde base "${v('f-bdorigen')||'[BD_ORIGEN]'}" a "${v('f-bdnueva')||'[NOMBRE_BD]'}" las siguientes tablas:\n${fmtTablas(mainSel)}`;
   if(ts['mas']==='si') extras.forEach((bl,i)=>{
     const nm=bl.querySelector('.bd-nm')?.value||`[BD ${i+2}]`;
-    const sel=getSel('ext'+i+'_');
-    tbls+=`\n\nCopiar desde base "${v('f-bdorigen')||'[BD_ORIGEN]'}" a "${nm}" las siguientes tablas:\n${fmtTablas(sel)}`;
+    tbls+=`\n\nCopiar desde base "${v('f-bdorigen')||'[BD_ORIGEN]'}" a "${nm}" las siguientes tablas:\n${fmtTablas(getSel('ext'+i+'_'))}`;
   });
   return `Para: it@manager.cl
 Asunto: Solicitud Creación BD – ${v('f-razon')||'[CLIENTE]'} – ${v('f-bdnueva')||'[BD]'}
 Área Solicitante: Comercial / GEX
+Vendedor: ${v('f-vendedor')||'—'}
+GEX: ${v('f-gex')||'—'}
 
 Estimados, muy buenas tardes,
 
@@ -741,6 +725,8 @@ function generate(){
       <div class="summ-row"><span class="summ-lbl">RUT</span><span class="summ-val">${v('f-rut')||'—'}</span></div>
       <div class="summ-row"><span class="summ-lbl">Contacto</span><span class="summ-val">${v('f-contacto')||'—'}</span></div>
       <div class="summ-row"><span class="summ-lbl">Correo</span><span class="summ-val">${v('f-email')||'—'}</span></div>
+      <div class="summ-row"><span class="summ-lbl">Vendedor</span><span class="summ-val">${v('f-vendedor')||'—'}</span></div>
+      <div class="summ-row"><span class="summ-lbl">GEX</span><span class="summ-val">${v('f-gex')||'—'}</span></div>
     </div>
     <div class="summ-sec"><div class="summ-sec-t">Base de Datos</div>
       <div class="summ-row"><span class="summ-lbl">BD Nueva</span><span class="summ-val" style="font-family:var(--mono)">${v('f-bdnueva')||'—'}</span></div>
@@ -753,22 +739,17 @@ function generate(){
     </div>
     ${v('f-obs')?`<div class="summ-sec"><div class="summ-sec-t">Observaciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-obs')}</div></div>`:''}`;
   document.getElementById('email-pre').textContent=buildEmail();
-  const s=document.getElementById('summ');
-  s.classList.add('show');
-  s.scrollIntoView({behavior:'smooth',block:'start'});
+  const s=document.getElementById('summ');s.classList.add('show');s.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function copyEmail(){
   navigator.clipboard.writeText(buildEmail()).then(()=>{
-    const b=document.getElementById('btn-copy');
-    b.textContent='✓ Copiado';b.classList.add('ok');
+    const b=document.getElementById('btn-copy');b.textContent='✓ Copiado';b.classList.add('ok');
     setTimeout(()=>{b.textContent='📋 Copiar correo';b.classList.remove('ok');},2000);
   });
 }
-
 function openOutlook(){
-  const email=buildEmail();
-  const lines=email.split('\n');
+  const email=buildEmail(),lines=email.split('\n');
   const asunto=lines.find(l=>l.startsWith('Asunto:'))?.replace('Asunto:','').trim()||'Solicitud Creación BD';
   const body=lines.slice(lines.findIndex(l=>l.trim()==='')+1).join('\n');
   window.location.href=`mailto:it@manager.cl?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(body)}`;
@@ -786,32 +767,28 @@ function genPDF(){
     const rut=bl.querySelector('.bd-rut')?.value||'—';
     const dc=bl.querySelector('.bd-dc')?.value||'—';
     const sel=getSel('ext'+i+'_');
-    extraHTML+=`<div style="margin-bottom:10px;padding:10px;background:#f0f4fa;border-radius:6px;">
-      <b style="color:#1F3864;">BD ${i+2}: ${nm}</b><br>
-      <span style="color:#666;">RUT: ${rut} · Descripción: ${dc}</span><br>
-      <span style="font-size:9pt;">Tablas: ${sel.map(t=>`<span style="font-family:monospace;background:#e8f0fb;padding:1px 5px;border-radius:3px;margin-right:2px;">${t.c}</span>`).join('')}</span>
-    </div>`;
+    extraHTML+=`<div style="margin-bottom:10px;padding:10px;background:#f0f4fa;border-radius:6px;"><b style="color:#1F3864;">BD ${i+2}: ${nm}</b><br><span style="color:#666;">RUT: ${rut} · Descripción: ${dc}</span><br><span style="font-size:9pt;">Tablas: ${sel.map(t=>`<span style="font-family:monospace;background:#e8f0fb;padding:1px 5px;border-radius:3px;margin-right:2px;">${t.c}</span>`).join('')}</span></div>`;
   });
   const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Levantamiento ${cliente}</title>
 <style>
 body{font-family:Calibri,Arial,sans-serif;font-size:11pt;max-width:700px;margin:20px auto;padding:0 20px;color:#18243C;}
-.hdr{border:3px solid #1F3864;border-radius:8px;padding:16px 20px;margin-bottom:20px;position:relative;}
+.hdr{border:3px solid #1F3864;border-radius:8px;padding:16px 20px;margin-bottom:20px;}
 .hdr::before{content:'';display:block;height:8px;background:linear-gradient(90deg,#1F3864,#00B0F0);border-radius:4px 4px 0 0;margin:-16px -20px 12px -20px;}
 h1{font-size:15pt;margin:0 0 3px;color:#1F3864;}
 .hdr p{color:#4A5A78;font-size:9pt;margin:0;}
-.hdr-badge{display:inline-block;border:2px solid #00B0F0;color:#00B0F0;font-size:8pt;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:6px;letter-spacing:.05em;text-transform:uppercase;}
+.hdr-badge{display:inline-block;border:2px solid #00B0F0;color:#00B0F0;font-size:8pt;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:6px;text-transform:uppercase;}
 .st{border-left:5px solid #1F3864;padding:5px 10px;margin:16px 0 8px;font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;color:#1F3864;background:#F0F4FA;}
 .st-num{display:inline-block;width:20px;height:20px;border:2px solid #00B0F0;color:#1F3864;border-radius:50%;text-align:center;line-height:17px;font-size:8pt;font-weight:700;margin-right:6px;vertical-align:middle;}
 table.data{width:100%;border-collapse:collapse;margin-bottom:6px;}
 table.data td{padding:5px 0;font-size:11pt;vertical-align:top;border-bottom:1px solid #F0F4FA;}
-table.data td.lbl{color:#4A5A78;width:150px;}
+table.data td.lbl{color:#4A5A78;width:160px;}
 table.data td.val{font-weight:600;color:#18243C;}
+td.zoho-val{font-weight:600;color:#0A6A32;}
 .tags{margin-top:4px;}
 .tag{display:inline-block;font-family:monospace;font-size:9pt;padding:2px 7px;border:1px solid #1F3864;color:#1F3864;border-radius:4px;margin:2px 2px 2px 0;}
 .email{border:1px solid #DDE4EE;border-left:4px solid #1F3864;border-radius:6px;padding:14px;font-family:'Courier New',monospace;font-size:9pt;white-space:pre-wrap;line-height:1.9;color:#4A5A78;background:#F7FAFD;}
 @media print{body{margin:0;}}
-</style>
-</head><body>
+</style></head><body>
 <div class="hdr"><h1>Formulario de Levantamiento</h1><p>Creación Nueva BD · ${new Date().toLocaleString('es-CL')} · Manager ERP</p><span class="hdr-badge">Manager ERP</span></div>
 <div class="st"><span class="st-num">1</span>Cliente</div>
 <table class="data">
@@ -820,6 +797,8 @@ table.data td.val{font-weight:600;color:#18243C;}
   <tr><td class="lbl">Contacto</td><td class="val">${v('f-contacto')||'—'}</td></tr>
   <tr><td class="lbl">Correo</td><td class="val">${v('f-email')||'—'}</td></tr>
   <tr><td class="lbl">Teléfono</td><td class="val">${v('f-tel')||'—'}</td></tr>
+  <tr><td class="lbl">Vendedor a cargo</td><td class="zoho-val">${v('f-vendedor')||'—'}</td></tr>
+  <tr><td class="lbl">GEX</td><td class="zoho-val">${v('f-gex')||'—'}</td></tr>
 </table>
 <div class="st"><span class="st-num">2</span>Base de Datos Principal</div>
 <table class="data">
