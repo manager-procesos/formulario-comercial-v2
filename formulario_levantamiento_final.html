@@ -243,7 +243,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
   <div class="sec" id="s2">
     <div class="sec-head" onclick="togSec('s2')">
       <div class="sec-icon" style="background:#FEF0E6">🗄️</div>
-      <div class="sec-title">2. Datos Réplica</div>
+      <div class="sec-title">2. Datos Réplica 1</div>
       <span class="sec-badge" id="b2">Pendiente</span><span class="sec-arrow">▼</span>
     </div>
     <div class="sec-body">
@@ -261,8 +261,8 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         </div>
       </div>
       <div class="row2">
-        <div class="field"><label>Descripción <span class="req">*</span></label><div class="hint">Nombre en el sistema · Máx. 30 car.</div><input id="f-desc" placeholder="Empresa Ejemplo 2026" maxlength="30" oninput="upd()"></div>
         <div class="field"><label>RUT Cliente</label><input id="f-rut-bd" placeholder="XX.XXX.XXX-X" style="font-family:var(--mono);font-size:12px" oninput="upd()"></div>
+        <div class="field"><label>Descripción <span class="req">*</span></label><div class="hint">Nombre en el sistema · Máx. 30 car.</div><input id="f-desc" placeholder="Empresa Ejemplo 2026" maxlength="30" oninput="upd()"></div>
       </div>
       <div class="field"><label>Ambiente ASP <span class="req">*</span></label><input id="f-amb" placeholder="\\MANAGER.LOCAL\MG\[código]\MANAGER8\COMUNES\" style="font-family:var(--mono);font-size:11px" oninput="upd()"></div>
       <div class="field"><label>Código BD</label><input id="f-cod" placeholder="T969935600A" style="font-family:var(--mono);font-size:12px" oninput="upd()"></div>
@@ -535,19 +535,27 @@ function chgNum(d){numExtra=Math.max(1,Math.min(6,numExtra+d));document.getEleme
 function renderExtras(){
   const cont=document.getElementById('extra-blocks');
   const saved={};
-  cont.querySelectorAll('.bd-block').forEach(b=>{const i=b.dataset.i;saved[i]={nm:b.querySelector('.bd-nm')?.value||'',rut:b.querySelector('.bd-rut')?.value||'',dc:b.querySelector('.bd-dc')?.value||''};});
+  cont.querySelectorAll('.bd-block').forEach(b=>{const i=b.dataset.i;saved[i]={nm:b.querySelector('.bd-nm')?.value||'',rut:b.querySelector('.bd-rut')?.value||'',dc:b.querySelector('.bd-dc')?.value||'',origen:b.querySelector('.bd-origen')?.value||''};});
   cont.innerHTML='';
   for(let i=0;i<numExtra;i++){
     const p=saved[i]||{};const b=document.createElement('div');b.className='bd-block open';b.dataset.i=i;
-    b.innerHTML=`<div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')"><div class="bd-num">${i+2}</div><div class="bd-block-title" id="bdt${i}">${p.nm||'BD Adicional '+(i+1)}</div><span class="bd-block-arrow">▼</span></div>
-      <div class="bd-block-body"><div class="bd-fields"><div class="bd-field"><label>Nombre BD nueva</label><input class="bd-nm" placeholder="NOMBRE_BD" value="${p.nm||''}" oninput="updBDTitle(${i},this.value)"></div><div class="bd-field"><label>RUT cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||''}"></div></div>
-      <div class="bd-fields"><div class="bd-field" style="grid-column:1/-1;"><label>Descripción (máx. 30)</label><input class="bd-dc" placeholder="Descripción" maxlength="30" value="${p.dc||''}"></div></div>
+    const rutVal = document.getElementById('f-rut-bd')?.value || '';
+    b.innerHTML=`<div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')"><div class="bd-num">${i+2}</div><div class="bd-block-title" id="bdt${i}">${p.nm||'Réplica '+(i+2)}</div><span class="bd-block-arrow">▼</span></div>
+      <div class="bd-block-body">
+      <div class="bd-fields">
+        <div class="bd-field"><label>Nombre BD nueva</label><input class="bd-nm" placeholder="NOMBRE_BD" value="${p.nm||''}" oninput="updBDTitle(${i},this.value)"></div>
+        <div class="bd-field"><label>BD de Origen</label><input class="bd-origen" placeholder="NOMBRE_ORIGEN" value="${p.origen||''}"></div>
+      </div>
+      <div class="bd-fields">
+        <div class="bd-field"><label>RUT Cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||rutVal}"></div>
+        <div class="bd-field"><label>Descripción (máx. 30)</label><input class="bd-dc" placeholder="Descripción" maxlength="30" value="${p.dc||''}"></div>
+      </div>
       <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px;">Tablas a copiar para esta BD</div>
       <div class="tabla-wrap"><div class="t-head"><div class="th">N°</div><div class="th tl">Tabla</div><div class="th si">SÍ</div><div class="th no">NO</div></div><div id="tbl_ext_${i}"></div></div></div>`;
     cont.appendChild(b);renderTbl('tbl_ext_'+i,'ext'+i+'_');
   }
 }
-function updBDTitle(i,val){const el=document.getElementById('bdt'+i);if(el)el.textContent=val.trim()||'BD Adicional '+(i+1);}
+function updBDTitle(i,val){const el=document.getElementById('bdt'+i);if(el)el.textContent=val.trim()||'Réplica '+(i+2);}
 
 function upd(){
   const req=[v('f-razon'),v('f-rut'),v('f-contacto'),v('f-email'),v('f-bdnueva'),v('f-bdorigen'),v('f-desc'),v('f-amb')];
