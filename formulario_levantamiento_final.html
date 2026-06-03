@@ -9,56 +9,44 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
-
-.topbar{background:var(--navy);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
-.tb-left{display:flex;align-items:center;gap:9px;}
-.tb-mark{width:30px;height:30px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0;}
+.topbar{background:var(--navy);padding:12px 16px;display:flex;align-items:center;position:sticky;top:0;z-index:200;}
+.tb-mark{width:30px;height:30px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0;margin-right:9px;}
 .tb-title{font-size:13px;font-weight:600;color:#fff;}
 .tb-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;}
-
 .prog-wrap{background:rgba(0,0,0,.15);height:3px;}
 .prog-fill{height:100%;background:var(--sky);transition:width .4s;width:0%;}
-
 .crm-block{background:var(--card);border:2px solid var(--sky);border-radius:var(--r-lg);margin-bottom:12px;overflow:visible;position:relative;}
 .crm-head{display:flex;align-items:center;gap:10px;padding:14px 16px;}
 .crm-icon{width:36px;height:36px;background:linear-gradient(135deg,#EEF9FF,#D0F0FF);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(--sky);}
 .crm-title{font-size:13.5px;font-weight:700;flex:1;color:var(--navy);}
-.crm-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sky);color:#fff;letter-spacing:.03em;}
+.crm-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sky);color:#fff;}
 .crm-body{padding:0 14px 14px;}
-
 .search-wrap{position:relative;}
 .search-input{width:100%;padding:11px 44px 11px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#FAFBFD;outline:none;transition:all .2s;}
 .search-input:focus{border-color:var(--sky);background:#fff;box-shadow:0 0 0 3px rgba(0,176,240,.12);}
 .search-ico{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none;}
 .spin{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--sky);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 .ac-drop{position:absolute;top:calc(100% + 5px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);box-shadow:0 12px 32px rgba(0,0,0,.14);z-index:500;max-height:240px;overflow-y:auto;display:none;}
 .ac-drop.open{display:block;}
 .ac-item{padding:11px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;display:flex;align-items:center;gap:10px;}
 .ac-item:last-child{border-bottom:none;}
 .ac-item:hover,.ac-item.hi{background:#EEF9FF;}
 .ac-dot{width:8px;height:8px;border-radius:50%;background:var(--sky);flex-shrink:0;}
-.ac-info{flex:1;}
 .ac-name{font-size:13.5px;font-weight:600;color:var(--text);}
-.ac-sub{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-top:1px;}
+.ac-rut{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-top:1px;}
 .ac-empty{padding:16px;text-align:center;color:var(--text-3);font-size:13px;}
 .ac-error{padding:16px;text-align:center;color:var(--red);font-size:12.5px;}
-
 .crm-sel{display:none;align-items:center;gap:8px;background:#EEF9FF;border:1px solid #A8DDF8;border-radius:var(--r);padding:9px 12px;margin-top:8px;}
 .crm-sel.show{display:flex;}
-.crm-sel-info{flex:1;}
-.crm-sel-name{font-size:13px;font-weight:700;color:var(--navy);}
-.crm-sel-sub{font-size:11px;color:var(--text-3);}
+.crm-sel-name{font-size:13px;font-weight:700;color:var(--navy);flex:1;}
 .crm-clear{background:none;border:none;cursor:pointer;color:var(--text-3);font-size:20px;line-height:1;padding:0 2px;}
 .crm-clear:hover{color:var(--red);}
-
 .crm-pills{display:none;flex-wrap:wrap;gap:7px;margin-top:10px;}
 .crm-pills.show{display:flex;}
 .crm-pill{display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:20px;font-size:12px;font-weight:600;}
 .crm-pill-vendedor{background:#E6F4EC;border:1px solid #A8DCBC;color:#0A6A32;}
 .crm-pill-gex{background:#EEF3FC;border:1px solid var(--border-hi);color:var(--navy);}
-
 .contact-sel{margin-top:10px;display:none;}
 .contact-sel.show{display:block;}
 .contact-label{font-size:11.5px;font-weight:600;color:var(--text-2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;}
@@ -66,20 +54,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .contact-pill{padding:7px 13px;border:1.5px solid var(--border);border-radius:20px;font-size:12.5px;cursor:pointer;color:var(--text-2);transition:all .15s;background:#fff;}
 .contact-pill:hover{border-color:var(--sky);color:var(--navy);}
 .contact-pill.on{border-color:var(--sky);background:#EEF9FF;color:var(--navy);font-weight:600;}
-
 .crm-status{display:flex;align-items:center;gap:8px;padding:8px 14px;background:#F7FAFD;border-top:1px solid var(--border);border-radius:0 0 var(--r-lg) var(--r-lg);font-size:11.5px;color:var(--text-3);}
 .st-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0;}
 .st-dot.ok{background:var(--green);}
 .st-dot.err{background:var(--red);}
 .st-dot.loading{background:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
 .wrap{max-width:680px;margin:0 auto;padding:20px 20px 100px;}
-.hero{background:linear-gradient(135deg,var(--navy) 0%,#1a4a8a 100%);border-radius:var(--r-lg);padding:22px 24px;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero{background:linear-gradient(135deg,var(--navy),#1a4a8a);border-radius:var(--r-lg);padding:22px 24px;margin-bottom:16px;overflow:hidden;position:relative;}
 .hero::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:rgba(0,176,240,.12);}
 .hero-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;}
 .hero-desc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
-
 .sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:8px;overflow:hidden;}
 .sec-head{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;transition:background .1s;}
 .sec-head:hover{background:#FAFBFD;}
@@ -91,7 +76,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .sec.open .sec-arrow{transform:rotate(180deg);}
 .sec-body{display:none;padding:0 14px 16px;border-top:1px solid var(--border);}
 .sec.open .sec-body{display:block;}
-
 .field{margin-top:12px;}
 .field label{display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em;}
 .hint{font-size:11px;color:var(--text-3);margin-bottom:4px;}
@@ -102,20 +86,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;}
 .char-count{font-size:11px;color:var(--text-3);text-align:right;margin-top:3px;}
 input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !important;color:var(--navy);}
-input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !important;color:#0A6A32 !important;}
-.zoho-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--sky);background:#EEF9FF;border:1px solid #A8DDF8;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;}
-
 .togs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
 .tog{display:flex;align-items:center;gap:6px;padding:8px 13px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;font-size:13px;color:var(--text-2);user-select:none;transition:all .15s;}
 .tog:hover{border-color:var(--border-hi);}
 .tog.on{border-color:var(--sky);background:#EEF3FC;color:var(--navy);font-weight:600;}
 .tog-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .tog.on .tog-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;}
-
 .alert{border-radius:var(--r);padding:9px 12px;font-size:12.5px;line-height:1.5;margin-top:10px;display:flex;gap:7px;}
 .alert-blue{background:#EEF3FC;border-left:3px solid var(--blue);color:#1A3060;}
 .alert-orange{background:#FFF8F0;border-left:3px solid var(--orange);color:#7A4A00;}
-
 .bd-block{border:1px solid var(--border-hi);border-radius:var(--r-lg);margin-bottom:8px;overflow:hidden;background:var(--card);}
 .bd-block-head{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;transition:background .1s;}
 .bd-block-head:hover{background:#F0F4FC;}
@@ -129,7 +108,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
 .bd-field label{display:block;font-size:11.5px;font-weight:600;margin-bottom:3px;color:var(--text-2);}
 .bd-field input{width:100%;padding:7px 9px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:11.5px;color:var(--text);background:#fff;outline:none;}
 .bd-field input:focus{border-color:var(--sky);}
-
 .extra-wrap{margin-top:12px;display:none;}
 .extra-wrap.show{display:block;}
 .num-sel{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:var(--r);border:1px solid var(--border);margin-bottom:10px;}
@@ -138,7 +116,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
 .num-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:none;cursor:pointer;font-size:16px;color:var(--text);}
 .num-btn:hover{background:var(--border);}
 .num-val{width:36px;text-align:center;font-family:var(--mono);font-size:13px;font-weight:700;border-left:1px solid var(--border);border-right:1px solid var(--border);padding:5px 0;background:#fff;color:var(--navy);}
-
 .tabla-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:6px;}
 .t-head{display:grid;grid-template-columns:28px 1fr 46px 46px;background:#F0F4FA;padding:6px 0;border-bottom:1px solid var(--border);}
 .th{text-align:center;font-size:10.5px;font-weight:600;color:var(--text-3);}
@@ -163,7 +140,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
 .cb-no{border-color:#F0B4BC;background:#FFF0F2;}
 .cb-no.on{background:var(--red);border-color:var(--red);}
 .cb-no.on::after{content:'✗';color:#fff;font-size:11px;font-weight:700;}
-
 .summ{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;margin-top:10px;display:none;}
 .summ.show{display:block;}
 .summ-title{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--navy);}
@@ -181,7 +157,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
 .ab.ok{background:#E6F4EC;color:#0A6A32;border-color:#A8DCBC;}
 .ab-blue{background:#EEF3FC;color:var(--navy);border-color:var(--border-hi);}
 .ab-green{background:#E6F4EC;color:#0A6A32;border-color:#A8DCBC;}
-
 .sticky-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:11px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;}
 .sf-left{display:flex;align-items:center;gap:10px;}
 .sf-pct{font-size:15px;font-weight:700;color:var(--navy);font-family:var(--mono);}
@@ -189,35 +164,23 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
 .sf-fill{height:100%;background:linear-gradient(90deg,var(--navy),var(--sky));border-radius:3px;transition:width .4s;}
 .sf-label{font-size:10.5px;color:var(--text-3);margin-bottom:2px;}
 .btn-gen{padding:11px 20px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;box-shadow:0 2px 8px rgba(31,56,100,.3);}
-.btn-gen:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(31,56,100,.4);}
-
-@media(max-width:500px){
-  .row2,.bd-fields{grid-template-columns:1fr;}
-  .action-btns{flex-direction:column;}
-  .action-btns .ab{width:100%;justify-content:center;}
-}
+.btn-gen:hover{transform:translateY(-1px);}
+@media(max-width:500px){.row2,.bd-fields{grid-template-columns:1fr;}.action-btns{flex-direction:column;}.action-btns .ab{width:100%;justify-content:center;}}
 </style>
 </head>
 <body>
-
 <div class="topbar">
-  <div class="tb-left">
-    <div class="tb-mark">M</div>
-    <div>
-      <div class="tb-title">Formulario de Levantamiento</div>
-      <div class="tb-sub">Creación Nueva BD · Manager ERP</div>
-    </div>
-  </div>
+  <div class="tb-mark">M</div>
+  <div><div class="tb-title">Formulario de Levantamiento</div><div class="tb-sub">Creación Nueva BD · Manager ERP</div></div>
 </div>
 <div class="prog-wrap"><div class="prog-fill" id="tp"></div></div>
 
 <div class="wrap">
   <div class="hero">
     <div class="hero-title">Completar con el Cliente</div>
-    <div class="hero-desc">Busca el cliente en Zoho CRM para autocompletar datos, vendedor y GEX. Al terminar genera el correo para IT y descarga el PDF.</div>
+    <div class="hero-desc">Busca el cliente en Zoho CRM para autocompletar datos. Al terminar genera el correo para IT y descarga el PDF.</div>
   </div>
 
-  <!-- CRM SEARCH -->
   <div class="crm-block">
     <div class="crm-head">
       <div class="crm-icon">🔍</div>
@@ -232,16 +195,11 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
         </div>
         <div class="ac-drop" id="ac-drop"></div>
       </div>
-
       <div class="crm-sel" id="crm-sel">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        <div class="crm-sel-info">
-          <div class="crm-sel-name" id="crm-sel-name"></div>
-          <div class="crm-sel-sub" id="crm-sel-sub"></div>
-        </div>
+        <span class="crm-sel-name" id="crm-sel-name"></span>
         <button class="crm-clear" onclick="clearCRM()">×</button>
       </div>
-
       <div class="crm-pills" id="crm-pills">
         <div class="crm-pill crm-pill-vendedor">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -252,7 +210,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
           <span id="pill-gex-text"></span>
         </div>
       </div>
-
       <div class="contact-sel" id="contact-sel">
         <div class="contact-label">Seleccionar contacto</div>
         <div class="contact-list" id="contact-list"></div>
@@ -264,7 +221,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
     </div>
   </div>
 
-  <!-- S1: CLIENTE -->
   <div class="sec open" id="s1">
     <div class="sec-head" onclick="togSec('s1')">
       <div class="sec-icon" style="background:#EEF3FC">👤</div>
@@ -281,20 +237,9 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
         <div class="field"><label>Correo <span class="req">*</span></label><input id="f-email" type="email" placeholder="correo@empresa.cl" oninput="upd()"></div>
       </div>
       <div class="field"><label>Teléfono</label><input id="f-tel" placeholder="+56 9 XXXX XXXX" oninput="upd()"></div>
-      <div class="row2">
-        <div class="field">
-          <label>Vendedor a cargo <span class="zoho-tag">ZOHO</span></label>
-          <input id="f-vendedor" placeholder="Se autocompleta desde Zoho CRM" readonly style="background:#F7FAFD;cursor:default;">
-        </div>
-        <div class="field">
-          <label>Gestor de Expansión GEX <span class="zoho-tag">ZOHO</span></label>
-          <input id="f-gex" placeholder="Se autocompleta desde Zoho CRM" readonly style="background:#F7FAFD;cursor:default;">
-        </div>
-      </div>
     </div>
   </div>
 
-  <!-- S2: BD -->
   <div class="sec" id="s2">
     <div class="sec-head" onclick="togSec('s2')">
       <div class="sec-icon" style="background:#FEF0E6">🗄️</div>
@@ -318,7 +263,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
       <div class="field"><label>Descripción <span class="req">*</span></label><div class="hint">Nombre en el sistema · Máx. 30 car.</div><input id="f-desc" placeholder="Empresa Ejemplo 2026" maxlength="30" oninput="upd()"></div>
       <div class="field"><label>Ambiente ASP <span class="req">*</span></label><input id="f-amb" placeholder="\\MANAGER.LOCAL\MG\[código]\MANAGER8\COMUNES\" style="font-family:var(--mono);font-size:11px" oninput="upd()"></div>
       <div class="field"><label>Código BD</label><input id="f-cod" placeholder="T969935600A" style="font-family:var(--mono);font-size:12px" oninput="upd()"></div>
-
       <div style="margin-top:16px;">
         <div class="bd-block open">
           <div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')" style="background:#E6F4EC;">
@@ -335,7 +279,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
           </div>
         </div>
       </div>
-
       <div class="field" style="margin-top:14px;">
         <label>¿El cliente tiene más de una BD?</label>
         <div class="togs">
@@ -354,7 +297,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
         </div>
         <div id="extra-blocks"></div>
       </div>
-
       <div class="field" style="margin-top:14px;">
         <label>Módulos contratados en ASP</label>
         <div class="togs mods">
@@ -371,7 +313,6 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
     </div>
   </div>
 
-  <!-- S3: PREGUNTAS -->
   <div class="sec" id="s3">
     <div class="sec-head" onclick="togSec('s3')">
       <div class="sec-icon" style="background:#E8F4EE">❓</div>
@@ -412,17 +353,13 @@ input.autofilled-zoho{background:#E6F4EC !important;border-color:#A8DCBC !import
 <div class="sticky-footer">
   <div class="sf-left">
     <div class="sf-pct" id="sf-pct">0%</div>
-    <div>
-      <div class="sf-label">Completado</div>
-      <div class="sf-mini"><div class="sf-fill" id="sf-fill"></div></div>
-    </div>
+    <div><div class="sf-label">Completado</div><div class="sf-mini"><div class="sf-fill" id="sf-fill"></div></div></div>
   </div>
   <button class="btn-gen" onclick="generate()">✨ Generar resumen</button>
 </div>
 
 <script>
-const PROXY = 'https://fine-cassowary-48.manager-procesos.deno.net';
-
+const PROXY='https://fine-cassowary-48.manager-procesos.deno.net';
 const TABLAS=[
   {n:1,c:"ACCESS",d:"Control de acceso y permisos",ob:true},
   {n:2,c:"AUTOR_DB",d:"Autorizaciones del sistema",ob:true},
@@ -447,34 +384,25 @@ const TABLAS=[
   {n:21,c:"RECET_DB",d:"Recetas / producción",ob:false},
   {n:22,c:"DESCT_DB",d:"Descuentos y LP (si aplica)",ob:false},
 ];
-
 const ts={};let numExtra=1;let searchTimer=null;let currentContacts=[];
+let crmVendedor='',crmGex='';
 
 const crmInput=document.getElementById('crm-input');
 const acDrop=document.getElementById('ac-drop');
 const searchIco=document.getElementById('search-ico');
 
-function setStatus(state,msg){
-  document.getElementById('st-dot').className='st-dot'+(state?' '+state:'');
-  document.getElementById('st-msg').textContent=msg;
-}
-function showSpinner(on){
-  searchIco.innerHTML=on
-    ?'<div class="spin"></div>'
-    :'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
-}
+function setStatus(state,msg){document.getElementById('st-dot').className='st-dot'+(state?' '+state:'');document.getElementById('st-msg').textContent=msg;}
+function showSpinner(on){searchIco.innerHTML=on?'<div class="spin"></div>':'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';}
 
 crmInput.addEventListener('input',function(){
-  clearTimeout(searchTimer);
-  const q=this.value.trim();
+  clearTimeout(searchTimer);const q=this.value.trim();
   if(q.length<2){acDrop.classList.remove('open');setStatus('','Escribe al menos 2 caracteres para buscar');return;}
   showSpinner(true);setStatus('loading','Buscando en Zoho CRM…');
   searchTimer=setTimeout(()=>searchZoho(q),450);
 });
 document.addEventListener('click',function(e){if(!e.target.closest('.crm-block'))acDrop.classList.remove('open');});
 crmInput.addEventListener('keydown',function(e){
-  const items=acDrop.querySelectorAll('.ac-item');
-  const hi=acDrop.querySelector('.ac-item.hi');
+  const items=acDrop.querySelectorAll('.ac-item'),hi=acDrop.querySelector('.ac-item.hi');
   if(e.key==='ArrowDown'){e.preventDefault();if(!hi)items[0]?.classList.add('hi');else{hi.classList.remove('hi');(hi.nextElementSibling||items[0]).classList.add('hi');}}
   else if(e.key==='ArrowUp'){e.preventDefault();if(!hi)items[items.length-1]?.classList.add('hi');else{hi.classList.remove('hi');(hi.previousElementSibling||items[items.length-1]).classList.add('hi');}}
   else if(e.key==='Enter'){e.preventDefault();acDrop.querySelector('.ac-item.hi')?.click();}
@@ -493,9 +421,9 @@ async function searchZoho(q){
       acDrop.innerHTML=data.accounts.map(a=>`
         <div class="ac-item" onclick="selectAccount(${JSON.stringify(a).replace(/"/g,'&quot;')})">
           <div class="ac-dot"></div>
-          <div class="ac-info">
+          <div>
             <div class="ac-name">${a.name}</div>
-            <div class="ac-sub">${a.vendedor?'Vendedor: '+a.vendedor:''}${a.gex?' · GEX: '+a.gex:''}</div>
+            <div class="ac-rut">${a.rut||''}</div>
           </div>
         </div>`).join('');
       setStatus('ok',data.accounts.length+' empresa(s) encontrada(s)');
@@ -512,9 +440,10 @@ async function searchZoho(q){
 async function selectAccount(account){
   acDrop.classList.remove('open');
   crmInput.value=account.name;
+  crmVendedor=account.vendedor||'';
+  crmGex=account.gex||'';
 
-  document.getElementById('crm-sel-name').textContent=account.name;
-  document.getElementById('crm-sel-sub').textContent=(account.vendedor?'Vendedor: '+account.vendedor:'')+(account.gex?' · GEX: '+account.gex:'');
+  document.getElementById('crm-sel-name').textContent=account.name+(account.rut?' · '+account.rut:'');
   document.getElementById('crm-sel').classList.add('show');
 
   document.getElementById('pill-vendedor-text').textContent='Vendedor: '+(account.vendedor||'—');
@@ -522,9 +451,8 @@ async function selectAccount(account){
   document.getElementById('crm-pills').classList.add('show');
 
   setField('f-razon',account.name);
+  setField('f-rut',account.rut);
   if(account.phone)setField('f-tel',account.phone);
-  setZohoField('f-vendedor',account.vendedor);
-  setZohoField('f-gex',account.gex);
 
   setStatus('loading','Cargando contactos…');
   try{
@@ -539,9 +467,7 @@ async function selectAccount(account){
     } else {
       setStatus('ok','Cliente cargado ✓');
     }
-  }catch(e){
-    setStatus('ok','Cliente cargado ✓');
-  }
+  }catch(e){setStatus('ok','Cliente cargado ✓');}
   upd();
 }
 
@@ -558,32 +484,22 @@ function selectContact(el,cid){
 }
 
 function setField(id,val){
-  const el=document.getElementById(id);
-  if(!el||!val)return;
+  const el=document.getElementById(id);if(!el||!val)return;
   el.value=val;el.classList.add('autofilled');
   el.addEventListener('input',()=>el.classList.remove('autofilled'),{once:true});
 }
-function setZohoField(id,val){
-  const el=document.getElementById(id);
-  if(!el||!val)return;
-  el.value=val;el.classList.add('autofilled-zoho');
-}
 
 function clearCRM(){
-  crmInput.value='';
+  crmInput.value='';crmVendedor='';crmGex='';
   document.getElementById('crm-sel').classList.remove('show');
   document.getElementById('contact-sel').classList.remove('show');
   document.getElementById('crm-pills').classList.remove('show');
   document.getElementById('contact-list').innerHTML='';
   currentContacts=[];
-  ['f-razon','f-tel','f-contacto','f-email'].forEach(id=>{
+  ['f-razon','f-rut','f-tel','f-contacto','f-email'].forEach(id=>{
     const el=document.getElementById(id);if(el){el.value='';el.classList.remove('autofilled');}
   });
-  ['f-vendedor','f-gex'].forEach(id=>{
-    const el=document.getElementById(id);if(el){el.value='';el.classList.remove('autofilled-zoho');}
-  });
-  setStatus('','Escribe al menos 2 caracteres para buscar');
-  upd();
+  setStatus('','Escribe al menos 2 caracteres para buscar');upd();
 }
 
 function renderTbl(containerId,prefix){
@@ -622,12 +538,12 @@ function renderExtras(){
     b.innerHTML=`<div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')"><div class="bd-num">${i+2}</div><div class="bd-block-title" id="bdt${i}">${p.nm||'BD Adicional '+(i+1)}</div><span class="bd-block-arrow">▼</span></div>
       <div class="bd-block-body"><div class="bd-fields"><div class="bd-field"><label>Nombre BD nueva</label><input class="bd-nm" placeholder="NOMBRE_BD" value="${p.nm||''}" oninput="updBDTitle(${i},this.value)"></div><div class="bd-field"><label>RUT cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||''}"></div></div>
       <div class="bd-fields"><div class="bd-field" style="grid-column:1/-1;"><label>Descripción (máx. 30)</label><input class="bd-dc" placeholder="Descripción" maxlength="30" value="${p.dc||''}"></div></div>
-      <div class="bd-tabla-title" style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px;">Tablas a copiar para esta BD</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px;">Tablas a copiar para esta BD</div>
       <div class="tabla-wrap"><div class="t-head"><div class="th">N°</div><div class="th tl">Tabla</div><div class="th si">SÍ</div><div class="th no">NO</div></div><div id="tbl_ext_${i}"></div></div></div>`;
     cont.appendChild(b);renderTbl('tbl_ext_'+i,'ext'+i+'_');
   }
 }
-function updBDTitle(i,v){const el=document.getElementById('bdt'+i);if(el)el.textContent=v.trim()||'BD Adicional '+(i+1);}
+function updBDTitle(i,val){const el=document.getElementById('bdt'+i);if(el)el.textContent=val.trim()||'BD Adicional '+(i+1);}
 
 function upd(){
   const req=[v('f-razon'),v('f-rut'),v('f-contacto'),v('f-email'),v('f-bdnueva'),v('f-bdorigen'),v('f-desc'),v('f-amb')];
@@ -663,8 +579,8 @@ function buildEmail(){
   return `Para: it@manager.cl
 Asunto: Solicitud Creación BD – ${v('f-razon')||'[CLIENTE]'} – ${v('f-bdnueva')||'[BD]'}
 Área Solicitante: Comercial / GEX
-Vendedor: ${v('f-vendedor')||'—'}
-GEX: ${v('f-gex')||'—'}
+Vendedor: ${crmVendedor||'—'}
+GEX: ${crmGex||'—'}
 
 Estimados, muy buenas tardes,
 
@@ -690,8 +606,6 @@ function generate(){
       <div class="summ-row"><span class="summ-lbl">RUT</span><span class="summ-val">${v('f-rut')||'—'}</span></div>
       <div class="summ-row"><span class="summ-lbl">Contacto</span><span class="summ-val">${v('f-contacto')||'—'}</span></div>
       <div class="summ-row"><span class="summ-lbl">Correo</span><span class="summ-val">${v('f-email')||'—'}</span></div>
-      <div class="summ-row"><span class="summ-lbl">Vendedor</span><span class="summ-val">${v('f-vendedor')||'—'}</span></div>
-      <div class="summ-row"><span class="summ-lbl">GEX</span><span class="summ-val">${v('f-gex')||'—'}</span></div>
     </div>
     <div class="summ-sec"><div class="summ-sec-t">Base de Datos</div>
       <div class="summ-row"><span class="summ-lbl">BD Nueva</span><span class="summ-val" style="font-family:var(--mono)">${v('f-bdnueva')||'—'}</span></div>
@@ -757,8 +671,8 @@ td.zoho-val{font-weight:600;color:#0A6A32;}
   <tr><td class="lbl">Contacto</td><td class="val">${v('f-contacto')||'—'}</td></tr>
   <tr><td class="lbl">Correo</td><td class="val">${v('f-email')||'—'}</td></tr>
   <tr><td class="lbl">Teléfono</td><td class="val">${v('f-tel')||'—'}</td></tr>
-  <tr><td class="lbl">Vendedor a cargo</td><td class="zoho-val">${v('f-vendedor')||'—'}</td></tr>
-  <tr><td class="lbl">GEX</td><td class="zoho-val">${v('f-gex')||'—'}</td></tr>
+  <tr><td class="lbl">Vendedor a cargo</td><td class="zoho-val">${crmVendedor||'—'}</td></tr>
+  <tr><td class="lbl">GEX</td><td class="zoho-val">${crmGex||'—'}</td></tr>
 </table>
 <div class="st"><span class="st-num">2</span>Base de Datos Principal</div>
 <table class="data">
