@@ -270,7 +270,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         <div class="bd-block open">
           <div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')" style="background:#E6F4EC;">
             <div class="bd-num" style="background:#1A6B42;">1</div>
-            <div class="bd-block-title" style="color:#1A6B42;">BD Principal — Tablas a copiar</div>
+            <div class="bd-block-title" style="color:#1A6B42;">Réplica 1 — Tablas a copiar</div>
             <span class="bd-block-arrow" style="color:#1A6B42;">▼</span>
           </div>
           <div class="bd-block-body">
@@ -283,16 +283,13 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         </div>
       </div>
       <div class="field" style="margin-top:14px;">
-        <label>¿Tiene integraciones?</label>
+        <label>¿Necesita replicar otra BD?</label>
         <div class="togs">
-          <div class="tog" onclick="selTog(this,'integ','no');document.getElementById('integ-wrap').style.display='none'"><div class="tog-dot"></div>No</div>
-          <div class="tog" onclick="selTog(this,'integ','si');document.getElementById('integ-wrap').style.display='block'"><div class="tog-dot"></div>Sí</div>
-        </div>
-        <div id="integ-wrap" style="display:none;margin-top:10px;">
-          <textarea id="f-integraciones" placeholder="Describe las integraciones que tiene el cliente…" style="width:100%;min-height:80px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;resize:vertical;outline:none;" onfocus="this.style.borderColor='var(--sky)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+          <div class="tog" onclick="selTog(this,'mas','no');ocultarExtra()"><div class="tog-dot"></div>No</div>
+          <div class="tog" onclick="selTog(this,'mas','si');mostrarExtra()"><div class="tog-dot"></div>Sí</div>
         </div>
       </div>
-      <div class="extra-wrap" id="extra-wrap" style="display:none;">
+      <div class="extra-wrap" id="extra-wrap">
         <div class="num-sel">
           <span class="num-lbl">¿Cuántas BD adicionales?</span>
           <div class="num-ctrl">
@@ -518,6 +515,49 @@ function clearCRM(){
   setStatus('','Escribe al menos 2 caracteres para buscar');upd();
 }
 
+let extraSearchTimers={};
+async function searchExtra(idx,q){
+  clearTimeout(extraSearchTimers[idx]);
+  const drop=document.getElementById('ac-extra-'+idx);
+  if(q.length<2){drop.style.display='none';return;}
+  extraSearchTimers[idx]=setTimeout(async()=>{
+    try{
+      const res=await fetch(`${PROXY}?q=${encodeURIComponent(q)}`);
+      const data=await res.json();
+      if(!data.accounts||!data.accounts.length){
+        drop.innerHTML='<div style="padding:12px;text-align:center;color:var(--text-3);font-size:13px;">Sin resultados</div>';
+      } else {
+        drop.innerHTML=data.accounts.map(a=>`
+          <div onclick="selectExtra(${idx},${JSON.stringify(a).replace(/"/g,'&quot;')})"
+            style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;"
+            onmouseover="this.style.background='#EEF9FF'" onmouseout="this.style.background=''">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">${a.name}</div>
+            <div style="font-size:11px;color:var(--text-3);font-family:var(--mono)">${a.rut||''}</div>
+          </div>`).join('');
+      }
+      drop.style.display='block';
+    }catch(e){drop.style.display='none';}
+  },400);
+}
+function selectExtra(idx,account){
+  const drop=document.getElementById('ac-extra-'+idx);
+  const input=document.getElementById('crm-extra-'+idx);
+  const block=input.closest('.bd-block');
+  drop.style.display='none';
+  if(input)input.value=account.name;
+  const nm=block.querySelector('.bd-nm');
+  const rut=block.querySelector('.bd-rut');
+  if(nm&&!nm.value)nm.value=account.name;
+  if(rut)rut.value=account.rut||'';
+  const i=parseInt(block.dataset.i);
+  updBDTitle(i,block.querySelector('.bd-nm')?.value||'');
+}
+document.addEventListener('click',function(e){
+  document.querySelectorAll('[id^="ac-extra-"]').forEach(d=>{
+    if(!e.target.closest('[id^="crm-extra-"]'))d.style.display='none';
+  });
+});
+
 function renderTbl(containerId,prefix){
   const el=document.getElementById(containerId);if(!el)return;
   el.innerHTML=TABLAS.map((t,i)=>`
@@ -551,15 +591,24 @@ function renderExtras(){
   cont.innerHTML='';
   for(let i=0;i<numExtra;i++){
     const p=saved[i]||{};const b=document.createElement('div');b.className='bd-block open';b.dataset.i=i;
-    const rutVal = document.getElementById('f-rut-bd')?.value || '';
     b.innerHTML=`<div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')"><div class="bd-num">${i+2}</div><div class="bd-block-title" id="bdt${i}">${p.nm||'Réplica '+(i+2)}</div><span class="bd-block-arrow">▼</span></div>
       <div class="bd-block-body">
+      <!-- Mini buscador CRM para esta réplica -->
+      <div style="margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px;">Buscar empresa en Zoho CRM</div>
+        <div style="position:relative;">
+          <input type="text" id="crm-extra-${i}" placeholder="Escribe nombre de empresa…" autocomplete="off"
+            style="width:100%;padding:9px 36px 9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:13px;color:var(--text);background:#FAFBFD;outline:none;"
+            oninput="searchExtra(${i},this.value)">
+          <div id="ac-extra-${i}" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:400;max-height:180px;overflow-y:auto;"></div>
+        </div>
+      </div>
       <div class="bd-fields">
         <div class="bd-field"><label>Nombre BD nueva</label><input class="bd-nm" placeholder="NOMBRE_BD" value="${p.nm||''}" oninput="updBDTitle(${i},this.value)"></div>
         <div class="bd-field"><label>BD de Origen</label><input class="bd-origen" placeholder="NOMBRE_ORIGEN" value="${p.origen||''}"></div>
       </div>
       <div class="bd-fields">
-        <div class="bd-field"><label>RUT Cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||rutVal}"></div>
+        <div class="bd-field"><label>RUT Cliente</label><input class="bd-rut" placeholder="XX.XXX.XXX-X" value="${p.rut||''}"></div>
         <div class="bd-field"><label>Descripción (máx. 30)</label><input class="bd-dc" placeholder="Descripción" maxlength="30" value="${p.dc||''}"></div>
       </div>
       <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px;">Tablas a copiar para esta BD</div>
@@ -617,7 +666,7 @@ BD       : ${codigo}
 
 ${tbls}
 
-${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}Nota: Todas las bases deben quedar actualizadas a la última versión disponible.\${v('f-integraciones')?'\n\nIntegraciones: '+v('f-integraciones'):''}
+${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}Nota: Todas las bases deben quedar actualizadas a la última versión disponible.
 
 Estaré atenta a sus comentarios. Saludos cordiales.`;
 }
@@ -642,7 +691,7 @@ function generate(){
     </div>
     ${v('f-integ')?`<div class="summ-sec"><div class="summ-sec-t">Integraciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-integ')}</div></div>`:''}
     ${v('f-obs')?`<div class="summ-sec"><div class="summ-sec-t">Observaciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-obs')}</div></div>`:''}
-    ${v('f-integraciones')?`<div class="summ-sec"><div class="summ-sec-t">Integraciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-integraciones')}</div></div>`:''}`;
+`;
   document.getElementById('email-pre').textContent=buildEmail();
   const s=document.getElementById('summ');s.classList.add('show');s.scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -713,7 +762,7 @@ td.zoho-val{font-weight:600;color:#0A6A32;}
 ${extraHTML?`<div class="st"><span class="st-num">4</span>Bases de Datos Adicionales</div>${extraHTML}`:''}
 ${v('f-integ')?`<div class="st"><span class="st-num">5</span>Integraciones</div><div style="background:#EEF3FC;border-left:3px solid #2E6DA4;padding:8px 12px;font-size:10pt;">${v('f-integ')}</div>`:''}
 ${obs?`<div class="st"><span class="st-num">6</span>Observaciones</div><div style="background:#fff8f0;border-left:3px solid #C47A10;padding:8px 12px;font-size:10pt;">${obs}</div>`:''}
-${v('f-integraciones')?`<div class="st"><span class="st-num" style="border-color:#00B0F0">+</span>Integraciones</div><div style="background:#EEF3FC;border-left:3px solid #00B0F0;padding:8px 12px;font-size:10pt;">${v('f-integraciones')}</div>`:''}
+
 <div class="st"><span class="st-num">6</span>Correo para IT</div>
 <div class="email">${emailText}</div>
 </body></html>`;
