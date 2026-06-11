@@ -612,11 +612,12 @@ function renderExtras(){
       <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px;">Tablas a copiar para esta BD</div>
       <div class="tabla-wrap"><div class="t-head"><div class="th">N°</div><div class="th tl">Tabla</div><div class="th si">SÍ</div><div class="th no">NO</div></div><div id="tbl_ext_${i}"></div></div></div>`;
     cont.appendChild(b);renderTbl('tbl_ext_'+i,'ext'+i+'_');
-    // Conectar buscador de la réplica
-    const extraInput=document.getElementById('crm-extra-'+i);
-    if(extraInput){
-      extraInput.addEventListener('input',function(){searchExtra(i,this.value);});
-    }
+    (function(idx){
+      const extraInput=document.getElementById('crm-extra-'+idx);
+      if(extraInput){
+        extraInput.addEventListener('input',function(){searchExtra(idx,this.value);});
+      }
+    })(i);
   }
 }
 function updBDTitle(i,val){const el=document.getElementById('bdt'+i);if(el)el.textContent=val.trim()||'Réplica '+(i+2);}
