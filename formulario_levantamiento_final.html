@@ -593,13 +593,11 @@ function renderExtras(){
     const p=saved[i]||{};const b=document.createElement('div');b.className='bd-block open';b.dataset.i=i;
     b.innerHTML=`<div class="bd-block-head" onclick="this.closest('.bd-block').classList.toggle('open')"><div class="bd-num">${i+2}</div><div class="bd-block-title" id="bdt${i}">${p.nm||'Réplica '+(i+2)}</div><span class="bd-block-arrow">▼</span></div>
       <div class="bd-block-body">
-      <!-- Mini buscador CRM para esta réplica -->
       <div style="margin-bottom:12px;">
         <div style="font-size:11px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px;">Buscar empresa en Zoho CRM</div>
         <div style="position:relative;">
           <input type="text" id="crm-extra-${i}" placeholder="Escribe nombre de empresa…" autocomplete="off"
-            style="width:100%;padding:9px 36px 9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:13px;color:var(--text);background:#FAFBFD;outline:none;"
-            oninput="searchExtra(${i},this.value)">
+            style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:13px;color:var(--text);background:#FAFBFD;outline:none;">
           <div id="ac-extra-${i}" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:400;max-height:180px;overflow-y:auto;"></div>
         </div>
       </div>
@@ -614,6 +612,11 @@ function renderExtras(){
       <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px;">Tablas a copiar para esta BD</div>
       <div class="tabla-wrap"><div class="t-head"><div class="th">N°</div><div class="th tl">Tabla</div><div class="th si">SÍ</div><div class="th no">NO</div></div><div id="tbl_ext_${i}"></div></div></div>`;
     cont.appendChild(b);renderTbl('tbl_ext_'+i,'ext'+i+'_');
+    // Conectar buscador de la réplica
+    const extraInput=document.getElementById('crm-extra-'+i);
+    if(extraInput){
+      extraInput.addEventListener('input',function(){searchExtra(i,this.value);});
+    }
   }
 }
 function updBDTitle(i,val){const el=document.getElementById('bdt'+i);if(el)el.textContent=val.trim()||'Réplica '+(i+2);}
