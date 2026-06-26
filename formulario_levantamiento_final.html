@@ -336,13 +336,36 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
       <div class="field">
         <label>¿Factura con Acepta?</label>
         <div class="togs">
-          <div class="tog" onclick="selTog(this,'acepta','si');document.getElementById('dte-note').style.display='flex'"><div class="tog-dot"></div>Sí</div>
-          <div class="tog" onclick="selTog(this,'acepta','no');document.getElementById('dte-note').style.display='none'"><div class="tog-dot"></div>No</div>
-          <div class="tog" onclick="selTog(this,'acepta','otra');document.getElementById('dte-note').style.display='none'"><div class="tog-dot"></div>Otra entidad</div>
+          <div class="tog" onclick="selTog(this,'acepta','si');document.getElementById('dte-note').style.display='flex';document.getElementById('ses-dte-wrap').style.display='block'"><div class="tog-dot"></div>Sí</div>
+          <div class="tog" onclick="selTog(this,'acepta','no');document.getElementById('dte-note').style.display='none';document.getElementById('ses-dte-wrap').style.display='none'"><div class="tog-dot"></div>No</div>
+          <div class="tog" onclick="selTog(this,'acepta','otra');document.getElementById('dte-note').style.display='none';document.getElementById('ses-dte-wrap').style.display='none'"><div class="tog-dot"></div>Otra entidad</div>
         </div>
-        <div class="alert alert-orange" id="dte-note" style="display:none;">⚠ Notificar al área DTE para realizar cesión de Rutas.</div>
+        <div class="alert alert-orange" id="dte-note" style="display:none;">⚠ Notificar al área DTE para realizar cambio de Rutas.</div>
       </div>
       <div class="field"><label>¿Formatos de impresión personalizados?</label><div class="togs"><div class="tog" onclick="selTog(this,'fmt','si')"><div class="tog-dot"></div>Sí</div><div class="tog" onclick="selTog(this,'fmt','no')"><div class="tog-dot"></div>No, estándar</div></div></div>
+      <!-- SESIONES -->
+      <div class="field" style="margin-top:14px;">
+        <label>Sesiones requeridas</label>
+        <div class="alert alert-blue" style="margin-bottom:10px;">ℹ Las sesiones se calculan automáticamente. Puedes ajustarlas si es necesario.</div>
+        <div class="row2">
+          <div class="field">
+            <label>Onboarding</label>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="number" id="ses-onboarding" value="1" min="0" max="10"
+                style="width:70px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:14px;text-align:center;">
+              <span style="font-size:13px;color:var(--text-2);">sesión(es) de revisión</span>
+            </div>
+          </div>
+          <div class="field" id="ses-dte-wrap" style="display:none;">
+            <label>DTE <span style="font-size:10px;color:var(--orange);font-weight:normal;">(Acepta activo)</span></label>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="number" id="ses-dte" value="1" min="0" max="10"
+                style="width:70px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:14px;text-align:center;">
+              <span style="font-size:13px;color:var(--text-2);">sesión(es) · 2 hrs · Cambio de Rutas</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="field"><label>Observaciones</label><textarea id="f-obs" placeholder="Detalles adicionales relevantes..." oninput="upd()"></textarea></div>
     </div>
   </div>
@@ -671,12 +694,12 @@ BD       : ${codigo}
 ${tbls}
 
 ${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}Información adicional:
-- Factura con Acepta: \${ts['acepta']==='si'?'Sí — notificar área DTE para cesión de Rutas':ts['acepta']==='no'?'No':'—'}
+- Factura con Acepta: \${ts['acepta']==='si'?'Sí — notificar área DTE para cambio de Rutas':ts['acepta']==='no'?'No':'—'}
 - Formatos de impresión personalizados: \${ts['fmt']==='si'?'Sí':'No'}
 \${ts['integ']==='si'&&v('f-integ')?'- Integraciones: '+v('f-integ')+'\n':''}
 Sesiones requeridas:
-- Onboarding: 1 sesión de revisión
-\${ts['acepta']==='si'?'- DTE: 1 sesión (2 horas) · Cesión de Rutas\n':''}
+- Onboarding: \${document.getElementById('ses-onboarding')?.value||'1'} sesión(es) de revisión
+\${ts['acepta']==='si'?'- DTE: ${document.getElementById('ses-dte')?.value||'1'} sesión(es) · 2 hrs · Cambio de Rutas\n':''}
 Nota: Todas las bases deben quedar actualizadas a la última versión disponible.
 
 Estaré atenta a sus comentarios. Saludos cordiales.`;
@@ -738,11 +761,11 @@ function generate(){
     </div>
     <div class="summ-sec" style="background:var(--sky-light,#e6f7fe);border-radius:var(--r);padding:12px 14px;">
       <div class="summ-sec-t" style="margin-bottom:8px;">Sesiones Requeridas</div>
-      <div class="summ-row"><span class="summ-lbl">Onboarding</span><span class="summ-val">1 sesión de revisión</span></div>
-      ${ts['acepta']==='si'?`<div class="summ-row"><span class="summ-lbl">DTE</span><span class="summ-val">1 sesión (2 horas) · Cesión de Rutas</span></div>`:''}
+      <div class="summ-row"><span class="summ-lbl">Onboarding</span><span class="summ-val">${document.getElementById('ses-onboarding')?.value||'1'} sesión(es) de revisión</span></div>
+      ${ts['acepta']==='si'?`<div class="summ-row"><span class="summ-lbl">DTE</span><span class="summ-val">${document.getElementById('ses-dte')?.value||'1'} sesión(es) · 2 hrs · Cambio de Rutas</span></div>`:''}
       <div class="summ-row" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
         <span class="summ-lbl" style="font-weight:700;color:var(--navy);">Total</span>
-        <span class="summ-val" style="color:var(--navy);font-size:15px;">${ts['acepta']==='si'?'2 sesiones':'1 sesión'}</span>
+        <span class="summ-val" style="color:var(--navy);font-size:15px;">${(parseInt(document.getElementById('ses-onboarding')?.value||'1')+(ts['acepta']==='si'?parseInt(document.getElementById('ses-dte')?.value||'1'):0))} sesión(es)</span>
       </div>
     </div>
 `;
