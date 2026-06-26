@@ -340,7 +340,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
           <div class="tog" onclick="selTog(this,'acepta','no');document.getElementById('dte-note').style.display='none'"><div class="tog-dot"></div>No</div>
           <div class="tog" onclick="selTog(this,'acepta','otra');document.getElementById('dte-note').style.display='none'"><div class="tog-dot"></div>Otra entidad</div>
         </div>
-        <div class="alert alert-orange" id="dte-note" style="display:none;">⚠ Notificar al área DTE.</div>
+        <div class="alert alert-orange" id="dte-note" style="display:none;">⚠ Notificar al área DTE para realizar cesión de Rutas.</div>
       </div>
       <div class="field"><label>¿Formatos de impresión personalizados?</label><div class="togs"><div class="tog" onclick="selTog(this,'fmt','si')"><div class="tog-dot"></div>Sí</div><div class="tog" onclick="selTog(this,'fmt','no')"><div class="tog-dot"></div>No, estándar</div></div></div>
       <div class="field"><label>Observaciones</label><textarea id="f-obs" placeholder="Detalles adicionales relevantes..." oninput="upd()"></textarea></div>
@@ -670,12 +670,48 @@ BD       : ${codigo}
 
 ${tbls}
 
-${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}Nota: Todas las bases deben quedar actualizadas a la última versión disponible.
+${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}Información adicional:
+- Factura con Acepta: \${ts['acepta']==='si'?'Sí — notificar área DTE para cesión de Rutas':ts['acepta']==='no'?'No':'—'}
+- Formatos de impresión personalizados: \${ts['fmt']==='si'?'Sí':'No'}
+\${ts['integ']==='si'&&v('f-integ')?'- Integraciones: '+v('f-integ')+'\n':''}
+Sesiones requeridas:
+- Onboarding: 1 sesión de revisión
+\${ts['acepta']==='si'?'- DTE: 1 sesión (2 horas) · Cesión de Rutas\n':''}
+Nota: Todas las bases deben quedar actualizadas a la última versión disponible.
 
 Estaré atenta a sus comentarios. Saludos cordiales.`;
 }
 
 function generate(){
+  // Validar campos obligatorios
+  const obligatorios = [
+    {id:'f-razon', label:'Razón Social'},
+    {id:'f-rut', label:'RUT'},
+    {id:'f-contacto', label:'Contacto'},
+    {id:'f-email', label:'Correo'},
+    {id:'f-bdnueva', label:'Nombre BD nueva'},
+    {id:'f-bdorigen', label:'BD de Origen'},
+    {id:'f-desc', label:'Descripción'},
+    {id:'f-amb', label:'Ambiente ASP'},
+  ];
+  const faltantes = obligatorios.filter(o => !v(o.id));
+  if(faltantes.length > 0){
+    // Marcar campos vacíos
+    obligatorios.forEach(o => {
+      const el = document.getElementById(o.id);
+      if(el) el.style.borderColor = v(o.id) ? '' : 'var(--red)';
+    });
+    alert('Por favor completa los campos obligatorios:\n' + faltantes.map(o=>'• '+o.label).join('\n'));
+    // Scroll al primer campo vacío
+    const first = document.getElementById(faltantes[0].id);
+    if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  // Limpiar bordes rojos
+  obligatorios.forEach(o => {
+    const el = document.getElementById(o.id);
+    if(el) el.style.borderColor = '';
+  });
   const mainSel=getSel('main_');
   document.getElementById('summ-data').innerHTML=`
     <div class="summ-sec"><div class="summ-sec-t">Cliente</div>
@@ -695,6 +731,20 @@ function generate(){
     </div>
     ${v('f-integ')?`<div class="summ-sec"><div class="summ-sec-t">Integraciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-integ')}</div></div>`:''}
     ${v('f-obs')?`<div class="summ-sec"><div class="summ-sec-t">Observaciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-obs')}</div></div>`:''}
+    <div class="summ-sec"><div class="summ-sec-t">Preguntas Clave</div>
+      ${ts['acepta']?`<div class="summ-row"><span class="summ-lbl">Factura con Acepta</span><span class="summ-val">${ts['acepta']==='si'?'Sí':ts['acepta']==='no'?'No':'Otra entidad'}</span></div>`:''}
+      ${ts['fmt']?`<div class="summ-row"><span class="summ-lbl">Formatos personalizados</span><span class="summ-val">${ts['fmt']==='si'?'Sí':'No'}</span></div>`:''}
+      ${ts['integ']?`<div class="summ-row"><span class="summ-lbl">Integraciones</span><span class="summ-val">${ts['integ']==='si'?'Sí'+(v('f-integ')?' · '+v('f-integ'):''):'No'}</span></div>`:''}
+    </div>
+    <div class="summ-sec" style="background:var(--sky-light,#e6f7fe);border-radius:var(--r);padding:12px 14px;">
+      <div class="summ-sec-t" style="margin-bottom:8px;">Sesiones Requeridas</div>
+      <div class="summ-row"><span class="summ-lbl">Onboarding</span><span class="summ-val">1 sesión de revisión</span></div>
+      ${ts['acepta']==='si'?`<div class="summ-row"><span class="summ-lbl">DTE</span><span class="summ-val">1 sesión (2 horas) · Cesión de Rutas</span></div>`:''}
+      <div class="summ-row" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+        <span class="summ-lbl" style="font-weight:700;color:var(--navy);">Total</span>
+        <span class="summ-val" style="color:var(--navy);font-size:15px;">${ts['acepta']==='si'?'2 sesiones':'1 sesión'}</span>
+      </div>
+    </div>
 `;
   document.getElementById('email-pre').textContent=buildEmail();
   const s=document.getElementById('summ');s.classList.add('show');s.scrollIntoView({behavior:'smooth',block:'start'});
