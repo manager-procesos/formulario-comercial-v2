@@ -342,29 +342,44 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
         </div>
         <div class="alert alert-orange" id="dte-note" style="display:none;">⚠ Notificar al área DTE para realizar cambio de Rutas.</div>
       </div>
-      <div class="field"><label>¿Formatos de impresión personalizados?</label><div class="togs"><div class="tog" onclick="selTog(this,'fmt','si')"><div class="tog-dot"></div>Sí</div><div class="tog" onclick="selTog(this,'fmt','no')"><div class="tog-dot"></div>No, estándar</div></div></div>
+      <div class="field">
+        <label>¿Formatos de impresión personalizados?</label>
+        <div class="togs">
+          <div class="tog" onclick="selTog(this,'fmt','si');document.getElementById('fmt-box').style.display='block'"><div class="tog-dot"></div>Sí</div>
+          <div class="tog" onclick="selTog(this,'fmt','no');document.getElementById('fmt-box').style.display='none'"><div class="tog-dot"></div>No, estándar</div>
+        </div>
+        <div id="fmt-box" style="display:none;margin-top:10px;">
+          <textarea placeholder="Describe los formatos personalizados que tiene el cliente…" rows="3" id="f-fmt" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#fff;outline:none;resize:vertical;" oninput="upd()"></textarea>
+        </div>
+      </div>
       <!-- SESIONES -->
       <div class="field" style="margin-top:14px;">
         <label>Sesiones requeridas</label>
-        <div class="alert alert-blue" style="margin-bottom:10px;">ℹ Las sesiones se calculan automáticamente. Puedes ajustarlas si es necesario.</div>
-        <div class="row2">
-          <div class="field">
-            <label>Onboarding</label>
+        <div class="row2" style="margin-top:8px;">
+          <div style="background:#EEF3FC;border:1px solid var(--border-hi);border-radius:var(--r);padding:12px 14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Onboarding</div>
             <div style="display:flex;align-items:center;gap:8px;">
               <input type="number" id="ses-onboarding" value="1" min="0" max="10"
-                style="width:70px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:14px;text-align:center;">
-              <span style="font-size:13px;color:var(--text-2);">sesión(es) de revisión</span>
+                style="width:60px;padding:7px 10px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:15px;font-weight:700;text-align:center;color:var(--navy);">
+              <div>
+                <div style="font-size:13px;color:var(--text);font-weight:600;">sesión de revisión BD</div>
+                <div style="font-size:11px;color:var(--text-3);">2 horas</div>
+              </div>
             </div>
           </div>
-          <div class="field" id="ses-dte-wrap" style="display:none;">
-            <label>DTE <span style="font-size:10px;color:var(--orange);font-weight:normal;">(Acepta activo)</span></label>
+          <div id="ses-dte-wrap" style="display:none;background:#FFF8F0;border:1px solid #F0C898;border-radius:var(--r);padding:12px 14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">DTE · Acepta</div>
             <div style="display:flex;align-items:center;gap:8px;">
               <input type="number" id="ses-dte" value="1" min="0" max="10"
-                style="width:70px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:14px;text-align:center;">
-              <span style="font-size:13px;color:var(--text-2);">sesión(es) · 2 hrs · Cambio de Rutas</span>
+                style="width:60px;padding:7px 10px;border:1.5px solid #F0C898;border-radius:var(--r);font-family:var(--mono);font-size:15px;font-weight:700;text-align:center;color:var(--orange);">
+              <div>
+                <div style="font-size:13px;color:var(--text);font-weight:600;">sesión cambio de Rutas</div>
+                <div style="font-size:11px;color:var(--text-3);">2 horas</div>
+              </div>
             </div>
           </div>
         </div>
+        <div class="alert alert-blue" style="margin-top:10px;">ℹ Las sesiones se calculan automáticamente según lo seleccionado. Puedes ajustar el número si es necesario.</div>
       </div>
       <div class="field"><label>Observaciones</label><textarea id="f-obs" placeholder="Detalles adicionales relevantes..." oninput="upd()"></textarea></div>
     </div>
@@ -693,13 +708,7 @@ BD       : ${codigo}
 
 ${tbls}
 
-${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}Información adicional:
-- Factura con Acepta: \${ts['acepta']==='si'?'Sí — notificar área DTE para cambio de Rutas':ts['acepta']==='no'?'No':'—'}
-- Formatos de impresión personalizados: \${ts['fmt']==='si'?'Sí':'No'}
-\${ts['integ']==='si'&&v('f-integ')?'- Integraciones: '+v('f-integ')+'\n':''}
-Sesiones requeridas:
-- Onboarding: \${document.getElementById('ses-onboarding')?.value||'1'} sesión(es) de revisión
-\${ts['acepta']==='si'?'- DTE: ${document.getElementById('ses-dte')?.value||'1'} sesión(es) · 2 hrs · Cambio de Rutas\n':''}
+${v('f-integ')?'Integraciones: '+v('f-integ')+'\n\n':''}${ts['integ']==='si'&&v('f-integ')?'Integraciones: '+v('f-integ')+'\n':''}
 Nota: Todas las bases deben quedar actualizadas a la última versión disponible.
 
 Estaré atenta a sus comentarios. Saludos cordiales.`;
@@ -756,7 +765,7 @@ function generate(){
     ${v('f-obs')?`<div class="summ-sec"><div class="summ-sec-t">Observaciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-obs')}</div></div>`:''}
     <div class="summ-sec"><div class="summ-sec-t">Preguntas Clave</div>
       ${ts['acepta']?`<div class="summ-row"><span class="summ-lbl">Factura con Acepta</span><span class="summ-val">${ts['acepta']==='si'?'Sí':ts['acepta']==='no'?'No':'Otra entidad'}</span></div>`:''}
-      ${ts['fmt']?`<div class="summ-row"><span class="summ-lbl">Formatos personalizados</span><span class="summ-val">${ts['fmt']==='si'?'Sí':'No'}</span></div>`:''}
+      ${ts['fmt']?`<div class="summ-row"><span class="summ-lbl">Formatos personalizados</span><span class="summ-val">${ts['fmt']==='si'?'Sí'+(v('f-fmt')?' · '+v('f-fmt'):''):'No'}</span></div>`:''}
       ${ts['integ']?`<div class="summ-row"><span class="summ-lbl">Integraciones</span><span class="summ-val">${ts['integ']==='si'?'Sí'+(v('f-integ')?' · '+v('f-integ'):''):'No'}</span></div>`:''}
     </div>
     <div class="summ-sec" style="background:var(--sky-light,#e6f7fe);border-radius:var(--r);padding:12px 14px;">
