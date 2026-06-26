@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Formulario de Levantamiento · Manager ERP</title>
+<title>Formulario Levantamiento Réplica BD · Manager ERP</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#1F3864;--blue:#2E6DA4;--sky:#00B0F0;--bg:#F0F4FA;--card:#fff;--border:#DDE4EE;--border-hi:#B4C6E7;--text:#18243C;--text-2:#4A5A78;--text-3:#8898B8;--green:#1A6B42;--red:#C0001A;--orange:#C47A10;--font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--r:8px;--r-lg:12px;}
@@ -171,7 +171,7 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
 <body>
 <div class="topbar">
   <div class="tb-mark">M</div>
-  <div><div class="tb-title">Formulario de Levantamiento</div><div class="tb-sub">Réplica de BD · Manager ERP</div></div>
+  <div><div class="tb-title">Formulario Levantamiento Réplica BD</div><div class="tb-sub">Réplica de BD · Manager ERP</div></div>
 </div>
 <div class="prog-wrap"><div class="prog-fill" id="tp"></div></div>
 
@@ -761,7 +761,7 @@ function generate(){
     <div class="summ-sec"><div class="summ-sec-t">Tablas seleccionadas (${mainSel.length})</div>
       <div class="tags">${mainSel.map(t=>`<span class="tag">${t.c}</span>`).join('')}</div>
     </div>
-    ${v('f-integ')?`<div class="summ-sec"><div class="summ-sec-t">Integraciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-integ')}</div></div>`:''}
+    
     ${v('f-obs')?`<div class="summ-sec"><div class="summ-sec-t">Observaciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-obs')}</div></div>`:''}
     <div class="summ-sec"><div class="summ-sec-t">Preguntas Clave</div>
       ${ts['acepta']?`<div class="summ-row"><span class="summ-lbl">Factura con Acepta</span><span class="summ-val">${ts['acepta']==='si'?'Sí':ts['acepta']==='no'?'No':'Otra entidad'}</span></div>`:''}
