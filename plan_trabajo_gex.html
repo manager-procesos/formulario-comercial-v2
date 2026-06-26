@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Trabajo GEX</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1F3864;--sky:#00B0F0;--sky-l:#E6F7FD;--bg:#F0F4FA;
+  --green:#12A150;--green-l:#E6F7ED;--orange:#E87722;--orange-l:#FEF3E8;
+  --purple:#6B4FBB;--purple-l:#F0ECFA;
+  --g1:#F7F9FC;--g2:#E8EDF5;--g3:#BCC5D6;--g4:#7A8BA6;
+  --txt:#1A2840;--txt2:#5A6A82;
+  --r:10px;--rs:6px;
+  --sh:0 2px 10px rgba(31,56,100,.08);--shm:0 6px 24px rgba(31,56,100,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);padding-bottom:90px;}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);padding:18px 0 0;position:sticky;top:0;z-index:200;box-shadow:0 2px 14px rgba(0,0,0,.2);}
+.hdr-in{max-width:780px;margin:0 auto;padding:0 20px 14px;}
+.hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.badge{background:var(--sky);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.05em;font-family:'DM Mono',monospace;}
+.hdr h1{font-size:17px;font-weight:700;color:#fff;} .hdr h1 span{color:var(--sky);}
+
+/* buscador — FIX oscurecido */
+.sw{position:relative;}
+.si{
+  width:100%;
+  background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.28);
+  border-radius:var(--r);
+  padding:9px 36px;
+  font-size:14px;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  transition:border-color .2s;
+}
+.si::placeholder{color:rgba(255,255,255,.5);}
+.si:focus{outline:none;border-color:var(--sky);}
+.sico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.5);pointer-events:none;}
+.spin{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--sky);display:none;}
+.spin.on{display:block;animation:rot 1s linear infinite;}
+@keyframes rot{to{transform:translateY(-50%) rotate(360deg);}}
+/* dropdown BLANCO con texto oscuro */
+.drop{
+  position:absolute;top:calc(100% + 6px);left:0;right:0;
+  background:#fff;border-radius:var(--r);box-shadow:var(--shm);
+  max-height:230px;overflow-y:auto;z-index:400;display:none;
+  border:1px solid var(--g2);
+}
+.drop.open{display:block;}
+.di{padding:10px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--g2);transition:.15s;background:#fff;}
+.di:hover{background:var(--sky-l);}
+.di:last-child{border-bottom:none;}
+.di strong{display:block;color:var(--navy);font-size:13px;}
+.di small{color:var(--txt2);font-family:'DM Mono',monospace;font-size:11px;}
+.drop-mt{padding:12px 14px;font-size:13px;color:var(--g4);text-align:center;background:#fff;}
+
+/* pills */
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;min-height:24px;}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;font-family:'DM Mono',monospace;}
+.pv{background:var(--green-l);color:var(--green);}
+.pg{background:var(--sky-l);color:#007BB5;}
+.pd{width:6px;height:6px;border-radius:50%;background:currentColor;}
+
+/* progress */
+.ptrack{height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin-top:10px;}
+.pfill{height:100%;background:var(--sky);border-radius:2px;transition:width .4s;width:0%;}
+
+/* ── MAIN ── */
+.main{max-width:780px;margin:0 auto;padding:18px 20px 0;}
+
+/* ── CARD ── */
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);margin-bottom:12px;}
+.ch{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;user-select:none;border-bottom:1.5px solid transparent;border-radius:var(--r);transition:.15s;}
+.ch:hover{background:var(--g1);}
+.card.open .ch{border-bottom-left-radius:0;border-bottom-right-radius:0;border-color:var(--g2);}
+.ct{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;color:var(--navy);}
+.cn{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:#fff;flex-shrink:0;}
+.cn-b{background:var(--navy);} .cn-p{background:var(--purple);}
+.chev{color:var(--g3);transition:transform .25s;font-size:18px;}
+.card.open .chev{transform:rotate(180deg);}
+.cb{display:none;padding:20px;}
+.card.open .cb{display:block;}
+
+/* ── FIELDS ── */
+.f{margin-bottom:13px;} .f:last-child{margin-bottom:0;}
+label{display:block;font-size:11.5px;font-weight:600;color:var(--txt2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;}
+label .r{color:var(--sky);}
+input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{
+  width:100%;border:1.5px solid var(--g2);border-radius:var(--rs);
+  padding:8px 11px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--txt);background:#fff;transition:.2s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sky);}
+input[readonly]{background:var(--g1);color:var(--txt2);}
+textarea{resize:vertical;min-height:80px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;}
+.hr{height:1px;background:var(--g2);margin:14px 0;}
+
+/* inline search */
+.isw{position:relative;}
+.idrop{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border-radius:var(--rs);box-shadow:var(--shm);max-height:200px;overflow-y:auto;z-index:300;display:none;border:1px solid var(--g2);}
+.idrop.open{display:block;}
+.idi{padding:9px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--g2);transition:.15s;background:#fff;}
+.idi:hover{background:var(--sky-l);}
+.idi:last-child{border-bottom:none;}
+.idi strong{display:block;color:var(--navy);}
+.idi small{color:var(--txt2);font-size:11px;font-family:'DM Mono',monospace;}
+
+/* tags */
+.tags{display:flex;flex-wrap:wrap;gap:6px;min-height:20px;margin-top:5px;}
+.tag{display:inline-flex;align-items:center;gap:4px;background:var(--sky-l);border:1px solid var(--sky);color:#007BB5;font-size:12px;font-weight:600;padding:2px 8px;border-radius:20px;}
+.tagx{cursor:pointer;font-size:14px;line-height:1;}
+.tagx:hover{color:#E53935;}
+.tagm{background:var(--g1);border-color:var(--g3);color:var(--txt2);}
+
+/* ── BLOQUES doc ── */
+.blk{border:1.5px solid #C5D4E8;border-radius:var(--rs);margin-bottom:14px;overflow:hidden;}
+.blk-hdr{background:var(--navy);color:#fff;padding:9px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.blk-body{padding:14px;background:#fff;}
+
+/* ── PLAN TABLE ── */
+.pt{width:100%;border-collapse:collapse;font-size:13px;}
+.pt th,.pt td{border:1.5px solid #C5D4E8;padding:9px 11px;vertical-align:top;}
+.pt thead th{background:var(--navy);color:#fff;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.03em;}
+.pt .rs td{background:#daeaf7;font-weight:700;color:var(--navy);font-size:13px;}
+.pt .rc td{background:#fff;}
+.pt .rtot td{background:var(--sky);color:#fff;font-weight:700;font-size:13px;}
+.cses{width:80px;text-align:center;font-family:'DM Mono',monospace;font-weight:700;}
+.chrs{width:70px;text-align:center;font-family:'DM Mono',monospace;font-weight:700;}
+.sec-hdr-lbl{background:var(--sky);color:#fff;padding:7px 11px;font-weight:700;font-size:12px;}
+
+/* sesión visual anterior — card azul */
+.ses-card{
+  border:1.5px solid var(--sky);border-radius:var(--rs);
+  background:var(--sky-l);margin-bottom:10px;overflow:hidden;
+  animation:fi .2s ease;
+}
+.ses-card-hdr{
+  background:var(--sky);color:#fff;padding:9px 13px;
+  font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ses-badge{background:rgba(255,255,255,.25);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;}
+.ses-body{padding:14px;}
+.tlist{list-style:none;margin-bottom:10px;}
+.ti{display:flex;align-items:flex-start;gap:7px;padding:4px 0;border-bottom:1px solid rgba(0,176,240,.15);font-size:13px;}
+.ti:last-child{border-bottom:none;}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--sky);flex-shrink:0;margin-top:6px;}
+.ses-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+.sf label{margin-bottom:3px;font-size:11px;}
+.sf input[type=date]{border-color:rgba(0,176,240,.4);font-size:12px;padding:5px 8px;}
+.hbadge{display:inline-flex;align-items:center;gap:4px;background:rgba(0,176,240,.12);border:1px solid var(--sky);border-radius:20px;padding:3px 10px;font-size:11px;font-family:'DM Mono',monospace;color:#007BB5;font-weight:600;margin-top:8px;}
+.part-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.part-tag{display:inline-flex;align-items:center;gap:3px;background:var(--sky-l);border:1px solid var(--sky);color:#007BB5;font-size:11px;font-weight:600;padding:1px 7px;border-radius:20px;}
+.part-tagx{cursor:pointer;font-size:12px;line-height:1;}
+.part-tagx:hover{color:#E53935;}
+
+/* módulos selector */
+.mc{border:2px solid var(--g2);border-radius:var(--rs);padding:8px 10px;cursor:pointer;transition:.2s;user-select:none;display:flex;align-items:center;gap:7px;}
+.mc:hover{border-color:var(--sky);background:var(--sky-l);}
+.mc.sel{border-color:var(--sky);background:var(--sky-l);}
+.mc.sel .mck{background:var(--sky);border-color:var(--sky);}
+.mc.sel .mck::after{opacity:1;}
+.mck{width:15px;height:15px;border-radius:3px;border:2px solid var(--g3);flex-shrink:0;position:relative;transition:.2s;}
+.mck::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;opacity:0;transition:.15s;}
+.ml{font-size:12px;font-weight:600;color:var(--navy);}
+
+/* sesión adicional */
+.extra-card{border:2px solid var(--orange);border-radius:var(--rs);background:var(--orange-l);margin-bottom:10px;overflow:hidden;animation:fi .2s ease;}
+.extra-hdr{background:var(--orange);color:#fff;padding:9px 13px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;}
+.extra-body{padding:14px;}
+.xrm{cursor:pointer;background:transparent;border:none;color:rgba(255,255,255,.8);font-size:18px;line-height:1;padding:0;}
+.xrm:hover{color:#fff;}
+.btn-add-extra{display:flex;align-items:center;gap:7px;background:transparent;border:1.5px dashed var(--orange);border-radius:var(--rs);padding:9px 14px;width:100%;cursor:pointer;font-size:13px;font-weight:600;color:var(--orange);font-family:'DM Sans',sans-serif;transition:.2s;margin-top:6px;}
+.btn-add-extra:hover{background:var(--orange-l);}
+
+/* radio producto */
+.rb{flex:1;border:1.5px solid var(--g2);border-radius:var(--rs);padding:7px 10px;cursor:pointer;text-align:center;font-size:13px;font-weight:500;transition:.2s;user-select:none;}
+.rb.on{border-color:var(--sky);background:var(--sky-l);color:#007BB5;font-weight:700;}
+
+/* nota pie + firmas */
+.nota-pie{font-size:12px;font-style:italic;color:var(--txt2);text-align:center;margin-top:14px;padding-top:10px;border-top:1px solid var(--g2);}
+.firmas{display:flex;gap:40px;margin-top:20px;}
+.firma{flex:1;text-align:center;}
+.firma-line{height:1px;background:var(--txt);margin-bottom:6px;}
+.firma-lbl{font-size:12px;color:var(--txt2);}
+
+/* modal OT */
+.overlay{position:fixed;inset:0;background:rgba(10,20,40,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;animation:fi .2s ease;}
+.modal{background:#fff;border-radius:var(--r);max-width:500px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.22);overflow:hidden;}
+.mhdr{background:var(--purple);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.mhdr h2{font-size:15px;font-weight:700;}
+.mx{background:transparent;border:none;color:rgba(255,255,255,.8);font-size:22px;cursor:pointer;line-height:1;}
+.mx:hover{color:#fff;}
+.mbody{padding:18px;max-height:60vh;overflow-y:auto;}
+.prow{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--g2);}
+.prow:last-child{border-bottom:none;}
+.plbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--txt2);min-width:140px;flex-shrink:0;padding-top:1px;}
+.pval{font-size:13px;font-weight:500;color:var(--txt);}
+.mftr{padding:13px 18px;border-top:1px solid var(--g2);display:flex;gap:10px;justify-content:flex-end;background:var(--g1);}
+.ost{display:none;padding:10px 14px;border-radius:var(--rs);font-size:13px;font-weight:600;margin-top:10px;text-align:center;}
+.ost.ok{display:block;background:var(--green-l);color:var(--green);border:1px solid var(--green);}
+.ost.err{display:block;background:#FDE8E8;color:#C62828;border:1px solid #C62828;}
+.ost.ld{display:block;background:var(--sky-l);color:#007BB5;border:1px solid var(--sky);}
+
+/* footer */
+.ftr{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--g2);padding:9px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 -2px 12px rgba(31,56,100,.08);}
+.fpct{font-size:16px;font-weight:700;color:var(--navy);font-family:'DM Mono',monospace;}
+.fbtns{display:flex;gap:8px;}
+.btn{padding:8px 16px;border-radius:var(--rs);font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:.2s;}
+.btn-ol{background:transparent;border:1.5px solid var(--g2);color:var(--txt2);}
+.btn-ol:hover{border-color:var(--navy);color:var(--navy);}
+.btn-nv{background:var(--navy);color:#fff;}.btn-nv:hover{background:#162954;}
+.btn-pu{background:var(--purple);color:#fff;}.btn-pu:hover{background:#5a3ea8;}
+.btn-gn{background:var(--green);color:#fff;}.btn-gn:hover{background:#0e8a42;}
+
+@keyframes fi{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:600px){.g2,.g3,.ses-meta{grid-template-columns:1fr;}.firmas{flex-direction:column;gap:20px;}}
+@media print{
+  body{background:#fff;padding:0;}
+  .hdr{position:static;}.ftr,.btn-add-extra,.overlay,.xrm{display:none!important;}
+  .card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .cb{display:block!important;}
+  .ti::after{content:'☐R  ☐P  ☐NA';margin-left:auto;font-size:9px;color:#666;flex-shrink:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="hdr-top">
+      <span class="badge" id="badgeProd">Manager Time</span>
+      <h1>Plan de Trabajo <span>GEX</span></h1>
+    </div>
+    <div class="sw">
+      <svg class="sico" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input class="si" id="crmQ" type="text" placeholder="Buscar empresa en CRM (Accounts / OT_Detalle)…" autocomplete="off">
+      <span class="spin" id="crmSpin">↻</span>
+      <div class="drop" id="crmDrop"></div>
+    </div>
+    <div class="pills" id="pillsRow"></div>
+    <div class="ptrack"><div class="pfill" id="pf"></div></div>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ══ 1. DATOS CLIENTE ══ -->
+<div class="card open" id="s1">
+  <div class="ch" onclick="tog('s1')">
+    <div class="ct"><span class="cn cn-b">1</span>Datos del Cliente</div>
+    <span class="chev">▾</span>
+  </div>
+  <div class="cb">
+    <div class="g2">
+      <div class="f"><label>Nombre Empresa <span class="r">*</span></label><input type="text" id="fEmpresa" placeholder="Razón social"></div>
+      <div class="f"><label>RUT <span class="r">*</span></label><input type="text" id="fRut" placeholder="76.123.456-7"></div>
+    </div>
+    <div class="f">
+      <label>Jefe de Proyectos (Cliente) <span class="r">*</span></label>
+      <div class="isw">
+        <input type="text" id="fContactoQ" placeholder="Buscar contacto en CRM o escribir nombre + Enter…" autocomplete="off">
+        <div class="idrop" id="contactoDrop"></div>
+      </div>
+      <div class="tags" id="contactoTags"></div>
+    </div>
+    <div class="g2">
+      <div class="f"><label>Email</label><input type="email" id="fEmail" placeholder="contacto@empresa.cl"></div>
+      <div class="f"><label>Teléfono</label><input type="tel" id="fTel" placeholder="+56 9 1234 5678"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 2. DATOS MANAGER ══ -->
+<div class="card open" id="s2">
+  <div class="ch" onclick="tog('s2')">
+    <div class="ct"><span class="cn cn-b">2</span>Datos Manager</div>
+    <span class="chev">▾</span>
+  </div>
+  <div class="cb">
+    <div class="g2">
+      <div class="f"><label>Gestor de Expansión (GEX) <span class="r">*</span></label><input type="text" id="fGex" placeholder="Nombre GEX"></div>
+      <div class="f"><label>Email GEX</label><input type="email" id="fGexEmail" placeholder="gex@manager.cl"></div>
+    </div>
+    <div class="g3">
+      <div class="f"><label>Fecha Plan de Trabajo</label><input type="date" id="fFechaPlan"></div>
+      <div class="f"><label>Fecha estimada de inicio</label><input type="date" id="fFechaInicio"></div>
+      <div class="f"><label>Fecha apertura contable</label><input type="date" id="fFechaApertura"></div>
+    </div>
+    <div class="f">
+      <label>Producto</label>
+      <div style="display:flex;gap:8px;">
+        <div class="rb on" onclick="selProd(this,'Manager Time')">Manager Time</div>
+        <div class="rb" onclick="selProd(this,'Manager +')">Manager +</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 3. ALCANCE ══ -->
+<div class="card open" id="s3">
+  <div class="ch" onclick="tog('s3')">
+    <div class="ct"><span class="cn cn-b">3</span>Alcance</div>
+    <span class="chev">▾</span>
+  </div>
+  <div class="cb">
+    <div class="g2" style="margin-bottom:13px;">
+      <div class="f"><label>Sesiones de Trabajo</label><input type="text" id="fTotalSes" readonly placeholder="Se calcula automático"></div>
+      <div class="f"><label>Horas Totales</label><input type="text" id="fTotalHrs" readonly placeholder="Se calcula automático"></div>
+    </div>
+    <div class="f"><label>Objetivos <span class="r">*</span></label>
+      <textarea id="fObjetivos" placeholder="Ej: Abordar los puntos levantados por cliente en reunión del día 25/02/2026…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 4. PROPUESTA PLAN DE TRABAJO ══ -->
+<div class="card open" id="s4">
+  <div class="ch" onclick="tog('s4')">
+    <div class="ct"><span class="cn cn-b">4</span>Propuesta Plan de Trabajo</div>
+    <span class="chev">▾</span>
+  </div>
+  <div class="cb">
+
+    <!-- CONSIDERACIONES — primero como en el PDF -->
+    <div class="blk">
+      <div class="blk-hdr">Consideraciones</div>
+      <div class="blk-body">
+        <p style="font-size:12.5px;color:var(--txt2);margin-bottom:10px;">Texto base editable. Borra o modifica según el caso del cliente.</p>
+        <textarea id="fConsider" style="min-height:110px;">• Las sesiones de implementación consideran la parametrización y configuraciones de maestros en una razón social principal. A la cual posteriormente se realizan réplicas para dejar operativas las razones sociales adicionales.
+• El líder de la empresa es el líder del proyecto y, por ende, la persona encargada de tomar las decisiones. Dicho esto, el líder (responsable) participa continuamente en el proyecto.
+• No se considera la implementación de funcionalidades adicionales que no hayan sido detalladas en el presente plan de trabajo.
+• El presente plan de trabajo es factible ejecutarlo posterior a la evaluación comercial y bajo la disponibilidad de agenda del equipo de consultoría.
+• Participación del cliente en las sesiones de trabajo.</textarea>
+      </div>
+    </div>
+
+    <!-- PLANTEAMIENTO -->
+    <div class="blk">
+      <div class="blk-hdr">Planteamiento de la Problemática</div>
+      <div class="blk-body">
+        <textarea id="fProblema" style="min-height:100px;" placeholder="Describe el contexto y situación actual del cliente. Ej: Se levantan los siguientes puntos…"></textarea>
+      </div>
+    </div>
+
+    <!-- PLAN DE TRABAJO -->
+    <div class="blk">
+      <div class="blk-hdr">Plan de Trabajo</div>
+      <div class="blk-body" style="padding-bottom:18px;">
+
+        <!-- resumen sesiones/horas tipo PDF -->
+        <div style="background:var(--navy);color:#fff;border-radius:var(--rs);padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px;font-weight:700;font-size:13px;">
+          <span>Plan de trabajo de</span>
+          <span id="resumenSes" style="font-family:'DM Mono',monospace;font-size:15px;color:var(--sky);">0 sesiones</span>
+          <span>·</span>
+          <span id="resumenHrs" style="font-family:'DM Mono',monospace;font-size:15px;color:var(--sky);">0 horas</span>
+        </div>
+
+        <!-- MÓDULOS SELECTOR -->
+        <p style="font-size:12px;color:var(--txt2);margin-bottom:9px;font-weight:600;">▸ Selecciona módulos estándar:</p>
+        <div id="modGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;">
+          <div class="mc" data-m="abastecimiento" onclick="togM(this)"><div class="mck"></div><span class="ml">📦 Abastecimiento</span></div>
+          <div class="mc" data-m="importaciones"  onclick="togM(this)"><div class="mck"></div><span class="ml">🚢 Importaciones</span></div>
+          <div class="mc" data-m="existencias"    onclick="togM(this)"><div class="mck"></div><span class="ml">🏭 Existencias</span></div>
+          <div class="mc" data-m="ventas"         onclick="togM(this)"><div class="mck"></div><span class="ml">💼 Ventas</span></div>
+          <div class="mc" data-m="produccion"     onclick="togM(this)"><div class="mck"></div><span class="ml">🔧 Producción</span></div>
+          <div class="mc" data-m="servicio"       onclick="togM(this)"><div class="mck"></div><span class="ml">🛠 Serv. Técnico</span></div>
+          <div class="mc" data-m="finanzas"       onclick="togM(this)"><div class="mck"></div><span class="ml">💰 Finanzas</span></div>
+        </div>
+
+        <!-- SESIONES cards (formato visual anterior) -->
+        <div id="sesCards"></div>
+
+        <!-- SESIONES ADICIONALES -->
+        <p style="font-size:12px;color:var(--txt2);margin-bottom:8px;font-weight:600;margin-top:4px;">▸ Otros temas / sesiones adicionales:</p>
+        <div id="extraCards"></div>
+        <button class="btn-add-extra" onclick="addExtra()">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar sesión adicional (tema libre · 2 hrs)
+        </button>
+
+        <!-- TABLA RESUMEN TOTALES -->
+        <div style="margin-top:16px;border:1.5px solid #C5D4E8;border-radius:var(--rs);overflow:hidden;">
+          <table class="pt" style="margin:0;">
+            <thead>
+              <tr>
+                <th style="width:40%">Sesión / Tema</th>
+                <th>Contenidos principales</th>
+                <th class="cses">Sesiones</th>
+                <th class="chrs">Horas</th>
+              </tr>
+            </thead>
+            <tbody id="planBody"></tbody>
+            <tfoot>
+              <tr class="rtot">
+                <td colspan="2" style="text-align:right;font-size:13px;">Total de Sesiones y Horas</td>
+                <td class="cses" id="totSes">0</td>
+                <td class="chrs" id="totHrs">0</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="firmas">
+          <div class="firma"><div class="firma-line"></div><div class="firma-lbl">Jefe de Proyectos Cliente</div></div>
+          <div class="firma"><div class="firma-line"></div><div class="firma-lbl">Gestor de Expansión de Cuentas</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 5. CREAR OPORTUNIDAD ZOHO ══ -->
+<div class="card" id="s5">
+  <div class="ch" onclick="tog('s5')">
+    <div class="ct"><span class="cn cn-p">5</span>Crear Oportunidad en Zoho CRM</div>
+    <span class="chev">▾</span>
+  </div>
+  <div class="cb">
+    <div style="background:var(--purple-l);border:1.5px solid var(--purple);border-radius:var(--rs);padding:11px 14px;margin-bottom:14px;font-size:13px;color:var(--purple);font-weight:500;">
+      <strong style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px;">📋 Módulo: Oportunidades</strong>
+      Los campos 🔗 se pre-llenan desde el formulario automáticamente.
+    </div>
+    <div class="g2">
+      <div class="f"><label>RUT Empresa 🔗</label><input type="text" id="otRut" readonly></div>
+      <div class="f"><label>Nombre Empresa 🔗</label><input type="text" id="otEmp" readonly></div>
+    </div>
+    <div class="g2">
+      <div class="f"><label>Nombre de Oportunidad <span class="r">*</span></label><input type="text" id="otNom" placeholder="ej. Plan GEX – Empresa"></div>
+      <div class="f"><label>Propietario 🔗</label><input type="text" id="otProp" readonly></div>
+    </div>
+    <div class="g2">
+      <div class="f"><label>Contacto 🔗</label><input type="text" id="otCont" readonly></div>
+      <div class="f"><label>Tipo de contrato</label>
+        <select id="otTipo"><option value="">Ninguno</option><option>Nuevo</option><option>Renovación</option><option>Expansión</option></select>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="f"><label>Producto 🔗</label><input type="text" id="otProd" readonly></div>
+      <div class="f"><label>Fase</label>
+        <select id="otFase"><option>Discovery</option><option>Propuesta</option><option>Negociación</option><option>Cerrado Ganado</option></select>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="f"><label>Importe (CLP)</label><input type="text" id="otImp" placeholder="0"></div>
+      <div class="f"><label>Fecha de cierre</label><input type="date" id="otFc"></div>
+    </div>
+    <div class="f"><label>Sesiones contratadas 🔗</label><input type="text" id="otSes" readonly></div>
+    <div class="f"><label>Comentario</label><textarea id="otCom" placeholder="Detalle del plan acordado…"></textarea></div>
+    <button class="btn btn-pu" style="width:100%;padding:11px;margin-top:8px;" onclick="abrirModal()">
+      🗂 Previsualizar y crear Oportunidad en Zoho
+    </button>
+  </div>
+</div>
+
+</main>
+
+<footer class="ftr">
+  <div style="font-size:12px;color:var(--txt2);">Completado <span class="fpct" id="fpct">0%</span></div>
+  <div class="fbtns">
+    <button class="btn btn-ol" onclick="window.print()">📄 PDF</button>
+    <button class="btn btn-nv">💾 Guardar</button>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="modalOv" style="display:none;" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal">
+    <div class="mhdr"><h2>🗂 Confirmar Oportunidad</h2><button class="mx" onclick="cerrarModal()">×</button></div>
+    <div class="mbody" id="modalBody"></div>
+    <div class="mftr">
+      <button class="btn btn-ol" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn btn-gn" id="btnOK" onclick="crearOp()">✓ Crear en Zoho</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROXY='https://fine-cassowary-48.manager-procesos.deno.net';
+
+// ── MÓDULOS DATA ──────────────────────────────────────────────────────────────
+const MODS={
+  abastecimiento:{lbl:'Abastecimiento',icon:'📦',ses:[
+    {n:'Abastecimiento I',t:['Parámetros Generales y Tablas (Tipo de compra, Glosas de pago, Moneda)','Importancia de cuentas contables y moneda de compra','Ventana de costos en la ficha del producto','Opciones de uso del módulo','Listado de compradores (Ficha de Personal)','Solicitud de compra','Orden de compra','Cierre de OC']},
+    {n:'Abastecimiento II',t:['Generar GDC','Generar FACE','Generar notas de crédito y otros documentos','Revisión de ciclos de compras y unidades','Consulta de stock','Informes de abastecimiento','Costeos de productos','Centralización de documentos de compra']}
+  ]},
+  importaciones:{lbl:'Importaciones',icon:'🚢',ses:[
+    {n:'Importaciones I',t:['Registro del proveedor extranjero','Registro de tipos de cambio','Revisión de la ficha del producto','Registro del concepto contable','Generar OC y FACE (Invoice)','Revisión de ciclos de compras y unidades','Consulta de stock e informes','Costeos de productos']},
+    {n:'Importaciones II',t:['Registro del comprobante de traspaso','Factura del agente de aduanas y adicionales','Registro de anticipo a proveedores','Relación concepto contable con cuenta de existencias','Prorrateo del costo con concepto contable','Consulta informe de compras','Informes analíticos pendientes']}
+  ]},
+  existencias:{lbl:'Existencias',icon:'🏭',ses:[
+    {n:'Existencias I',t:['Parámetros y tablas','Vales de salida e ingreso','Vale de traspaso','Informes de existencias','Stock negativo (efectos)','Stock mínimo y óptimo','Stock retroactivo']},
+    {n:'Existencias II',t:['Toma de inventario','Ajuste de inventario','Tipos de vales','Cálculo valor promedio temporal','Recalcular consistencia de stock','Centralización de costos']}
+  ]},
+  ventas:{lbl:'Ventas',icon:'💼',ses:[
+    {n:'Ventas I',t:['Parámetros y tablas','Cotización de venta','Notas de ventas','Modalidades de GDVE','Generar facturas de venta, notas de crédito y débito','Despachos pendientes','Efectos en el stock y stock disponible','Informes de ventas']},
+    {n:'Ventas II',t:['Ciclos: Cot–FAV, Cot–NV–FAV, NV–FAV, FAV directo','Centralización de documentos de venta','Revisión de cuenta puente y sus efectos','Recalcular ventas mensuales']}
+  ]},
+  produccion:{lbl:'Producción',icon:'🔧',ses:[
+    {n:'Producción I',t:['Parámetros y tablas','Configuración de recetas','Revisión de costos (campo receta)','Orden de Producción','Mano de Obra a una receta (Opcional)','OP–VS–VI: Vale de Salida y Vale de Ingreso de Producción','Costear producción terminada']},
+    {n:'Producción II',t:['Cómo importar recetas','Costeo de la producción','Centralización de costos','Cierre de periodo','Informe de costos','Simulación de requerimientos de producción','OP en proceso / OP sin iniciar','Consumos y análisis de costos de una OP']}
+  ]},
+  servicio:{lbl:'Servicio Técnico',icon:'🛠',ses:[
+    {n:'Servicio Técnico I',t:['Parámetros y tablas','Máquinas (ítems a reparar)','Tipos de OT','Ingreso de Técnicos en tabla personal','Configuración de recetas (Opcional)','Configuración del producto/servicio','Presupuesto, Orden de Trabajo, FAV/Boleta, Vales, Guía de Despacho','Liquidación de una OT']},
+    {n:'Servicio Técnico II',t:['Ciclos: Ppto–OT–FAV, OT–VS, OT–Guía, OT–Liquidación, OT–FAV','Cierre de periodo comercial','Consumos de una OT / Consumos no facturados','Liquidación de consumos','OT sin facturar / OT en proceso / OT impagas','Trabajos por mecánico']}
+  ]},
+  finanzas:{lbl:'Finanzas',icon:'💰',ses:[
+    {n:'Finanzas I',t:['Plan de cuentas y tipos de esquemas contables','Tipos de comprobantes y documentos','Centros de costos','Comprobante contable y cuentas puente','Concepto Contable y Orden Jerárquico','Parámetros de finanzas y centralización contable']},
+    {n:'Finanzas II',t:['Asientos de centralización','Ingreso de apertura','Cuentas contables relacionadas a pagos','Tipos de documentos y formas de pago','Proceso de pago y recaudación','Conciliación','Documentos pendientes y movimientos por RUT','Informes analíticos, estados financieros y libros']}
+  ]}
+};
+
+// ── ESTADO ───────────────────────────────────────────────────────────────────
+let crmT=null, extraCnt=0, _accId=null, _contacts=[], _prod='Manager Time';
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function tog(id){document.getElementById(id).classList.toggle('open');prog();}
+function enc(o){return encodeURIComponent(JSON.stringify(o));}
+function dec(s){return JSON.parse(decodeURIComponent(s));}
+function closeDrop(id){document.getElementById(id)?.classList.remove('open');}
+function g(id){return document.getElementById(id);}
+function v(id,val){const el=g(id);if(el&&val!=null&&val!='')el.value=val;}
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.sw'))closeDrop('crmDrop');
+  if(!e.target.closest('.isw'))document.querySelectorAll('.idrop').forEach(d=>d.classList.remove('open'));
+});
+
+// ── PRODUCTO ─────────────────────────────────────────────────────────────────
+function selProd(btn,p){
+  document.querySelectorAll('.rb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');_prod=p;
+  g('badgeProd').textContent=p;
+  v('otProd',p);
+}
+
+// ── BUSCADOR CRM ─────────────────────────────────────────────────────────────
+g('crmQ').addEventListener('input',function(){
+  clearTimeout(crmT);
+  const q=this.value.trim();
+  if(q.length<2){closeDrop('crmDrop');return;}
+  g('crmSpin').classList.add('on');
+  crmT=setTimeout(()=>fetchAcc(q),380);
+});
+
+async function fetchAcc(q){
+  try{
+    const r=await fetch(`${PROXY}?q=${encodeURIComponent(q)}`);
+    const d=await r.json();
+    const list=d.accounts||[];
+    const dd=g('crmDrop');
+    if(!list.length){dd.innerHTML='<div class="drop-mt">Sin resultados</div>';dd.classList.add('open');return;}
+    dd.innerHTML=list.map(a=>`<div class="di" onclick="selAcc('${enc(a)}')">
+      <strong>${a.name}</strong><small>${a.rut||''} ${a.phone?'· '+a.phone:''}</small>
+    </div>`).join('');
+    dd.classList.add('open');
+  }catch{}
+  finally{g('crmSpin').classList.remove('on');}
+}
+
+window.selAcc=async function(encoded){
+  const a=dec(encoded);
+  g('crmQ').value=a.name;
+  closeDrop('crmDrop');
+  _accId=a.id&&!String(a.id).startsWith('ot_')?a.id:null;
+  v('fEmpresa',a.name);v('fRut',a.rut);v('fTel',a.phone);v('fEmail',a.email);v('fGex',a.gex);
+  v('otRut',a.rut);v('otEmp',a.name);v('otProp',a.gex);v('otProd',_prod);
+  if(a.name&&!g('otNom').value)v('otNom',`Plan GEX – ${a.name}`);
+  const pills=g('pillsRow');pills.innerHTML='';
+  if(a.vendedor)pills.innerHTML+=`<span class="pill pv"><span class="pd"></span>Vendedor: ${a.vendedor}</span>`;
+  if(a.gex)pills.innerHTML+=`<span class="pill pg"><span class="pd"></span>GEX: ${a.gex}</span>`;
+  _contacts=[];
+  if(_accId){
+    try{
+      const r=await fetch(`${PROXY}?account_id=${_accId}`);
+      const d=await r.json();
+      _contacts=d.contacts||[];
+      g('fContactoQ').placeholder=_contacts.length?`${_contacts.length} contacto(s) disponibles — buscar o escribir`:'Escribir nombre + Enter';
+    }catch{}
+  }
+  prog();
+};
+
+// ── CONTACTO ─────────────────────────────────────────────────────────────────
+g('fContactoQ').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  const dd=g('contactoDrop');
+  const filtered=_contacts.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.email||'').toLowerCase().includes(q));
+  if(!filtered.length&&q.length<2){dd.classList.remove('open');return;}
+  if(filtered.length){
+    dd.innerHTML=filtered.map(c=>`<div class="idi" onclick="addCont('${enc(c)}',this)">
+      <strong>${c.name}</strong><small>${c.email||''} ${c.phone?'· '+c.phone:''}</small>
+    </div>`).join('');
+    dd.classList.add('open');
+  }else dd.classList.remove('open');
+});
+g('fContactoQ').addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&this.value.trim()){
+    e.preventDefault();addCont(enc({name:this.value.trim()}),null,true);
+    this.value='';closeDrop('contactoDrop');
+  }
+});
+window.addCont=function(encoded,item,manual=false){
+  const c=dec(encoded);
+  const wrap=g('contactoTags');
+  if([...wrap.querySelectorAll('.tag')].some(t=>t.dataset.n===c.name))return;
+  const tag=document.createElement('span');
+  tag.className='tag'+(manual?' tagm':'');
+  tag.dataset.n=c.name;
+  tag.innerHTML=`${c.name}<span class="tagx" onclick="this.parentElement.remove();syncCont()">×</span>`;
+  wrap.appendChild(tag);
+  if(c.email&&!g('fEmail').value)v('fEmail',c.email);
+  if(c.phone&&!g('fTel').value)v('fTel',c.phone);
+  if(item)item.closest('.idrop').classList.remove('open');
+  syncCont();prog();
+};
+function syncCont(){v('otCont',[...g('contactoTags').querySelectorAll('.tag')].map(t=>t.dataset.n).join(', '));}
+
+// ── MÓDULOS → CARDS + TABLA ───────────────────────────────────────────────────
+function togM(card){card.classList.toggle('sel');rebuild();prog();}
+
+function rebuild(){
+  const cards=g('sesCards'); cards.innerHTML='';
+  const body=g('planBody'); body.innerHTML='';
+
+  document.querySelectorAll('.mc.sel').forEach(card=>{
+    const key=card.dataset.m;
+    const mod=MODS[key];
+
+    mod.ses.forEach((ses,i)=>{
+      // ── CARD visual — SIN fecha ni participantes ──
+      const div=document.createElement('div');
+      div.className='ses-card';
+      div.innerHTML=`
+        <div class="ses-card-hdr">
+          <span>${mod.icon} ${ses.n}</span>
+          <span class="ses-badge">⏱ 2 hrs · 1 sesión</span>
+        </div>
+        <div class="ses-body">
+          <ul class="tlist">${ses.t.map(t=>`<li class="ti"><div class="tdot"></div><span>${t}</span></li>`).join('')}</ul>
+          <div class="hbadge">⏱ 2 horas</div>
+        </div>`;
+      cards.appendChild(div);
+
+      // ── FILA en tabla resumen ──
+      const tr=document.createElement('tr');
+      tr.className='rc'; tr.dataset.ses=1; tr.dataset.hrs=2;
+      tr.innerHTML=`
+        <td style="font-weight:600;color:var(--navy);">${ses.n}</td>
+        <td style="font-size:12px;color:var(--txt2);">${ses.t.slice(0,3).join(' · ')}…</td>
+        <td class="cses">1</td><td class="chrs">2</td>`;
+      body.appendChild(tr);
+    });
+  });
+  syncTot();
+}
+
+// ── SESIONES ADICIONALES ─────────────────────────────────────────────────────
+function addExtra(){
+  extraCnt++;
+  const uid='ex'+extraCnt;
+
+  // Card naranja (formato visual)
+  const card=document.createElement('div');
+  card.className='extra-card'; card.id='ec-'+uid;
+  card.innerHTML=`
+    <div class="extra-hdr">
+      <span>➕ Sesión Adicional #${extraCnt}</span>
+      <button class="xrm" onclick="removeExtra('${uid}')">×</button>
+    </div>
+    <div class="extra-body">
+      <div class="f"><label>Tema / Nombre <span class="r">*</span></label>
+        <input type="text" id="et-${uid}" placeholder="ej. Explicación de Maestros, Apoyo carga importadores…" oninput="syncTot()">
+      </div>
+      <div class="f"><label>Contenido / Descripción</label>
+        <textarea placeholder="¿Qué se cubrirá en esta sesión?" style="min-height:60px;"></textarea>
+      </div>
+      <div class="hbadge">⏱ 2 horas</div>
+    </div>`;
+  g('extraCards').appendChild(card);
+
+  // Fila en tabla resumen
+  const tr=document.createElement('tr');
+  tr.className='rc'; tr.id='etr-'+uid; tr.dataset.ses=1; tr.dataset.hrs=2;
+  tr.innerHTML=`
+    <td style="font-weight:600;color:var(--orange);" id="etd-${uid}">Sesión adicional #${extraCnt}</td>
+    <td style="font-size:12px;color:var(--txt2);">—</td>
+    <td class="cses">1</td><td class="chrs">2</td>`;
+  g('planBody').appendChild(tr);
+
+  // sincronizar nombre
+  setTimeout(()=>{
+    const inp=g('et-'+uid);
+    if(inp) inp.addEventListener('input',()=>{
+      const td=g('etd-'+uid);
+      if(td)td.textContent=inp.value||`Sesión adicional #${extraCnt}`;
+    });
+  },100);
+
+  syncTot(); g('s4').classList.add('open'); prog();
+}
+
+function removeExtra(uid){
+  g('ec-'+uid)?.remove();
+  g('etr-'+uid)?.remove();
+  syncTot(); prog();
+}
+
+// ── PARTICIPANTES ─────────────────────────────────────────────────────────────
+function onPart(inp,uid){
+  const q=inp.value.trim().toLowerCase();
+  const dd=g('pdrop-'+uid);
+  if(!dd)return;
+  const filtered=_contacts.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.email||'').toLowerCase().includes(q));
+  if(filtered.length){
+    dd.innerHTML=filtered.slice(0,6).map(c=>`<div class="idi" onclick="addPTag('${uid}','${enc(c)}',this)">
+      <strong>${c.name}</strong><small>${c.email||''}</small>
+    </div>`).join('');
+    dd.classList.add('open');
+  }else dd.classList.remove('open');
+}
+function onPartKey(e,inp,uid){
+  if(e.key==='Enter'&&inp.value.trim()){
+    e.preventDefault();addPTag(uid,enc({name:inp.value.trim()}),null,true);
+    inp.value='';g('pdrop-'+uid)?.classList.remove('open');
+  }
+}
+window.addPTag=function(uid,encoded,item,manual=false){
+  const p=dec(encoded);
+  const wrap=g('ptags-'+uid);if(!wrap)return;
+  if([...wrap.querySelectorAll('.part-tag')].some(t=>t.dataset.n===p.name))return;
+  const tag=document.createElement('span');
+  tag.className='part-tag'+(manual?' tagm':'');tag.dataset.n=p.name;
+  tag.innerHTML=`${p.name}<span class="part-tagx" onclick="this.parentElement.remove()">×</span>`;
+  wrap.appendChild(tag);
+  if(item)item.closest('.idrop').classList.remove('open');
+};
+
+// ── TOTALES ───────────────────────────────────────────────────────────────────
+function syncTot(){
+  let ts=0,th=0;
+  document.querySelectorAll('#planBody tr[data-ses]').forEach(r=>{ts+=parseInt(r.dataset.ses)||0;th+=parseInt(r.dataset.hrs)||0;});
+  g('totSes').textContent=ts; g('totHrs').textContent=th;
+  g('fTotalSes').value=ts+' sesiones'; g('fTotalHrs').value=th+' horas';
+  g('resumenSes').textContent=ts+' sesiones'; g('resumenHrs').textContent=th+' horas';
+  g('otSes').value=ts+' sesiones · '+th+' horas';
+}
+
+// ── OT MODAL ─────────────────────────────────────────────────────────────────
+function abrirModal(){
+  const n=g('otNom').value.trim(),e=g('otEmp').value.trim();
+  if(!n||!e){alert('⚠️ Completa Nombre de Empresa y Nombre de Oportunidad.');return;}
+  const rows=[
+    {l:'RUT Empresa',v:g('otRut').value||'—'},{l:'Nombre Empresa',v:e},
+    {l:'Nombre Oportunidad',v:n},{l:'Propietario',v:g('otProp').value||'—'},
+    {l:'Contacto',v:g('otCont').value||'—'},{l:'Tipo de contrato',v:g('otTipo').value||'Ninguno'},
+    {l:'Producto',v:g('otProd').value||_prod},{l:'Fase',v:g('otFase').value},
+    {l:'Importe',v:g('otImp').value||'0'},{l:'Fecha de cierre',v:g('otFc').value||'—'},
+    {l:'Sesiones',v:g('otSes').value||'—'},
+  ];
+  g('modalBody').innerHTML=rows.map(r=>`<div class="prow"><span class="plbl">${r.l}</span><span class="pval">${r.v}</span></div>`).join('')+'<div class="ost" id="ost"></div>';
+  g('btnOK').disabled=false;g('btnOK').textContent='✓ Crear en Zoho';
+  g('modalOv').style.display='flex';
+}
+function cerrarModal(){g('modalOv').style.display='none';}
+async function crearOp(){
+  const btn=g('btnOK'),st=g('ost');
+  btn.disabled=true;btn.textContent='Creando…';
+  st.className='ost ld';st.textContent='⏳ Enviando a Zoho CRM…';
+  try{
+    const r=await fetch(`${PROXY}/oportunidades`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({data:[{
+        RUT_Empresa:g('otRut').value,Account_Name:{name:g('otEmp').value},
+        Deal_Name:g('otNom').value,Owner:{name:g('otProp').value},
+        Contact_Name:g('otCont').value,Tipo_de_contrato:g('otTipo').value,
+        Producto_de_inter_s:g('otProd').value||_prod,Stage:g('otFase').value,
+        Amount:parseFloat(g('otImp').value)||0,Closing_Date:g('otFc').value,
+        Description:g('otCom').value,Sesiones:g('otSes').value,
+      }]})
+    });
+    if(r.ok){st.className='ost ok';st.textContent='✅ Oportunidad creada en Zoho CRM';btn.style.display='none';}
+    else throw new Error(`HTTP ${r.status}`);
+  }catch(err){
+    st.className='ost err';st.textContent=`⚠️ ${err.message} — el proxy requiere soporte POST /oportunidades.`;
+    btn.disabled=false;btn.textContent='↻ Reintentar';
+  }
+}
+
+// ── PROGRESS ─────────────────────────────────────────────────────────────────
+function prog(){
+  const ok=[
+    !!g('fEmpresa').value.trim(),!!g('fRut').value.trim(),
+    !!g('fGex').value.trim(),!!g('fObjetivos').value.trim(),
+    document.querySelectorAll('.mc.sel').length>0||document.querySelectorAll('.extra-card').length>0,
+  ];
+  const pct=Math.round(ok.filter(Boolean).length/ok.length*100);
+  g('pf').style.width=pct+'%';g('fpct').textContent=pct+'%';
+}
+document.addEventListener('input',prog);
+document.addEventListener('change',prog);
+</script>
+</body>
+</html>
