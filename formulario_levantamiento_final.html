@@ -336,11 +336,14 @@ input.autofilled{background:#EEF9FF !important;border-color:var(--sky) !importan
       <div class="field">
         <label>¿Factura con Acepta?</label>
         <div class="togs">
-          <div class="tog" onclick="selTog(this,'acepta','si');document.getElementById('dte-note').style.display='flex';document.getElementById('ses-dte-wrap').style.display='block'"><div class="tog-dot"></div>Sí</div>
-          <div class="tog" onclick="selTog(this,'acepta','no');document.getElementById('dte-note').style.display='none';document.getElementById('ses-dte-wrap').style.display='none'"><div class="tog-dot"></div>No</div>
-          <div class="tog" onclick="selTog(this,'acepta','otra');document.getElementById('dte-note').style.display='none';document.getElementById('ses-dte-wrap').style.display='none'"><div class="tog-dot"></div>Otra entidad</div>
+          <div class="tog" onclick="selTog(this,'acepta','si');document.getElementById('dte-note').style.display='flex';document.getElementById('ses-dte-wrap').style.display='block';document.getElementById('facturador-box').style.display='none'"><div class="tog-dot"></div>Sí</div>
+          <div class="tog" onclick="selTog(this,'acepta','no');document.getElementById('dte-note').style.display='none';document.getElementById('ses-dte-wrap').style.display='none';document.getElementById('facturador-box').style.display='block'"><div class="tog-dot"></div>No</div>
         </div>
         <div class="alert alert-orange" id="dte-note" style="display:none;">⚠ Notificar al área DTE para realizar cambio de Rutas.</div>
+        <div id="facturador-box" style="display:none;margin-top:10px;">
+          <label style="font-size:11px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;display:block;">¿Con qué facturador trabaja?</label>
+          <input type="text" id="f-facturador" placeholder="Nombre del facturador" oninput="upd()">
+        </div>
       </div>
       <div class="field">
         <label>¿Formatos de impresión personalizados?</label>
@@ -764,7 +767,7 @@ function generate(){
     
     ${v('f-obs')?`<div class="summ-sec"><div class="summ-sec-t">Observaciones</div><div style="font-size:13px;color:var(--text-2);line-height:1.6;">${v('f-obs')}</div></div>`:''}
     <div class="summ-sec"><div class="summ-sec-t">Preguntas Clave</div>
-      ${ts['acepta']?`<div class="summ-row"><span class="summ-lbl">Factura con Acepta</span><span class="summ-val">${ts['acepta']==='si'?'Sí':ts['acepta']==='no'?'No':'Otra entidad'}</span></div>`:''}
+      ${ts['acepta']?`<div class="summ-row"><span class="summ-lbl">Factura con Acepta</span><span class="summ-val">${ts['acepta']==='si'?'Sí':'No'+(v('f-facturador')?' · '+v('f-facturador'):'')}</span></div>`:''}
       ${ts['fmt']?`<div class="summ-row"><span class="summ-lbl">Formatos personalizados</span><span class="summ-val">${ts['fmt']==='si'?'Sí'+(v('f-fmt')?' · '+v('f-fmt'):''):'No'}</span></div>`:''}
       ${ts['integ']?`<div class="summ-row"><span class="summ-lbl">Integraciones</span><span class="summ-val">${ts['integ']==='si'?'Sí'+(v('f-integ')?' · '+v('f-integ'):''):'No'}</span></div>`:''}
     </div>
