@@ -14,6 +14,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .tb-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;}
 .prog-wrap{background:rgba(0,0,0,.15);height:3px;}
 .prog-fill{height:100%;background:var(--sky);transition:width .4s;width:0%;}
+/* CRM block identico replica */
 .crm-block{background:var(--card);border:2px solid var(--sky);border-radius:var(--r-lg);margin-bottom:12px;overflow:visible;position:relative;}
 .crm-head{display:flex;align-items:center;gap:10px;padding:14px 16px;}
 .crm-icon{width:36px;height:36px;background:linear-gradient(135deg,#EEF9FF,#D0F0FF);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(--sky);}
@@ -59,48 +60,57 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .st-dot.err{background:var(--red);}
 .st-dot.loading{background:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+/* GEX selector */
 .gex-block{background:var(--card);border:1.5px solid var(--border-hi);border-radius:var(--r-lg);margin-bottom:12px;}
 .gex-head{display:flex;align-items:center;gap:10px;padding:13px 16px;}
 .gex-icon{width:34px;height:34px;background:linear-gradient(135deg,#EEF3FC,#D8E4F8);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--border-hi);}
 .gex-title{font-size:13px;font-weight:700;flex:1;color:var(--navy);}
 .gex-body{padding:0 16px 14px;}
 .gex-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
-.gex-pill{padding:7px 13px;border:1.5px solid var(--border);border-radius:20px;font-size:12.5px;cursor:pointer;color:var(--text-2);transition:all .15s;background:#fff;}
+.gex-pill{padding:7px 14px;border:1.5px solid var(--border);border-radius:20px;font-size:12.5px;cursor:pointer;color:var(--text-2);transition:all .15s;background:#fff;}
 .gex-pill:hover{border-color:var(--navy);color:var(--navy);}
 .gex-pill.on{border-color:var(--navy);background:#EEF3FC;color:var(--navy);font-weight:700;}
-.gex-manual{display:flex;gap:8px;margin-top:6px;}
-.gex-manual input{flex:1;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:13px;color:var(--text);background:#fff;outline:none;}
+.gex-manual{margin-top:8px;}
+.gex-manual input{width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:13px;color:var(--text);background:#fff;outline:none;}
 .gex-manual input:focus{border-color:var(--navy);}
-.wrap{max-width:680px;margin:0 auto;padding:20px 20px 100px;}
+/* layout */
+.wrap{max-width:680px;margin:0 auto;padding:20px 20px 120px;}
 .hero{background:linear-gradient(135deg,var(--navy),#1a4a8a);border-radius:var(--r-lg);padding:22px 24px;margin-bottom:16px;overflow:hidden;position:relative;}
 .hero::after{content:"";position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:rgba(0,176,240,.12);}
 .hero-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;}
 .hero-desc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
+/* secciones */
 .sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:8px;overflow:hidden;}
 .sec-head{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;transition:background .1s;}
 .sec-head:hover{background:#FAFBFD;}
 .sec-icon{width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .sec-title{font-size:13.5px;font-weight:600;flex:1;}
-.sec-badge{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:8px;background:#F0F4FA;color:var(--text-3);}
-.sec-badge.done{background:#E6F4EC;color:#0A6A32;}
 .sec-arrow{font-size:12px;color:var(--text-3);transition:transform .25s;margin-left:4px;}
 .sec.open .sec-arrow{transform:rotate(180deg);}
 .sec-body{display:none;padding:0 14px 16px;border-top:1px solid var(--border);}
 .sec.open .sec-body{display:block;}
+/* fields */
 .field{margin-top:12px;}
 .field label{display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em;}
 .req{color:var(--red);}
-.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#fff;outline:none;transition:all .15s;}
-.field input:focus,.field textarea:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(0,176,240,.1);}
-.field textarea{min-height:80px;resize:vertical;}
+.field input,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#fff;outline:none;transition:all .15s;}
+.field input:focus,.field select:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(0,176,240,.1);}
+.field textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--text);background:#fff;outline:none;transition:all .15s;resize:vertical;min-height:130px;line-height:1.6;}
+.field textarea:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(0,176,240,.1);}
 input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;color:var(--navy);}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+/* producto */
 .prod-togs{display:flex;gap:8px;margin-top:6px;}
 .prod-tog{flex:1;padding:9px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;text-align:center;font-size:13px;font-weight:500;transition:all .15s;user-select:none;}
 .prod-tog.on{border-color:var(--sky);background:#EEF9FF;color:var(--navy);font-weight:700;}
-.mod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 14px;}
-.mc{border:2px solid var(--border);border-radius:var(--r);padding:8px 10px;cursor:pointer;transition:all .15s;user-select:none;display:flex;align-items:center;gap:7px;}
+/* bloques doc */
+.blk{border:1.5px solid var(--border-hi);border-radius:var(--r);margin-bottom:14px;overflow:hidden;}
+.blk-hdr{background:var(--navy);color:#fff;padding:10px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.blk-body{padding:14px;background:#fff;}
+/* modulos */
+.mod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 16px;}
+.mc{border:2px solid var(--border);border-radius:var(--r);padding:9px 10px;cursor:pointer;transition:all .15s;user-select:none;display:flex;align-items:center;gap:7px;}
 .mc:hover{border-color:var(--sky);background:#EEF9FF;}
 .mc.sel{border-color:var(--sky);background:#EEF9FF;}
 .mc.sel .mck{background:var(--sky);border-color:var(--sky);}
@@ -108,6 +118,10 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
 .mck{width:15px;height:15px;border-radius:3px;border:2px solid var(--text-3);flex-shrink:0;position:relative;transition:all .15s;}
 .mck::after{content:"v";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;opacity:0;}
 .ml{font-size:12px;font-weight:600;color:var(--text);}
+/* resumen sesiones */
+.res-banner{background:var(--navy);color:#fff;border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px;font-weight:700;font-size:13px;}
+.res-val{font-family:var(--mono);font-size:15px;color:var(--sky);}
+/* cards sesion */
 .ses-card{border:1.5px solid var(--sky);border-radius:var(--r);background:#EEF9FF;margin-bottom:10px;overflow:hidden;animation:fadeIn .2s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:translateY(0);}}
 .ses-card-hdr{background:var(--sky);color:#fff;padding:9px 13px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;}
@@ -118,40 +132,45 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
 .ti:last-child{border-bottom:none;}
 .tdot{width:5px;height:5px;border-radius:50%;background:var(--sky);flex-shrink:0;margin-top:6px;}
 .hbadge{display:inline-flex;align-items:center;gap:4px;background:rgba(0,176,240,.12);border:1px solid var(--sky);border-radius:20px;padding:3px 10px;font-size:11px;font-family:var(--mono);color:#007BB5;font-weight:600;margin-top:8px;}
+/* sesion adicional */
 .extra-card{border:2px solid var(--orange);border-radius:var(--r);background:#FFF8F0;margin-bottom:10px;overflow:hidden;animation:fadeIn .2s ease;}
 .extra-hdr{background:var(--orange);color:#fff;padding:9px 13px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;}
 .extra-body{padding:12px 13px;}
 .xrm{background:transparent;border:none;color:rgba(255,255,255,.8);font-size:18px;cursor:pointer;line-height:1;}
 .xrm:hover{color:#fff;}
+.extra-body .field textarea{min-height:90px;background:#fff;}
 .btn-add-extra{display:flex;align-items:center;gap:7px;background:transparent;border:1.5px dashed var(--orange);border-radius:var(--r);padding:9px 14px;width:100%;cursor:pointer;font-size:13px;font-weight:600;color:var(--orange);font-family:var(--font);transition:.15s;margin-top:6px;}
 .btn-add-extra:hover{background:#FFF8F0;}
-.blk{border:1.5px solid var(--border-hi);border-radius:var(--r);margin-bottom:12px;overflow:hidden;}
-.blk-hdr{background:var(--navy);color:#fff;padding:9px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
-.blk-body{padding:13px;background:#fff;}
-.res-banner{background:var(--navy);color:#fff;border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px;font-weight:700;font-size:13px;}
-.res-val{font-family:var(--mono);font-size:15px;color:var(--sky);}
+/* tabla totales */
 .pt{width:100%;border-collapse:collapse;font-size:13px;}
 .pt th,.pt td{border:1.5px solid var(--border-hi);padding:8px 11px;vertical-align:top;}
 .pt thead th{background:var(--navy);color:#fff;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.03em;}
 .pt .rc td{background:#fff;}
 .pt .rtot td{background:var(--sky);color:#fff;font-weight:700;}
-.cses,.chrs{width:80px;text-align:center;font-family:var(--mono);font-weight:700;}
 .pt .sec-row td{background:#daeaf7;font-weight:700;color:var(--navy);font-size:12px;}
-.firmas{display:flex;gap:40px;margin-top:20px;}
+.cses,.chrs{width:80px;text-align:center;font-family:var(--mono);font-weight:700;}
+/* firmas */
+.firmas{display:flex;gap:40px;margin-top:24px;padding-top:16px;border-top:1px solid var(--border);}
 .firma{flex:1;text-align:center;}
 .firma-line{height:1px;background:var(--text);margin-bottom:6px;}
 .firma-lbl{font-size:12px;color:var(--text-2);}
+/* footer */
 .sticky-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:11px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;}
 .sf-left{display:flex;align-items:center;gap:10px;}
 .sf-pct{font-size:15px;font-weight:700;color:var(--navy);font-family:var(--mono);}
 .sf-mini{width:90px;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
 .sf-fill{height:100%;background:linear-gradient(90deg,var(--navy),var(--sky));border-radius:3px;transition:width .4s;}
 .sf-label{font-size:10.5px;color:var(--text-3);margin-bottom:2px;}
-.btn-pdf{padding:11px 20px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;box-shadow:0 2px 8px rgba(31,56,100,.3);}
-@media(max-width:500px){.row2,.row3,.mod-grid{grid-template-columns:1fr 1fr;}.firmas{flex-direction:column;gap:20px;}}
+.footer-btns{display:flex;gap:8px;}
+.btn-footer{padding:10px 16px;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;}
+.btn-pdf{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;box-shadow:0 2px 8px rgba(31,56,100,.3);}
+.btn-oport{background:#E6F4EC;color:#0A6A32;border:1.5px solid #A8DCBC;}
+.btn-ot{background:#EEF3FC;color:var(--navy);border:1.5px solid var(--border-hi);}
+.btn-footer:hover{transform:translateY(-1px);}
+@media(max-width:500px){.row2,.row3,.mod-grid{grid-template-columns:1fr 1fr;}.firmas{flex-direction:column;gap:20px;}.footer-btns{flex-wrap:wrap;}}
 @media print{
   body{background:#fff;padding:0;}
-  .topbar,.prog-wrap,.sticky-footer,.btn-add-extra,.xrm,.crm-block,.gex-block,.mod-grid{display:none!important;}
+  .topbar,.prog-wrap,.sticky-footer,.btn-add-extra,.crm-block,.gex-block,.mod-grid>*{display:none!important;}
   .sec{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
   .sec-body{display:block!important;}
 }
@@ -160,17 +179,16 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
 <body>
 <div class="topbar">
   <div class="tb-mark">M</div>
-  <div><div class="tb-title">Plan de Trabajo &middot; Propuesta de Sesiones</div><div class="tb-sub" id="tbSub">Gestor de Expansi&oacute;n de Cuentas</div></div>
+  <div><div class="tb-title">Plan de Trabajo &middot; Propuesta de Sesiones</div><div class="tb-sub" id="tbSub">Gestor de Expansion de Cuentas</div></div>
 </div>
 <div class="prog-wrap"><div class="prog-fill" id="tp"></div></div>
-
 <div class="wrap">
 <div class="hero">
   <div class="hero-title">Plan de Trabajo GEX</div>
-  <div class="hero-desc">Propuesta de sesiones de trabajo para implementaci&oacute;n y capacitaci&oacute;n. V&aacute;lido para Manager Time y Manager+.</div>
+  <div class="hero-desc">Propuesta de sesiones de trabajo. Valido para Manager Time y Manager+.</div>
 </div>
 
-<!-- BLOQUE CRM -->
+<!-- BLOQUE CRM identico replica -->
 <div class="crm-block">
   <div class="crm-head">
     <div class="crm-icon">&#128269;</div>
@@ -179,7 +197,7 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
   </div>
   <div class="crm-body">
     <div class="search-wrap">
-      <input type="text" class="search-input" id="crm-input" placeholder="Escribe el nombre de la empresa&hellip;" autocomplete="off">
+      <input type="text" class="search-input" id="crm-input" placeholder="Escribe el nombre de la empresa..." autocomplete="off">
       <div class="search-ico" id="search-ico">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
@@ -196,7 +214,7 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
         <span id="pill-vendedor-text"></span>
       </div>
       <div class="crm-pill crm-pill-gex">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
         <span id="pill-gex-text"></span>
       </div>
     </div>
@@ -215,58 +233,32 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
 <div class="gex-block">
   <div class="gex-head">
     <div class="gex-icon">&#128100;</div>
-    <div class="gex-title">Gestor de Expansi&oacute;n (GEX) &mdash; &iquest;Qui&eacute;n elabora este plan?</div>
+    <div class="gex-title">Gestor de Expansion (GEX) &mdash; Quien elabora este plan</div>
   </div>
   <div class="gex-body">
-    <div class="gex-list" id="gexList">
+    <div class="gex-list">
       <div class="gex-pill" onclick="selGex(this,'Gabriel Clavijo','gclavijo@manager.cl')">Gabriel Clavijo</div>
-      <div class="gex-pill" onclick="selGex(this,'H&eacute;ctor Figueroa','hfigueroa@manager.cl')">H&eacute;ctor Figueroa</div>
-      <div class="gex-pill" onclick="selGex(this,'Dayenis Vel&aacute;squez','dvelasquez@manager.cl')">Dayenis Vel&aacute;squez</div>
-      <div class="gex-pill" onclick="selGex(this,'Karen Hurtado','khurtado@manager.cl')">Karen Hurtado</div>
+      <div class="gex-pill" onclick="selGex(this,'Hector Figueroa','hfigueroa@manager.cl')">Hector Figueroa</div>
+      <div class="gex-pill" onclick="selGex(this,'Isabel Lopez','ilopez@manager.cl')">Isabel Lopez</div>
+      <div class="gex-pill" onclick="selGex(this,'Marcos Cayupan','mcayupan@manager.cl')">Marcos Cayupan</div>
     </div>
     <div class="gex-manual">
-      <input type="text" id="gexNombre" placeholder="O escribe el nombre del GEX&hellip;" oninput="onGexManual()">
-      <input type="email" id="gexEmail" placeholder="Email GEX" style="max-width:200px;">
+      <input type="text" id="gexNombre" placeholder="O escribe el nombre si no aparece..." oninput="onGexManual()">
     </div>
   </div>
 </div>
 
-<!-- S1 DATOS CLIENTE -->
+<!-- S1 DATOS MANAGER -->
 <div class="sec open" id="s1">
   <div class="sec-head" onclick="togSec('s1')">
-    <div class="sec-icon" style="background:#EEF3FC">&#128100;</div>
-    <div class="sec-title">1. Datos del Cliente</div>
-    <span class="sec-badge" id="b1">Pendiente</span><span class="sec-arrow">&#9660;</span>
-  </div>
-  <div class="sec-body">
-    <div class="row2">
-      <div class="field"><label>Nombre Empresa <span class="req">*</span></label><input id="f-empresa" placeholder="Raz&oacute;n social" oninput="upd()"></div>
-      <div class="field"><label>RUT <span class="req">*</span></label><input id="f-rut" placeholder="XX.XXX.XXX-X" oninput="upd()"></div>
-    </div>
-    <div class="field"><label>Jefe de Proyectos (Cliente)</label><input id="f-contacto" placeholder="Nombre y cargo" oninput="upd()"></div>
-    <div class="row2">
-      <div class="field"><label>Email</label><input id="f-email" type="email" placeholder="correo@empresa.cl" oninput="upd()"></div>
-      <div class="field"><label>Tel&eacute;fono</label><input id="f-tel" placeholder="+56 9 XXXX XXXX" oninput="upd()"></div>
-    </div>
-  </div>
-</div>
-
-<!-- S2 DATOS MANAGER -->
-<div class="sec open" id="s2">
-  <div class="sec-head" onclick="togSec('s2')">
     <div class="sec-icon" style="background:#EEF9FF">&#9881;&#65039;</div>
-    <div class="sec-title">2. Datos Manager</div>
-    <span class="sec-badge" id="b2">Pendiente</span><span class="sec-arrow">&#9660;</span>
+    <div class="sec-title">1. Datos del Plan</div>
+    <span class="sec-arrow">&#9660;</span>
   </div>
   <div class="sec-body">
     <div class="row2">
-      <div class="field"><label>Gestor de Expansi&oacute;n &#128279;</label><input id="f-gex" placeholder="Se llena arriba" readonly style="background:#F7FAFD;color:var(--text-2);"></div>
-      <div class="field"><label>Email GEX &#128279;</label><input id="f-gex-email" placeholder="Se llena arriba" readonly style="background:#F7FAFD;color:var(--text-2);"></div>
-    </div>
-    <div class="row3">
       <div class="field"><label>Fecha Plan de Trabajo</label><input type="date" id="f-fecha-plan"></div>
-      <div class="field"><label>Fecha est. de inicio</label><input type="date" id="f-fecha-inicio"></div>
-      <div class="field"><label>Fecha apertura contable</label><input type="date" id="f-fecha-apertura"></div>
+      <div class="field"><label>Fecha estimada de inicio</label><input type="date" id="f-fecha-inicio"></div>
     </div>
     <div class="field">
       <label>Producto</label>
@@ -278,58 +270,56 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
   </div>
 </div>
 
-<!-- S3 ALCANCE -->
-<div class="sec open" id="s3">
-  <div class="sec-head" onclick="togSec('s3')">
+<!-- S2 ALCANCE -->
+<div class="sec open" id="s2">
+  <div class="sec-head" onclick="togSec('s2')">
     <div class="sec-icon" style="background:#FEF0E6">&#127919;</div>
-    <div class="sec-title">3. Alcance</div>
+    <div class="sec-title">2. Alcance</div>
     <span class="sec-arrow">&#9660;</span>
   </div>
   <div class="sec-body">
-    <div class="row2">
-      <div class="field"><label>Sesiones de Trabajo</label><input id="f-total-ses" readonly placeholder="Autom&aacute;tico" style="background:#F7FAFD;font-family:var(--mono);font-weight:700;color:var(--navy);"></div>
-      <div class="field"><label>Horas Totales</label><input id="f-total-hrs" readonly placeholder="Autom&aacute;tico" style="background:#F7FAFD;font-family:var(--mono);font-weight:700;color:var(--navy);"></div>
-    </div>
     <div class="field"><label>Objetivos <span class="req">*</span></label>
-      <textarea id="f-objetivos" placeholder="Ej: Abordar los puntos levantados por cliente en reuni&oacute;n del d&iacute;a&hellip;" oninput="upd()"></textarea>
+      <textarea id="f-objetivos" placeholder="Ej: Abordar los puntos levantados por cliente en reunion del dia..." oninput="upd()"></textarea>
     </div>
   </div>
 </div>
 
-<!-- S4 PLAN -->
-<div class="sec open" id="s4">
-  <div class="sec-head" onclick="togSec('s4')">
+<!-- S3 PLAN -->
+<div class="sec open" id="s3">
+  <div class="sec-head" onclick="togSec('s3')">
     <div class="sec-icon" style="background:#E6F4EC">&#128203;</div>
-    <div class="sec-title">4. Propuesta Plan de Trabajo</div>
+    <div class="sec-title">3. Propuesta Plan de Trabajo</div>
     <span class="sec-arrow">&#9660;</span>
   </div>
   <div class="sec-body">
+
     <div class="blk">
       <div class="blk-hdr">Consideraciones</div>
       <div class="blk-body">
-        <textarea id="f-consider" style="min-height:110px;">- Las sesiones de implementacion consideran la parametrizacion y configuraciones de maestros en una razon social principal. Posteriormente se realizan replicas para las razones sociales adicionales.
+        <div class="field" style="margin-top:0;">
+          <textarea id="f-consider" style="min-height:160px;">- Las sesiones de implementacion consideran la parametrizacion y configuraciones de maestros en una razon social principal. Posteriormente se realizan replicas para las razones sociales adicionales.
 - El lider de la empresa es el lider del proyecto y la persona encargada de tomar las decisiones. El lider (responsable) participa continuamente en el proyecto.
 - No se considera la implementacion de funcionalidades adicionales no detalladas en el presente plan de trabajo.
 - El presente plan de trabajo es factible ejecutarlo posterior a la evaluacion comercial y bajo disponibilidad de agenda del equipo de consultoria.
 - Se requiere la participacion del cliente en las sesiones de trabajo.</textarea>
+        </div>
       </div>
     </div>
+
     <div class="blk">
       <div class="blk-hdr">Planteamiento de la Problematica</div>
       <div class="blk-body">
-        <textarea id="f-problema" style="min-height:100px;" placeholder="Describe el contexto y situacion actual del cliente..."></textarea>
+        <div class="field" style="margin-top:0;">
+          <textarea id="f-problema" style="min-height:150px;" placeholder="Describe el contexto y situacion actual del cliente..."></textarea>
+        </div>
       </div>
     </div>
+
     <div class="blk">
       <div class="blk-hdr">Plan de Accion</div>
       <div class="blk-body">
-        <div class="res-banner">
-          <span>Plan de trabajo de</span>
-          <span class="res-val" id="res-ses">0 sesiones</span>
-          <span>&middot;</span>
-          <span class="res-val" id="res-hrs">0 horas</span>
-        </div>
-        <p style="font-size:12px;color:var(--text-3);margin-bottom:4px;font-weight:600;">Selecciona modulos estandar:</p>
+
+        <p style="font-size:12px;color:var(--text-3);font-weight:600;margin-bottom:4px;">Selecciona los modulos:</p>
         <div class="mod-grid">
           <div class="mc" data-m="abastecimiento" onclick="togM(this)"><div class="mck"></div><span class="ml">Abastecimiento</span></div>
           <div class="mc" data-m="importaciones"  onclick="togM(this)"><div class="mck"></div><span class="ml">Importaciones</span></div>
@@ -339,17 +329,33 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
           <div class="mc" data-m="servicio"       onclick="togM(this)"><div class="mck"></div><span class="ml">Serv. Tecnico</span></div>
           <div class="mc" data-m="finanzas"       onclick="togM(this)"><div class="mck"></div><span class="ml">Finanzas</span></div>
         </div>
-        <div id="sesCards"></div>
-        <p style="font-size:12px;color:var(--text-3);font-weight:600;margin-bottom:6px;">Otros temas / sesiones adicionales:</p>
+
+        <p style="font-size:12px;color:var(--text-3);font-weight:600;margin-bottom:6px;">Sesiones adicionales / otros temas:</p>
         <div id="extraCards"></div>
-        <button class="btn-add-extra" onclick="addExtra()">+ Agregar sesion adicional (tema libre - 2 hrs)</button>
-        <div style="margin-top:18px;border:1.5px solid var(--border-hi);border-radius:var(--r);overflow:hidden;">
+        <button class="btn-add-extra" onclick="addExtra()">+ Agregar sesion adicional (2 hrs)</button>
+
+        <!-- resumen aparece solo cuando hay sesiones -->
+        <div id="resumenWrap" style="display:none;margin-top:16px;">
+          <div class="res-banner">
+            <span>Plan de trabajo de</span>
+            <span class="res-val" id="res-ses">0 sesiones</span>
+            <span>&middot;</span>
+            <span class="res-val" id="res-hrs">0 horas</span>
+          </div>
+        </div>
+
+        <!-- cards sesiones (aparecen despues de seleccionar) -->
+        <div id="sesCards"></div>
+
+        <!-- tabla totales -->
+        <div id="tablaWrap" style="display:none;margin-top:16px;border:1.5px solid var(--border-hi);border-radius:var(--r);overflow:hidden;">
           <table class="pt">
-            <thead><tr><th style="width:38%">Sesion / Tema</th><th>Contenidos principales</th><th class="cses">Ses.</th><th class="chrs">Hrs.</th></tr></thead>
+            <thead><tr><th style="width:38%">Sesion / Tema</th><th>Contenidos</th><th class="cses">Ses.</th><th class="chrs">Hrs.</th></tr></thead>
             <tbody id="planBody"></tbody>
             <tfoot><tr class="rtot"><td colspan="2" style="text-align:right;">Total de Sesiones y Horas</td><td class="cses" id="totSes">0</td><td class="chrs" id="totHrs">0</td></tr></tfoot>
           </table>
         </div>
+
         <div class="firmas">
           <div class="firma"><div class="firma-line"></div><div class="firma-lbl">Jefe de Proyectos Cliente</div></div>
           <div class="firma"><div class="firma-line"></div><div class="firma-lbl">Gestor de Expansion de Cuentas</div></div>
@@ -358,14 +364,19 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
     </div>
   </div>
 </div>
-</div>
+
+</div><!-- /wrap -->
 
 <div class="sticky-footer">
   <div class="sf-left">
     <div class="sf-pct" id="sf-pct">0%</div>
     <div><div class="sf-label">Completado</div><div class="sf-mini"><div class="sf-fill" id="sf-fill"></div></div></div>
   </div>
-  <button class="btn-pdf" onclick="window.print()">Generar PDF</button>
+  <div class="footer-btns">
+    <button class="btn-footer btn-oport" onclick="alert('Proximamente: Crear Oportunidad en Zoho')">&#128203; Generar Oportunidad</button>
+    <button class="btn-footer btn-ot" onclick="alert('Proximamente: Generar OT')">&#128196; Generar OT</button>
+    <button class="btn-footer btn-pdf" onclick="window.print()">&#128196; Generar PDF</button>
+  </div>
 </div>
 
 <script>
@@ -404,7 +415,7 @@ let searchTimer=null,currentContacts=[],extraCnt=0;
 const crmInput=document.getElementById("crm-input");
 const acDrop=document.getElementById("ac-drop");
 const searchIco=document.getElementById("search-ico");
-function setStatus(state,msg){document.getElementById("st-dot").className="st-dot"+(state?" "+state:"");document.getElementById("st-msg").textContent=msg;}
+function setStatus(s,m){document.getElementById("st-dot").className="st-dot"+(s?" "+s:"");document.getElementById("st-msg").textContent=m;}
 function showSpinner(on){searchIco.innerHTML=on?"<div class=\"spin\"></div>":"<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg>";}
 crmInput.addEventListener("input",function(){
   clearTimeout(searchTimer);const q=this.value.trim();
@@ -436,16 +447,18 @@ async function selectAccount(account){
   document.getElementById("pill-vendedor-text").textContent="Vendedor: "+(account.vendedor||"--");
   document.getElementById("pill-gex-text").textContent="GEX: "+(account.gex||"--");
   document.getElementById("crm-pills").classList.add("show");
-  setField("f-empresa",account.name);setField("f-rut",account.rut);
-  if(account.phone)setField("f-tel",account.phone);
-  if(account.gex&&!document.getElementById("f-gex").value){setField("f-gex",account.gex);document.getElementById("tbSub").textContent="GEX: "+account.gex;}
+  if(account.gex&&!document.getElementById("gexNombre").value){
+    document.getElementById("gexNombre").value=account.gex;
+    document.getElementById("tbSub").textContent="GEX: "+account.gex;
+  }
   setStatus("loading","Cargando contactos...");
   try{
     const res=await fetch(PROXY+"?account_id="+account.id);
     const data=await res.json();currentContacts=data.contacts||[];
     if(currentContacts.length){
-      document.getElementById("contact-list").innerHTML=currentContacts.map(c=>"<div class=\"contact-pill\" onclick=\"selectContact(this,\'"+c.id+"\')\" >"+c.name+"</div>").join("");
-      document.getElementById("contact-sel").classList.add("show");setStatus("ok","Selecciona el Jefe de Proyectos del cliente");
+      document.getElementById("contact-list").innerHTML=currentContacts.map(c=>"<div class=\"contact-pill\" onclick=\"selectContact(this,'"+c.id+"')\">"+c.name+"</div>").join("");
+      document.getElementById("contact-sel").classList.add("show");
+      setStatus("ok","Selecciona el Jefe de Proyectos del cliente");
     }else setStatus("ok","Cliente cargado");
   }catch(e){setStatus("ok","Cliente cargado");}
   upd();
@@ -453,27 +466,25 @@ async function selectAccount(account){
 function selectContact(el,cid){
   document.querySelectorAll(".contact-pill").forEach(p=>p.classList.remove("on"));el.classList.add("on");
   const c=currentContacts.find(x=>x.id===cid);if(!c)return;
-  setField("f-contacto",c.name);if(c.email)setField("f-email",c.email);if(c.phone)setField("f-tel",c.phone);
   setStatus("ok","Contacto: "+c.name);upd();
 }
-function setField(id,val){const el=document.getElementById(id);if(!el||!val)return;el.value=val;el.classList.add("autofilled");el.addEventListener("input",()=>el.classList.remove("autofilled"),{once:true});}
 function clearCRM(){
-  crmInput.value="";document.getElementById("crm-sel").classList.remove("show");
-  document.getElementById("contact-sel").classList.remove("show");document.getElementById("crm-pills").classList.remove("show");
-  document.getElementById("contact-list").innerHTML="";currentContacts=[];
-  ["f-empresa","f-rut","f-tel","f-contacto","f-email"].forEach(id=>{const el=document.getElementById(id);if(el){el.value="";el.classList.remove("autofilled");}});
+  crmInput.value="";
+  document.getElementById("crm-sel").classList.remove("show");
+  document.getElementById("contact-sel").classList.remove("show");
+  document.getElementById("crm-pills").classList.remove("show");
+  document.getElementById("contact-list").innerHTML="";
+  currentContacts=[];
   setStatus("","Escribe al menos 2 caracteres para buscar");upd();
 }
 function selGex(pill,nombre,email){
   document.querySelectorAll(".gex-pill").forEach(p=>p.classList.remove("on"));pill.classList.add("on");
-  document.getElementById("gexNombre").value=nombre;document.getElementById("gexEmail").value=email;
-  setField("f-gex",nombre);setField("f-gex-email",email);
+  document.getElementById("gexNombre").value=nombre;
   document.getElementById("tbSub").textContent="GEX: "+nombre;upd();
 }
 function onGexManual(){
   document.querySelectorAll(".gex-pill").forEach(p=>p.classList.remove("on"));
   const n=document.getElementById("gexNombre").value;
-  document.getElementById("f-gex").value=n;
   document.getElementById("tbSub").textContent=n?"GEX: "+n:"Gestor de Expansion de Cuentas";upd();
 }
 function selProd(btn,p){document.querySelectorAll(".prod-tog").forEach(b=>b.classList.remove("on"));btn.classList.add("on");}
@@ -481,15 +492,18 @@ function togSec(id){document.getElementById(id).classList.toggle("open");}
 function togM(card){card.classList.toggle("sel");rebuild();upd();}
 function rebuild(){
   const cards=document.getElementById("sesCards");cards.innerHTML="";
-  const body=document.getElementById("planBody");body.innerHTML="";
+  const body=document.getElementById("planBody");
+  // conservar filas de sesiones extra
+  const extraRows=[...body.querySelectorAll("tr.extra-row")];
+  body.innerHTML="";
   document.querySelectorAll(".mc.sel").forEach(card=>{
     const mod=MODS[card.dataset.m];
     const hr=document.createElement("tr");hr.className="sec-row";
-    hr.innerHTML="<td colspan=\"4\" style=\"font-weight:700;color:var(--navy);font-size:12px;background:#daeaf7;\">"+mod.lbl+"</td>";
+    hr.innerHTML="<td colspan=\"4\" style=\"background:#daeaf7;font-weight:700;color:var(--navy);font-size:12px;\">"+mod.lbl+"</td>";
     body.appendChild(hr);
     mod.ses.forEach(ses=>{
       const div=document.createElement("div");div.className="ses-card";
-      div.innerHTML="<div class=\"ses-card-hdr\"><span>"+ses.n+"</span><span class=\"ses-badge-tag\">2 hrs - 1 sesion</span></div>"
+      div.innerHTML="<div class=\"ses-card-hdr\"><span>"+ses.n+"</span><span class=\"ses-badge-tag\">2 hrs</span></div>"
         +"<div class=\"ses-body\"><ul class=\"tlist\">"+ses.t.map(t=>"<li class=\"ti\"><div class=\"tdot\"></div><span>"+t+"</span></li>").join("")+"</ul>"
         +"<div class=\"hbadge\">2 horas</div></div>";
       cards.appendChild(div);
@@ -497,35 +511,69 @@ function rebuild(){
       tr.innerHTML="<td style=\"font-weight:600;\">"+ses.n+"</td><td style=\"font-size:12px;color:var(--text-2);\">"+ses.t.slice(0,2).join(" - ")+"...</td><td class=\"cses\">1</td><td class=\"chrs\">2</td>";
       body.appendChild(tr);
     });
-  });syncTot();
+  });
+  extraRows.forEach(r=>body.appendChild(r));
+  syncTot();
 }
 function addExtra(){
   extraCnt++;const uid="ex"+extraCnt;
+  // card naranja
   const card=document.createElement("div");card.className="extra-card";card.id="ec-"+uid;
-  card.innerHTML="<div class=\"extra-hdr\"><span>Sesion Adicional #"+extraCnt+"</span><button class=\"xrm\" onclick=\"removeExtra(\'"+uid+"\')\">x</button></div>"
+  card.innerHTML="<div class=\"extra-hdr\"><span>Sesion Adicional #"+extraCnt+"</span><button class=\"xrm\" onclick=\"removeExtra('"+uid+"')\">x</button></div>"
     +"<div class=\"extra-body\">"
-    +"<div class=\"field\"><label>Tema / Nombre</label><input type=\"text\" id=\"et-"+uid+"\" placeholder=\"ej. Explicacion de Maestros, Apoyo carga importadores...\" oninput=\"updateExtraRow(\'"+uid+"\')\"></div>"
-    +"<div class=\"field\"><label>Contenido / Descripcion</label><textarea placeholder=\"Que se cubrira en esta sesion?\" style=\"min-height:60px;\"></textarea></div>"
+    +"<div class=\"field\"><label>Tema <span class=\"req\">*</span></label>"
+    +"<input type=\"text\" id=\"et-"+uid+"\" placeholder=\"ej. Explicacion de Maestros, Apoyo carga importadores...\" oninput=\"updateExtraRow('"+uid+"')\"></div>"
+    +"<div class=\"field\"><label>Contenido / Descripcion</label>"
+    +"<textarea id=\"ec-ta-"+uid+"\" placeholder=\"Que se cubrira en esta sesion?\" style=\"min-height:90px;\"></textarea></div>"
     +"<div class=\"hbadge\">2 horas</div></div>";
   document.getElementById("extraCards").appendChild(card);
-  const tr=document.createElement("tr");tr.className="rc";tr.id="etr-"+uid;tr.dataset.ses=1;tr.dataset.hrs=2;
-  tr.innerHTML="<td style=\"font-weight:600;color:var(--orange);\" id=\"etd-"+uid+"\">Sesion adicional #"+extraCnt+"</td><td style=\"font-size:12px;color:var(--text-2);\">&mdash;</td><td class=\"cses\">1</td><td class=\"chrs\">2</td>";
-  document.getElementById("planBody").appendChild(tr);syncTot();upd();
+  // fila en tabla
+  const tr=document.createElement("tr");tr.className="rc extra-row";tr.id="etr-"+uid;tr.dataset.ses=1;tr.dataset.hrs=2;
+  tr.innerHTML="<td style=\"font-weight:600;color:var(--orange);\" id=\"etd-"+uid+"\">Sesion adicional #"+extraCnt+"</td>"
+    +"<td style=\"font-size:12px;color:var(--text-2);\" id=\"etdc-"+uid+"\">&mdash;</td>"
+    +"<td class=\"cses\">1</td><td class=\"chrs\">2</td>";
+  document.getElementById("planBody").appendChild(tr);
+  syncTot();upd();
 }
-function removeExtra(uid){document.getElementById("ec-"+uid)&&document.getElementById("ec-"+uid).remove();document.getElementById("etr-"+uid)&&document.getElementById("etr-"+uid).remove();syncTot();upd();}
-function updateExtraRow(uid){const v=document.getElementById("et-"+uid)&&document.getElementById("et-"+uid).value;const td=document.getElementById("etd-"+uid);if(td)td.textContent=v||"Sesion adicional";}
+function removeExtra(uid){
+  document.getElementById("ec-"+uid)&&document.getElementById("ec-"+uid).remove();
+  document.getElementById("etr-"+uid)&&document.getElementById("etr-"+uid).remove();
+  syncTot();upd();
+}
+function updateExtraRow(uid){
+  const v=document.getElementById("et-"+uid)&&document.getElementById("et-"+uid).value;
+  const td=document.getElementById("etd-"+uid);if(td)td.textContent=v||"Sesion adicional";
+  const ta=document.getElementById("ec-ta-"+uid);
+  const tdc=document.getElementById("etdc-"+uid);
+  if(ta&&tdc)tdc.textContent=ta.value||"--";
+}
+// tambien actualizar tabla cuando cambia el textarea de contenido
+document.addEventListener("input",function(e){
+  if(e.target&&e.target.id&&e.target.id.startsWith("ec-ta-")){
+    const uid=e.target.id.replace("ec-ta-","");
+    updateExtraRow(uid);
+  }
+});
 function syncTot(){
-  let ts=0,th=0;document.querySelectorAll("#planBody tr[data-ses]").forEach(r=>{ts+=parseInt(r.dataset.ses)||0;th+=parseInt(r.dataset.hrs)||0;});
-  document.getElementById("totSes").textContent=ts;document.getElementById("totHrs").textContent=th;
-  document.getElementById("f-total-ses").value=ts+" sesiones";document.getElementById("f-total-hrs").value=th+" horas";
-  document.getElementById("res-ses").textContent=ts+" sesiones";document.getElementById("res-hrs").textContent=th+" horas";
+  let ts=0,th=0;
+  document.querySelectorAll("#planBody tr[data-ses]").forEach(r=>{ts+=parseInt(r.dataset.ses)||0;th+=parseInt(r.dataset.hrs)||0;});
+  document.getElementById("totSes").textContent=ts;
+  document.getElementById("totHrs").textContent=th;
+  if(document.getElementById("res-ses"))document.getElementById("res-ses").textContent=ts+" sesiones";
+  if(document.getElementById("res-hrs"))document.getElementById("res-hrs").textContent=th+" horas";
+  const show=ts>0;
+  document.getElementById("resumenWrap").style.display=show?"block":"none";
+  document.getElementById("tablaWrap").style.display=show?"block":"none";
 }
 function upd(){
-  const checks=[!!document.getElementById("f-empresa").value.trim(),!!document.getElementById("f-rut").value.trim(),!!document.getElementById("f-gex").value.trim(),!!document.getElementById("f-objetivos").value.trim(),document.querySelectorAll(".mc.sel").length>0||document.querySelectorAll(".extra-card").length>0];
+  const gex=document.getElementById("gexNombre").value.trim();
+  const obj=document.getElementById("f-objetivos").value.trim();
+  const empresa=document.getElementById("crm-sel").classList.contains("show");
+  const checks=[empresa,!!gex,!!obj,document.querySelectorAll(".mc.sel").length>0||document.querySelectorAll(".extra-card").length>0];
   const pct=Math.round(checks.filter(Boolean).length/checks.length*100);
-  document.getElementById("tp").style.width=pct+"%";document.getElementById("sf-fill").style.width=pct+"%";document.getElementById("sf-pct").textContent=pct+"%";
-  document.getElementById("b1").textContent=checks[0]&&checks[1]?"Listo":"Pendiente";document.getElementById("b1").className="sec-badge"+(checks[0]&&checks[1]?" done":"");
-  document.getElementById("b2").textContent=checks[2]?"Listo":"Pendiente";document.getElementById("b2").className="sec-badge"+(checks[2]?" done":"");
+  document.getElementById("tp").style.width=pct+"%";
+  document.getElementById("sf-fill").style.width=pct+"%";
+  document.getElementById("sf-pct").textContent=pct+"%";
 }
 document.addEventListener("input",upd);document.addEventListener("change",upd);
 </script>
