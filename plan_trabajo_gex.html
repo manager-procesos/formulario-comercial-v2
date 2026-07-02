@@ -122,7 +122,7 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
 .res-banner{background:var(--navy);color:#fff;border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px;font-weight:700;font-size:13px;}
 .res-val{font-family:var(--mono);font-size:15px;color:var(--sky);}
 /* cards sesion */
-.ses-card{border:1.5px solid var(--sky);border-radius:var(--r);background:#EEF9FF;margin-bottom:10px;overflow:hidden;animation:fadeIn .2s ease;}
+.ses-card{display:none!important;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:translateY(0);}}
 .ses-card-hdr{background:var(--sky);color:#fff;padding:9px 13px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;}
 .ses-badge-tag{background:rgba(255,255,255,.25);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:var(--mono);}
@@ -347,8 +347,8 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
           </div>
         </div>
 
-        <!-- cards sesiones (aparecen despues de seleccionar) -->
-        <div id="sesCards"></div>
+        <!-- cards sesiones OCULTAS -->
+        <div id="sesCards" style="display:none"></div>
 
         <!-- tabla totales -->
         <div id="tablaWrap" style="display:none;margin-top:16px;border:1.5px solid var(--border-hi);border-radius:var(--r);overflow:hidden;">
@@ -505,13 +505,13 @@ function rebuild(){
     hr.innerHTML="<td colspan=\"4\" style=\"background:#daeaf7;font-weight:700;color:var(--navy);font-size:12px;\">"+mod.lbl+"</td>";
     body.appendChild(hr);
     mod.ses.forEach(ses=>{
-      const div=document.createElement("div");div.className="ses-card";
+      const div=document.createElement("div");div.className="ses-card";div.style.display="none";
       div.innerHTML="<div class=\"ses-card-hdr\"><span>"+ses.n+"</span><span class=\"ses-badge-tag\">2 hrs</span></div>"
         +"<div class=\"ses-body\"><ul class=\"tlist\">"+ses.t.map(t=>"<li class=\"ti\"><div class=\"tdot\"></div><span>"+t+"</span></li>").join("")+"</ul>"
         +"<div class=\"hbadge\">2 horas</div></div>";
       cards.appendChild(div);
       const tr=document.createElement("tr");tr.className="rc";tr.dataset.ses=1;tr.dataset.hrs=2;
-      tr.innerHTML="<td style=\"font-weight:600;\">"+ses.n+"</td><td style=\"font-size:12px;color:var(--text-2);\">"+ses.t.slice(0,2).join(" - ")+"...</td><td class=\"cses\">1</td><td class=\"chrs\">2</td>";
+      tr.innerHTML="<td style=\"font-weight:600;\">"+ses.n+"</td><td style=\"font-size:12px;color:var(--text-2);\">"+ses.t.join("<br>• ").replace(/^/,"• ")+"</td><td class=\"cses\">1</td><td class=\"chrs\">2</td>";
       body.appendChild(tr);
     });
   });
@@ -565,7 +565,7 @@ function syncTot(){
   if(document.getElementById("res-ses"))document.getElementById("res-ses").textContent=ts+" sesiones";
   if(document.getElementById("res-hrs"))document.getElementById("res-hrs").textContent=th+" horas";
   const show=ts>0;
-  document.getElementById("resumenWrap").style.display=show?"block":"none";
+  document.getElementById("resumenWrap").style.display="none";
   document.getElementById("tablaWrap").style.display=show?"block":"none";
 }
 function upd(){
