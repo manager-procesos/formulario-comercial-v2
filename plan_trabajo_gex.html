@@ -8,7 +8,7 @@
 :root{--navy:#1F3864;--blue:#2E6DA4;--sky:#00B0F0;--bg:#F0F4FA;--card:#fff;--border:#DDE4EE;--border-hi:#B4C6E7;--text:#18243C;--text-2:#4A5A78;--text-3:#8898B8;--green:#1A6B42;--red:#C0001A;--orange:#C47A10;--font:"DM Sans",sans-serif;--mono:"DM Mono",monospace;--r:8px;--r-lg:12px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
-.topbar{background:var(--navy);padding:12px 16px;display:flex;align-items:center;position:sticky;top:0;z-index:200;}
+.topbar{background:var(--navy);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}.tb-back{color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;font-family:var(--font);}.tb-back:hover{color:#fff;}
 .tb-mark{width:30px;height:30px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0;margin-right:9px;}
 .tb-title{font-size:13px;font-weight:600;color:#fff;}
 .tb-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;}
@@ -178,8 +178,11 @@ input.autofilled{background:#EEF9FF!important;border-color:var(--sky)!important;
 </head>
 <body>
 <div class="topbar">
-  <div class="tb-mark">M</div>
-  <div><div class="tb-title">Plan de Trabajo &middot; Propuesta de Sesiones</div><div class="tb-sub" id="tbSub">Gestor de Expansion de Cuentas</div></div>
+  <div style="display:flex;align-items:center;gap:9px;">
+    <div class="tb-mark">M</div>
+    <div><div class="tb-title">Plan de Trabajo &middot; Propuesta de Sesiones</div><div class="tb-sub" id="tbSub">Gestor de Expansion de Cuentas</div></div>
+  </div>
+  <a class="tb-back" href="https://manager-procesos.github.io/procesos-manager/comercial.html">← Volver</a>
 </div>
 <div class="prog-wrap"><div class="prog-fill" id="tp"></div></div>
 <div class="wrap">
